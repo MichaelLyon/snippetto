@@ -25,3 +25,4 @@ Stretch Features:
 	1. Word Games like Sodoku, Crossword, Word Search
 	2. Social Media other than twitter
 	3. Calendar
+ 
