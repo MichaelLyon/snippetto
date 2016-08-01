@@ -2,7 +2,7 @@ Web based app optimized for mobile.
 
 MVP: a Daily Planning Application to plan your day and week. 
 
-Features MVP:
+MVP Features:
   1. News
    	  a. Times API
 			b. Reddit API
