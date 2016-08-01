@@ -1,4 +1,4 @@
-Web based app that is optimized for mobile.
+Web based app optimized for mobile.
 
 MVP: a Daily Planning Application to plan your day and week. 
 
@@ -25,4 +25,3 @@ Stretch Features:
 -Word Games like Sodoku, Crossword, Word Search
 -Social Media other than twitter
 -Calendar
-
