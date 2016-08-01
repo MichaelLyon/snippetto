@@ -4,18 +4,18 @@ MVP: a Daily Planning Application to plan your day and week.
 
 Features MVP:
   1. News
-    a. Times API
-    b. Reddit API
-    c. Other News Coruce API's
+    1. Times API
+    2. Reddit API
+    3. Other News Coruce API's
 
   2. Traffic
   3. Weather
-    a. Google Map/Traffic API
-    b. Etc
+    1. Google Map/Traffic API
+    2. Etc
   4. Events
   5. Fun Section:
-    a. Word of the Day
-    b. Quote of the Day
+    1. Word of the Day
+    2. Quote of the Day
   6. Twitter
 
 Stretch Features:
