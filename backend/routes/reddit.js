@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-
+router.post('/oauth', function(req, res, next) {
+  console.log(req.body.accessToken);
 });
 
 module.exports = router;
