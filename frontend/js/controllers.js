@@ -20,7 +20,7 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('apiController', ['$http', function($http) {
+.controller('redditController', ['$http', function($http) {
     var getReddit = function() {
         var requestString = 'https://www.reddit.com/r/webdev/top/.json';
         request = new XMLHttpRequest();
@@ -33,9 +33,9 @@ angular.module('myApp.controllers', [])
         //console.log(this.responseText);
         var results = JSON.parse(this.responseText);
         console.log(results);
-        $http.redditResults = results.data.children[0].data.author;
+        self.redditResults = results.data.children[0].data.author;
     };
-
+    //comments
     getReddit();
 
 }])

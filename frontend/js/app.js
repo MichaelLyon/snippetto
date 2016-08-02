@@ -21,11 +21,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'newsController',
       controllerAs: 'news'
     })
-    .state('api',{
-      url:'/api',
-      templateUrl:'/views/api.html',
-      controller:'apiController',
-      controllerAs: 'api'
+    .state('reddit',{
+      url:'/reddit',
+      templateUrl:'/views/reddit.html',
+      controller:'redditController',
+      controllerAs: 'reddit'
     })
     .state('sign_ups', {
       url: '/signup',
@@ -39,5 +39,5 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'guestController',
       controllerAs: 'guest'
     })
-  
+
 }])
