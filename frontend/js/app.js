@@ -21,4 +21,16 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'newsController',
       controllerAs: 'news'
     })
+    .state('api',{
+      url:'/api',
+      templateUrl:'/views/api.html',
+      controller:'apiController',
+      controllerAs: 'api'
+    })
+    .state('sign_ups', {
+      url: '/signup',
+      templateUrl: '/views/sign_ups.html',
+      controller: 'signupController',
+      controllerAs: 'sign_up'
+    })
 }])
