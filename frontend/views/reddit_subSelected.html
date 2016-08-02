@@ -4,10 +4,10 @@
     <!-- <a href="{{story}}" target="blank"><h3 class="display-1">{{story}}</h3></href> -->
     <!-- <p>{{story.data.author}}</p> -->
 <!-- </div> -->
-<form class="subReddit_Post">
+<form class="subReddit_Post" action="localhost:3000/subreddit/" method="post">
   <div class="list-group-item" ng-repeat="sub in reddit.redditSubList">
       <!-- <img src="{{story}}" alt="" /> -->
-      <a href="/#/reddit_sub" ng-model="subreddit.name"><h3 class="display-1">{{sub.data.url}}</h3></href>
-      <input type="submit" name="name" value="{{sub.data.url}}" ng-model="subreddit.name" ng-click="getSub()">
+      <a href="localhost:8000/#/reddit/{{sub.data}}" target="blank"><h3 class="display-1">{{sub.data.url}}</h3></href>
+      <!-- <input type="submit" name="name" value="{{sub.data.url}}"> -->
   </div>
 </form>

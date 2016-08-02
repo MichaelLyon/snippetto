@@ -1,7 +1,7 @@
 angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('login')
+  $urlRouterProvider.otherwise('')//login
   $stateProvider
     .state('login', {
       url: '/login',
@@ -26,6 +26,12 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       templateUrl:'/views/reddit.html',
       controller:'redditController',
       controllerAs: 'reddit'
+    })
+    .state('reddit_sub',{
+      url:'/reddit_sub',
+      templateUrl:'/views/reddit_subSelected.html',
+      controller:'redditSubController',
+      controllerAs: 'redditSub'
     })
     .state('members', {
       url: '/members',
