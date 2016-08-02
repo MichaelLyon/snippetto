@@ -31,6 +31,12 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       url: '/signup',
       templateUrl: '/views/sign_ups.html',
       controller: 'signupController',
-      controllerAs: 'sign_up'
+      controllerAs: 'sign_ups'
+    })
+    .state('guest', {
+      url: '/guest',
+      templateUrl: '/views/guest.html',
+      controller: 'guestController',
+      controllerAs: 'guest'
     })
 }])
