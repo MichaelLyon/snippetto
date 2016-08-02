@@ -27,7 +27,7 @@ angular.module('myApp.controllers', [])
 .controller('newsController', ['$http', function($http) {
     var self = this
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
-        self.stories = data.data.results
+        self.stories = data.data.results;
     })
 }])
 
@@ -43,10 +43,9 @@ angular.module('myApp.controllers', [])
 
     var proccessResults = function() {
         //console.log(this.responseText);
-        var reddit = this;
         var results = JSON.parse(this.responseText);
         console.log(results);
-        reddit.redditResults = results.data.children[0].data.author;
+        this.redditResults = results.data.children[0].data.author;
     };
     //comments
     getReddit();
