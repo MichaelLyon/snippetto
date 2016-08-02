@@ -43,9 +43,10 @@ angular.module('myApp.controllers', [])
 
     var proccessResults = function() {
         //console.log(this.responseText);
+        var reddit = this;
         var results = JSON.parse(this.responseText);
         console.log(results);
-        self.redditResults = results.data.children[0].data.author;
+        reddit.redditResults = results.data.children[0].data.author;
     };
     //comments
     getReddit();
