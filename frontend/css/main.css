@@ -28,7 +28,7 @@ body{
 .outer_box3{
   height: 80vh;
   width: 90%;
-  margin: 0 2% 0 2%;
+  margin: 0 2% 0 4.6%;
 }
 .fa.fa-google{
  height: 7vh;
@@ -70,12 +70,17 @@ body{
 }
 .story-img{
   float: left;
-
+}
+#news-icon{
+  border-radius: 8px;
+  height: 10.5vh;
+  width: 6.5vw;
 }
 .story{
   /*display: inline-block;*/
   overflow: auto;
   zoom: 1;
+  padding-left: 2%;
 }
 .border{
    margin: auto;
@@ -86,4 +91,10 @@ body{
 .clearfix {
   overflow: auto;
   zoom: 1;
+}
+.scroll{
+  /*background-color: indigo;*/
+  width: 100%;
+  height: 75vh;
+  overflow: scroll;
 }
