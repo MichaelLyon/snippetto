@@ -9,6 +9,9 @@ angular.module('myApp.controllers', [])
 
 .controller('homeController', ['$http', function($http) {
     console.log('this is the home page');
+    //adding some shit
+    //in the home controller
+    //yo
 }])
 
 
