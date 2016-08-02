@@ -69,14 +69,21 @@ body{
   font-family: 'Arvo', serif;
 }
 .story-img{
-  display: inline-block;
+  float: left;
+
 }
 .story{
-  display: inline-block;
+  /*display: inline-block;*/
+  overflow: auto;
+  zoom: 1;
 }
-.things{
+.border{
    margin: auto;
    /*width: 80%;*/
    border: .05em solid cornflowerblue;
    padding: 1.2%;
+}
+.clearfix {
+  overflow: auto;
+  zoom: 1;
 }
