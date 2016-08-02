@@ -20,11 +20,11 @@ angular.module('myApp.controllers', [])
   request.send();
 };
 
-var proccessResults = function() {
-  var results = JSON.parse(this.responseText);
-  console.log(results);
-  redditResults = results;
-};
+  var proccessResults = function() {
+    var results = JSON.parse(this.responseText);
+    console.log(results);
+    redditResults = results;
+  };
 
 getReddit();
 
