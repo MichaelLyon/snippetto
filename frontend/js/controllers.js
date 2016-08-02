@@ -18,7 +18,8 @@ angular.module('myApp.controllers', [])
         accessToken: $rootScope.accessToken
       }
       console.log(postObj);
-      $http.post('http://localhost:3000/google/oauth', postObj).then(function() {
+      $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
+        console.log(data);
         console.log('access token sent successfully');
       })
     })
