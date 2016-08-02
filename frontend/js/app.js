@@ -39,4 +39,5 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'guestController',
       controllerAs: 'guest'
     })
+  
 }])
