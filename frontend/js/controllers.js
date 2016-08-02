@@ -1,5 +1,4 @@
 angular.module('myApp.controllers', [])
-    //raw js here
 
 .controller('loginController', ['$http', '$state', function($http, $state) {
   if (window.location.href.includes('code')) {
