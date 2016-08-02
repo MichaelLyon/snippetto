@@ -1,6 +1,6 @@
 angular.module('myApp.controllers', [])
     //raw js here
-
+    //COMMENT FOR MERGE STUFF
 .controller('loginController', ['$http', '$state', function($http, $state) {
   if (window.location.href.includes('code')) {
     $state.go('news')
