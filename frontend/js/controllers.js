@@ -1,8 +1,10 @@
 angular.module('myApp.controllers', [])
 //raw js here
 
-.controller('loginController', ['$http', function($http) {
-  console.log('this is the login controller');
+.controller('loginController', ['$http', '$state', function($http, $state) {
+  if (window.location.href.includes('code')) {
+    $state.go('news')
+  }
 
 }])
 
