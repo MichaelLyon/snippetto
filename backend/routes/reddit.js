@@ -4,8 +4,8 @@ var router = express.Router();
 router.post('/oauth', function(req, res, next) {
 });
 
-router.get('/', function(req,res,next){
-  res.cookie('cookie', 'yeah');
+router.post('/', function(req,res,next){
+  
 })
 
 module.exports = router;

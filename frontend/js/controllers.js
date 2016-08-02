@@ -41,8 +41,9 @@ angular.module('myApp.controllers', [])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
   var reddit = this;
-  $http.get('https://www.reddit.com/r/webdev/top/.json').then(function(data){
-    // console.log(data.data.data.children);
+  $http.get('http://localhost:3000/reddit').then(function(data){
+    console.log('working');
     reddit.redditResults = data.data.data.children;
   })
 }])
+//https://www.reddit.com/r/webdev/top/.json
