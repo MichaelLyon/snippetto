@@ -2,6 +2,9 @@ angular.module('myApp.controllers', [])
     //raw js here
     //COMMENT FOR MERGE STUFF
 .controller('loginController', ['$http', '$state', function($http, $state) {
+  //adding a comment in the login controller
+
+  
   if (window.location.href.includes('code')) {
     $state.go('news')
   }
