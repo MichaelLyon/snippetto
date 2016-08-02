@@ -34,6 +34,28 @@ body{
  border-radius: 12px;
  background-color: #DD4B39;
 }
-#snippeto_title{
+#snippetto_title{
   font-family: 'Roboto Slab', serif;
+}
+.left_icons{
+  float: left;
+  padding-left: 25%;
+}
+.right_icons{
+  float: right;
+  padding-right: 25%;
+}
+.icons{
+  height: 26vh;
+  width: 17vw;
+  border-radius: 70px;
+  border-style:none;
+}
+.left_icons button{
+  border-style:none;
+  background-color: white;
+}
+.right_icons button{
+  border-style:none;
+  background-color: white;
 }
