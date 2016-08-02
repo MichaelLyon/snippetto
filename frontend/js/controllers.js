@@ -1,13 +1,19 @@
 angular.module('myApp.controllers', [])
 
-.controller('loginController', ['$http', '$state', function($http, $state) {
+.controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
+  var self = this
+  var startingIndex = window.location.search.indexOf('code=') + 5
+  $rootScope.accessToken = window.location.search.substring(startingIndex, window.location.search.length)
+
   if (window.location.href.includes('code')) {
-    $state.go('news')
+    console.log(window.location);
+    $state.go('home')
   }
 }])
 
-.controller('homeController', ['$http', function($http) {
+.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
     console.log('this is the home page');
+    console.log($rootScope.accessToken);
 }])
 
 
