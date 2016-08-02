@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,700italic);
 *{
   margin: 0;
   padding: 0;
@@ -23,6 +24,11 @@ body{
   height: 70vh;
   width: 70%;
   margin-left: 13.5%;
+}
+.outer_box3{
+  height: 80vh;
+  width: 90%;
+  margin: 0 2% 0 2%;
 }
 .fa.fa-google{
  height: 7vh;
@@ -58,4 +64,19 @@ body{
 .right_icons button{
   border-style:none;
   background-color: white;
+}
+#title{
+  font-family: 'Arvo', serif;
+}
+.story-img{
+  display: inline-block;
+}
+.story{
+  display: inline-block;
+}
+.things{
+   margin: auto;
+   /*width: 80%;*/
+   border: .05em solid cornflowerblue;
+   padding: 1.2%;
 }
