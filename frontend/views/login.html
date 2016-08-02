@@ -2,33 +2,27 @@
   <div class="outer_box">
     <div class="modal-header" align="center">
       <img class="img-circle" id="img_logo" src="images/Snippetto.png">
-      <h1>Snippetto</h1>
+      <h1 id='snippetto_title'>Snippetto</h1>
     </div>
     <div id="div-forms">
 
       <!-- Begin # Login Form -->
-      <form id="login-form">
-        <div class="modal-body">
-        <input id="login_username" class="form-control" type="text" placeholder="Username" required>
-        <input id="login_password" class="form-control" type="password" placeholder="Password" required>
+      <!-- <form id="login-form"> -->
+        <a href="https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/oauth2/v2/auth?access_type%3Doffline%26scope%3Demail%2Bprofile%26response_type%3Dcode%26state%3Dhello%26client_id%3D709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com%26redirect_uri%3Dhttp://localhost:8000%26from_login%3D1%26as%3D1cb293ffbd85eae5&btmpl=authsub&scc=1&oauth=1" class="btn btn-block btn-social btn-google">
+          <button class="fa fa-google">  | Sign in with Google</button>
+        </a>
         <div class="checkbox">
           <label>
             <input type="checkbox"> Remember me
           </label>
         </div>
-      </div>
+
       <div class="modal-footer">
         <div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-        </div>
-        <div>
-          <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-          <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
           <button id="guest_btn" type="button" class="btn btn-link">Guest</button>
         </div>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
-
   </div>
   </div>
