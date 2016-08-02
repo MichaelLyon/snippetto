@@ -37,5 +37,7 @@ angular.module('myApp.controllers', [])
   $http.get('https://www.reddit.com/r/webdev/top/.json').then(function(data){
     // console.log(data.data.data.children);
     reddit.redditResults = data.data.data.children;
+    $rootScope.redditScope = data.data.data.children;
+    console.log($rootScope.redditScope);
   })
 }])

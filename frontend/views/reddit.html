@@ -1,8 +1,10 @@
 <h1>Reddit View</h1>
 
-
 <div class="list-group-item" ng-repeat="story in reddit.redditResults">
     <!-- <img src="{{story}}" alt="" /> -->
     <!-- <a href="{{story}}" target="blank"><h3 class="display-1">{{story}}</h3></href> -->
     <p>{{story.data.author}}</p>
+    <p>
+      {{redditScope[0].data.author}}
+    </p>
 </div>
