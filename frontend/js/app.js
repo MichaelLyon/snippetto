@@ -27,17 +27,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller:'redditController',
       controllerAs: 'reddit'
     })
-    .state('sign_ups', {
-      url: '/signup',
-      templateUrl: '/views/sign_ups.html',
-      controller: 'signupController',
-      controllerAs: 'sign_ups'
-    })
-    .state('guest', {
-      url: '/guest',
-      templateUrl: '/views/guest.html',
-      controller: 'guestController',
-      controllerAs: 'guest'
+    .state('members', {
+      url: '/members',
+      templateUrl: '/views/members.html',
+      controller: 'membersController',
+      controllerAs: 'members'
     })
 
 }])
