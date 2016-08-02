@@ -21,8 +21,10 @@ angular.module('myApp.controllers', [])
 
 .controller('apiController', ['$http', function($http){
   console.log('api');
+  var clientID = 'e8ZJzbmcLGzGLmwXOkHOBxrqkQ8';
+
   var getReddit = function() {
-  var requestString = "https://www.reddit.com/api/v1/authorize?client_id=CLIENT_ID&response_type=TYPE&state=RANDOM_STRING&redirect_uri=URI&duration=DURATION&scope=SCOPE_STRING";
+  var requestString = "https://www.reddit.com/api/v1/authorize?client_id=" +clientID+"&response_type=code&state=1337&redirect_uri=https://reddit.com&duration=temporary&scope=mysubreddits";
   request = new XMLHttpRequest();
   request.onload = proccessResults;
   request.open("get", requestString, true);
@@ -30,7 +32,8 @@ angular.module('myApp.controllers', [])
 };
 
   var proccessResults = function() {
-    var results = JSON.parse(this.responseText);
+    // console.log(this.responseText);
+    var results = JSON.parse(JSON.stringify(this.responseText));
     console.log(results);
     redditResults = results;
   };
