@@ -1,3 +1,20 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 body{
-  background-color: lightblue;
+}
+.wrapper{
+  height: 95vh;
+  width: 100%;
+}
+#img_logo{
+  height: 10%;
+  width: 10%;
+}
+.outer_box{
+  height: 70vh;
+  width: 70%;
+  margin-top: 10%;
+  margin-left: 13.5%;
 }

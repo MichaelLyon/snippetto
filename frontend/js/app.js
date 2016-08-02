@@ -15,6 +15,12 @@ angular.module('myApp', ['ui.router', 'myApp.controllers'])
       controller: 'homeController',
       controllerAs: 'home'
     })
+    .state('sign_ups', {
+      url: '/signup',
+      templateUrl: '/views/sign_ups.html',
+      controller: 'signupController',
+      controllerAs: 'sign_up'
+    })
 }])
 
 // .controller('loginController', ['$http', function($http) {
