@@ -17,10 +17,11 @@ angular.module('myApp.controllers', [])
       var postObj = {
         accessToken: $rootScope.accessToken
       }
-      console.log(postObj);
       $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
-        console.log(data);
-        console.log('access token sent successfully');
+        $rootScope.username = data.data.email
+        $http.post('http://localhost:3000/google/new', {username: $rootScope.username}).then(function(message) {
+          console.log(message.data);
+        })
       })
     })
   }

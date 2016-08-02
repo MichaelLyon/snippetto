@@ -3,7 +3,7 @@ require('dotenv').config({silent: true});
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/userDatabase_development'
+    connection: 'postgres://localhost/snippetto_development'
   },
 
   production: {
