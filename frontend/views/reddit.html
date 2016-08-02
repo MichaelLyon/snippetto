@@ -1,13 +1,22 @@
 <h1>Reddit View</h1>
+
+<pre>user = {{user | json}}</pre>
+<pre>master = {{master | json}}</pre>
 <!-- <div class="list-group-item" ng-repeat="story in reddit.redditResults"> -->
     <!-- <img src="{{story}}" alt="" /> -->
     <!-- <a href="{{story}}" target="blank"><h3 class="display-1">{{story}}</h3></href> -->
     <!-- <p>{{story.data.author}}</p> -->
 <!-- </div> -->
-<form class="subReddit_Post" action="index.html" method="post">
-  <div class="list-group-item" ng-repeat="sub in reddit.redditSubList">
-      <!-- <img src="{{story}}" alt="" /> -->
-      <!-- <a href="{{story}}" target="blank"><h3 class="display-1">{{story}}</h3></href> -->
-      <input type="submit" name="name" value="{{sub.data.url}}">
+  <div ng-controller="redditController">
+    <form novalidate class="css-form">
+      <input type="button" ng-click="reset()" value="Reset" />
+      <input type="submit" ng-click="update(user)" value="Save" />
+      <div class="list-group-item" ng-repeat="sub in reddit.redditSubList">
+          <!-- <img src="{{story}}" alt="" /> -->
+          <!-- <a href="{{story}}" target="blank"><h3 class="display-1">{{story}}</h3></href> -->
+          <input type="submit" name="name" value="{{sub.data.url}}">
+      </div>
+
+    </form>
+
   </div>
-</form>

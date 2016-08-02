@@ -25,9 +25,6 @@ angular.module('myApp.controllers', [])
     })
   }
 
-
-
-
 }])
 
 .controller('newsController', ['$http', function($http) {
@@ -39,6 +36,14 @@ angular.module('myApp.controllers', [])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
   var reddit = this;
+  $rootScope.master = {};
+
+  $rootScope.update = function(user) {
+    $rootScope.master = angular.copy(user);
+  };
+  // $rootScope.reset = function() {
+  //   $rootScope.user = angular.copy($rootScope.master);
+  // };
   $http.post('http://localhost:3000/reddit/subreddit/webdev').then(function(data){
     reddit.redditResults = data.data.data.children;
   })
@@ -46,4 +51,5 @@ angular.module('myApp.controllers', [])
     console.log(data);
     reddit.redditSubList = data.data.data.children;
   })
+  // $rootScope.reset();
 }])

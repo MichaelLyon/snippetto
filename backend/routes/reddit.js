@@ -4,7 +4,7 @@ var httpRequest = require('fd-http-request')
 var request = require('request')
 
 router.post('/subredditList', function(req, res, next) {
-  request('https://www.reddit.com/reddits.json?limit=100&after=t3_10omtd/', function (error, response, body) {
+  request('https://www.reddit.com/reddits.json?limit=50&after=t3_10omtd/', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body);
       res.send(body);
