@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myApp.controllers'])
+angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('login')
@@ -15,6 +15,18 @@ angular.module('myApp', ['ui.router', 'myApp.controllers'])
       controller: 'homeController',
       controllerAs: 'home'
     })
+    .state('news', {
+      url: '/news',
+      templateUrl: '/views/news.html',
+      controller: 'newsController',
+      controllerAs: 'news'
+    })
+    .state('api',{
+      url:'/api',
+      templateUrl:'/views/api.html',
+      controller:'apiController',
+      controllerAs: 'api'
+    })
     .state('sign_ups', {
       url: '/signup',
       templateUrl: '/views/sign_ups.html',
@@ -28,12 +40,3 @@ angular.module('myApp', ['ui.router', 'myApp.controllers'])
       controllerAs: 'guest'
     })
 }])
-
-// .controller('loginController', ['$http', function($http) {
-//   console.log('this is the login controller');
-// }])
-//
-//
-// .controller('homeController', ['$http', function($http) {
-//   console.log('this is the home controller');
-// }])
