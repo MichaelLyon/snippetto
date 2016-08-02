@@ -32,22 +32,10 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('redditController', ['$http', function($http) {
-    var getReddit = function() {
-        var requestString = 'https://www.reddit.com/r/webdev/top/.json';
-        request = new XMLHttpRequest();
-        request.onload = proccessResults;
-        request.open("get", requestString, true);
-        request.send();
-    };
-
-    var proccessResults = function() {
-        //console.log(this.responseText);
-        var results = JSON.parse(this.responseText);
-        console.log(results);
-        this.redditResults = results.data.children[0].data.author;
-    };
-    //comments
-    getReddit();
-
+.controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
+  var reddit = this;
+  $http.get('https://www.reddit.com/r/webdev/top/.json').then(function(data){
+    // console.log(data.data.data.children);
+    reddit.redditResults = data.data.data.children;
+  })
 }])
