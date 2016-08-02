@@ -18,8 +18,7 @@ angular.module('myApp.controllers', [])
         accessToken: $rootScope.accessToken
       }
       console.log(postObj);
-      $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
-        console.log(data.data);
+      $http.post('http://localhost:3000/google/oauth', postObj).then(function() {
         console.log('access token sent successfully');
       })
     })
@@ -30,7 +29,6 @@ angular.module('myApp.controllers', [])
 
 }])
 
-
 .controller('newsController', ['$http', function($http) {
     var self = this
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
@@ -38,12 +36,13 @@ angular.module('myApp.controllers', [])
     })
 }])
 
-
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
   var reddit = this;
-  $http.get('http://localhost:3000/reddit').then(function(data){
-    console.log('working');
+  $http.post('http://localhost:3000/reddit/subreddit/webdev').then(function(data){
     reddit.redditResults = data.data.data.children;
   })
+  $http.post('http://localhost:3000/reddit/subredditList').then(function(data){
+    console.log(data);
+    reddit.redditSubList = data.data.data.children;
+  })
 }])
-//https://www.reddit.com/r/webdev/top/.json
