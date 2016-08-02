@@ -1,7 +1,20 @@
-<h1>this is the news controller</h1>
-
-<div class="list-group-item" ng-repeat="story in news.stories">
-    <img src="{{story.multimedia[0].url}}" alt="" />
-    <a href="{{story.url}}" target="blank"><h3 class="display-1">{{story.title}}</h3></href>
-    <p>{{story.abstract}}</p>
+<div class="wrapper">
+<div class="outer_box3">
+<div class="modal-header" align="center">
+  <img class="img-circle" id="img_logo" src="images/Snippetto.png">
+  <h1 id='snippetto_title'>Snippetto</h1>
 </div>
+
+    <h1 id='title'>Top News Stories</h1>
+    <div class="border" ng-repeat="story in news.stories">
+      <div class="story-img">
+        <img src="{{story.multimedia[0].url}}" alt="" />
+      </div>
+      <div class="story">
+        <a href="{{story.url}}" target="blank"><h3 class="display-1">{{story.title}}</h3></href>
+          <p id='words'>{{story.abstract}}</p>
+      </div>
+      </div>
+  </div>
+</div>
+<!-- list-group-item -->
