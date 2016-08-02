@@ -15,6 +15,12 @@ angular.module('myApp', ['ui.router', 'myApp.controllers'])
       controller: 'homeController',
       controllerAs: 'home'
     })
+    .state('api',{
+      url:'/api',
+      templateUrl:'/views/api.html',
+      controller:'apiController',
+      controllerAs: 'api'
+    })
 }])
 
 // .controller('loginController', ['$http', function($http) {
