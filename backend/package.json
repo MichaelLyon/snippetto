@@ -11,10 +11,12 @@
     "debug": "~2.2.0",
     "dotenv": "^2.0.0",
     "express": "~4.13.4",
+    "fd-http-request": "^1.1.2",
     "jade": "~1.11.0",
     "knex": "^0.11.9",
     "morgan": "~1.7.0",
     "pg": "^6.0.3",
+    "request": "^2.74.0",
     "serve-favicon": "~2.3.0"
   }
 }
