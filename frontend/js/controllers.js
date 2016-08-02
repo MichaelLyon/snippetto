@@ -2,18 +2,25 @@ angular.module('myApp.controllers', [])
 
 .controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
   var self = this
-  var startingIndex = window.location.search.indexOf('code=') + 5
-  $rootScope.accessToken = window.location.search.substring(startingIndex, window.location.search.length)
 
   if (window.location.href.includes('code')) {
-    console.log(window.location);
+    var startingIndex = window.location.search.indexOf('code=') + 5
+    $rootScope.accessToken = window.location.search.substring(startingIndex, window.location.search.length)
     $state.go('home')
   }
 }])
 
 .controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-    console.log('this is the home page');
     console.log($rootScope.accessToken);
+    if ($rootScope.accessToken) {
+      var postObj = {
+        accessToken: $rootScope.accessToken
+      }
+      console.log(postObj);
+      $http.post('http://localhost:3000/google/oauth', postObj).then(function() {
+        console.log('access token sent successfully');
+      })
+    }
 }])
 
 
