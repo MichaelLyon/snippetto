@@ -45,16 +45,18 @@ body{
 }
 .left_icons{
   float: left;
-  padding-left: 25%;
+  /*padding-left: 25%;*/
+  border: 1px solid black;
 }
 .right_icons{
   float: right;
-  padding-right: 25%;
+  /*padding-right: 25%;*/
+  border: 1px solid black;
 }
 .icons{
-  height: 26vh;
-  width: 17vw;
-  border-radius: 70px;
+  height: 40%;
+  width: 20%;
+  border-radius: 80%;
   border-style:none;
 }
 .left_icons button{
