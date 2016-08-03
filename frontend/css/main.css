@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,700italic);
+
+
+.news-checkbox {
+  margin-right: 50px !important;
+  margin-left: 5px !important;
+}
+
+
 *{
   margin: 0;
   padding: 0;
