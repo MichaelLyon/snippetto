@@ -12,9 +12,11 @@ var request = require('request');
     console.log('STARTING HTTP REQUEST');
     request("http://api.openweathermap.org/data/2.5/forecast?id=5419384&APPID=c98ec93f5a134adb4a37ca10c015d4e5", function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        res.send(body);
-       var city = body
-       console.log(city);
+
+       var x = body
+       console.log('city: ', x);
+
+       res.send(body);
       }
     })
   });
