@@ -20,7 +20,7 @@ router.post('/new', function(req, res, next) {
       res.send(user.rows[0].username)
     } else {
       Users.createNewUser(req.body.username).then(function() {
-        res.send('USER CREATED')
+        res.send(req.body.username + ' newUser')
       })
     }
   })
