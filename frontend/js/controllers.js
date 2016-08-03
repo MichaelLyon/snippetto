@@ -43,6 +43,13 @@ angular.module('myApp.controllers', [])
             console.log('post successful');
         })
     }
+    // Image replacement function -- not working yet
+    // function imgError(image) {
+    //   image.onerror = "";
+    //   image.src = "../images/Snippetto.png";
+    //   console.log('hit');
+    //   return true;
+    // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -91,7 +98,14 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-
+  this.variable = 'whatever'
+  var self = this
+  $http.get('http://localhost:3000/weather/getWeather').then(function(data) {
+    self.weatherData = data.data
+    self.city = data.data.name
+    self.desc = data.data.weather[0].description
+    self.temp = Math.ceil(data.data.main.temp) + '°'
+  })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
