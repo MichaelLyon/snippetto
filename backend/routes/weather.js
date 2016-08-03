@@ -9,7 +9,7 @@ var request = require('request');
     var weatherAPIKey = 'c98ec93f5a134adb4a37ca10c015d4e5';
     var long = -104.98
     var lat = 39.74
-    request("http://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?id=5419384&units=imperial&APPID=c98ec93f5a134adb4a37ca10c015d4e5", function (error, response, body) {
+    request("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?id=5419384&units=imperial&APPID=c98ec93f5a134adb4a37ca10c015d4e5", function (error, response, body) {
       if (!error && response.statusCode == 200) {
        var obj = JSON.parse(body)
        var arr = obj
