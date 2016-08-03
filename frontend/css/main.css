@@ -13,10 +13,7 @@
 }
 body{
 }
-.wrapper{
-  height: 95vh;
-  width: 100%;
-}
+
 #img_logo{
   height: 10%;
   width: 10%;
@@ -27,10 +24,11 @@ body{
   margin-top: 10%;
   margin-left: 13.5%;
 }
-.outer_box2{
-  height: 70vh;
-  width: 70%;
-  margin-left: 13.5%;
+.members_wrapper{
+  margin: auto;
+  /*height: 70vh;*/
+  width: 100%;
+  text-align: center;
 }
 .outer_box3{
   height: 80vh;
@@ -51,17 +49,19 @@ body{
   font-family: 'Roboto Slab', serif;
   font-size: 3vw;
 }
-.left_icons{
-  height: 74vh;
-  width: 18%;
+#left_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
   float: left;
-  margin-left: 31%;
+  margin-left: auto;
 }
-.right_icons{
-  height: 74vh;
-  width: 18%;
+#right_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
   float: right;
-  margin-right: 31%;
+  margin-right: auto;
 }
 .icons{
   height: 115%;
