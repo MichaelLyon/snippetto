@@ -42,30 +42,31 @@ angular.module('myApp.controllers', [])
     }
 
     this.gatherPreferences = function() {
-            if ($rootScope.user_id) {
-                var postObj = {
-                    user_id: $rootScope.user_id
-                }
-            } else {
-                var postObj = {}
-            }
-            var preferences = document.getElementsByClassName('news-checkbox')
-            for (var i = 0; i < preferences.length; i++) {
-                if (preferences[i].checked) {
-                    postObj[preferences[i].name] = preferences[i].name
-                }
-            }
-            $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-                console.log('post successful');
-            })
-        }
-        // Image replacement function -- not working yet
-        // function imgError(image) {
-        //   image.onerror = "";
-        //   image.src = "../images/Snippetto.png";
-        //   console.log('hit');
-        //   return true;
-        // }
+      self.showPrefs = false
+      if ($rootScope.user_id) {
+          var postObj = {
+              user_id: $rootScope.user_id
+          }
+      } else {
+          var postObj = {}
+      }
+      var preferences = document.getElementsByClassName('news-checkbox')
+      for (var i = 0; i < preferences.length; i++) {
+          if (preferences[i].checked) {
+              postObj[preferences[i].name] = preferences[i].name
+          }
+      }
+      $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+          console.log('post successful');
+      })
+  }
+  // Image replacement function -- not working yet
+  // function imgError(image) {
+  //   image.onerror = "";
+  //   image.src = "../images/Snippetto.png";
+  //   console.log('hit');
+  //   return true;
+  // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
