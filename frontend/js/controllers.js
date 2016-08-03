@@ -15,8 +15,17 @@ angular.module('myApp.controllers', [])
 
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
+    this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
+      $http.post('http://localhost:3000/news/getPreferences', {user_id: $rootScope.user_id}).then(function(prefs) {
+        if (prefs.data.preferences) {
+          self.prefTabs = true
+          self.preferences = prefs.data.preferences
+        } else {
+          console.log('there are no preferences');
+        }
+      })
       self.showPrefs = true
     } else {
       self.showPrefs = false

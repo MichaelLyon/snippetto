@@ -28,5 +28,8 @@ module.exports = {
               console.log(results);
             }
         })
+  },
+  getNewsPreferences: function(id) {
+    return knex.raw(`select * from nyt_sections where user_id = ${id}`)
   }
 }

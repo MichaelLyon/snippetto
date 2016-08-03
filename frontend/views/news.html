@@ -23,6 +23,11 @@
         Real Estate<input class="news-checkbox" type="checkbox" name="realestate" value="realestate"> <br> <br>
         <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
     </div>
+    <div class="pref-tabs row" ng-show="news.prefTabs">
+        <div class="col-md-2" ng-repeat="pref in news.preferences">
+            <button type="button" class="btn btn-primary">{{pref.section}}</button>
+        </div>
+    </div>
 
     <h1 class="h1 display-1">New York Times</h1>
     <h3 id='title'>Top News Stories</h3>
@@ -37,7 +42,7 @@
           </div>
           <h4>{{story.section}}</h4>
         </div>
-        
+
     </div>
   </div>
 </div>

@@ -14,4 +14,20 @@ router.post('/setPreferences', function(req, res, next) {
 });
 
 
+router.post('/getPreferences', function(req, res, next) {
+  News.getNewsPreferences(req.body.user_id).then(function(prefs) {
+    if (prefs.rows[0]) {
+      res.json({
+        preferences: prefs.rows
+      })
+    } else {
+      res.json({
+        noPreferences: true
+      })
+    }
+  })
+});
+
+
+
 module.exports = router;
