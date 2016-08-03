@@ -26,7 +26,11 @@ angular.module('myApp.controllers', [])
     })
 
     this.gatherPreferences = function() {
-      var postObj = {}
+      if ($rootScope.user_id) {
+        var postObj = {user_id: $rootScope.user_id}
+      } else {
+        var postObj = {}
+      }
       var preferences = document.getElementsByClassName('news-checkbox')
       for (var i = 0; i < preferences.length; i++) {
         if (preferences[i].checked) {
@@ -70,13 +74,11 @@ angular.module('myApp.controllers', [])
       }
       $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
         $rootScope.username = data.data.email
-        $http.post('http://localhost:3000/google/new', {username: $rootScope.username}).then(function(message) {
-          console.log(message.data);
-          console.log(message.data.split(' ').length);
-          if (message.data.split(' ').length > 1) {
+        $http.post('http://localhost:3000/google/new', {username: $rootScope.username}).then(function(data) {
+          $rootScope.user_id = data.data.user_id
+          if (data.data.firstTimeUser) {
             $rootScope.firstTimeUser = true
           }
-          console.log($rootScope);
         })
       })
     })
