@@ -16,15 +16,30 @@ angular.module('myApp.controllers', [])
 
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
+    this.currentSection = 'home'
+    this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
-        self.showPrefs = true
+      $http.post('http://localhost:3000/news/getPreferences', {user_id: $rootScope.user_id}).then(function(prefs) {
+        if (prefs.data.preferences) {
+          self.prefTabs = true
+          self.preferences = prefs.data.preferences
+        } else {
+          self.showPrefs = true
+        }
+      })
     } else {
-        self.showPrefs = false
     }
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
     })
+
+    this.updateNewsPage = function(section) {
+      $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
+        self.stories = data.data.results
+      })
+      this.currentSection = section
+    }
 
     this.gatherPreferences = function() {
             if ($rootScope.user_id) {
