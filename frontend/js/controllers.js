@@ -133,15 +133,22 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        $rootScope.currentPosition = pos;
+        console.log($rootScope.currentPosition);
+    })
+    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
 
+    })
     this.workAddGet = function(address) {
-        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
+        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-            $http.post('http://localhost:3000/traffic/getTraffic', $rootScope.currentPosition).then(function(data) {
-                console.log(data);
-                $rootScope.traffic = data;
-            })
+
         })
     }
 }])
