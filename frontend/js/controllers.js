@@ -10,10 +10,6 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
-}])
-
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
     this.currentSection = 'home'
