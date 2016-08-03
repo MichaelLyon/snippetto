@@ -43,10 +43,6 @@ angular.module('myApp.controllers', [])
   })
   this.getSub = function(name){
     $rootScope.subreddit = name;
-    console.log($rootScope.subreddit);
-    // $http.post(`http://localhost:3000/reddit/subreddit/{rootScope.subreddit}`).then(function(data){
-    //   redditSub.redditResults = data.data.data.children;
-    // })
   }
 }])
 
