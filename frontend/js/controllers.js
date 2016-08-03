@@ -43,7 +43,13 @@ angular.module('myApp.controllers', [])
             console.log('post successful');
         })
     }
-
+    // Image replacement function -- not working yet
+    // function imgError(image) {
+    //   image.onerror = "";
+    //   image.src = "../images/Snippetto.png";
+    //   console.log('hit');
+    //   return true;
+    // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
