@@ -37,20 +37,45 @@ angular.module('myApp.controllers', [])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
   var reddit = this;
-  $rootScope.master = {};
-
-  $rootScope.update = function(user) {
-    $rootScope.master = angular.copy(user);
-  };
-  // $rootScope.reset = function() {
-  //   $rootScope.user = angular.copy($rootScope.master);
-  // };
-  $http.post('http://localhost:3000/reddit/subreddit/webdev').then(function(data){
-    reddit.redditResults = data.data.data.children;
-  })
   $http.post('http://localhost:3000/reddit/subredditList').then(function(data){
     console.log(data);
     reddit.redditSubList = data.data.data.children;
   })
-  // $rootScope.reset();
+  this.getSub = function(name){
+    $rootScope.subreddit = name;
+  }
+}])
+
+.controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope){
+  var redditSub = this;
+    $http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data){
+      console.log(data);
+      redditSub.redditResults = data.data.data.children;
+    })
+}])
+
+
+.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+
+.controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('twitterController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
+
 }])
