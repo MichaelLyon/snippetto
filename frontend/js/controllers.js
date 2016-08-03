@@ -33,8 +33,14 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('newsController', ['$http', function($http) {
+.controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
+    console.log($rootScope);
+    if ($rootScope.username) {
+      self.showPrefs = true
+    } else {
+      self.showPrefs = false
+    }
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
     })
@@ -74,7 +80,7 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
-
+  console.log($rootScope);
 }])
 
 
