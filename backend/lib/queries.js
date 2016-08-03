@@ -28,14 +28,20 @@ module.exports = {
                 console.log(results);
             }
         })
-    },
-    saveAddress: function(addressObj) {
+  },
+  getNewsPreferences: function(id) {
+    return knex.raw(`select * from nyt_sections where user_id = ${id}`)
+  },
+  saveAddresses: function(street,city,state,zip){
+    return knex.raw(`insert into work_address values(default, '${street}', '${city}', '${state}', ${zip})`);
+  },
+  saveAddress: function(addressObj) {
         return knex.raw(`insert into work_address values (${addressObj.id}, '${addressObj.street}', '${addressObj.city}', '${addressObj.state}', ${addressObj.zip})`);
     },
-    selectUser: function(id) {
+  selectUser: function(id) {
         return knex.raw(`select * from work_address where user_id = ${id}`);
     },
-    updateAddress: function(addressObj) {
+  updateAddress: function(addressObj) {
         return knex.raw(`update work_address set street = '${addressObj.street}', city = '${addressObj.city}', state = '${addressObj.state}', zip = ${addressObj.zip} where user_id = ${addressObj.id}`);
-    }
+  }
 }
