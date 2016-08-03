@@ -4,10 +4,17 @@ var httpRequest = require('fd-http-request')
 var request = require('request')
 var Traffic = require('../lib/queries')
 
-router.post('/setAddress/:street/:city/:state/:zip', function(req, res, next) {
-  console.log(req.body);
-  Traffic.saveAddresses(req.params.street, req.parmas.city, req.params.state, req.params.zip).then(function(data){
-    res.send(data);
+router.post('/setAddress', function(req, res, next) {
+  Traffic.selectUser(req.body.id).then(function(condition){
+    if(condition.rowCount != 0){
+      Traffic.updateAddress(req.body).then(function(){
+        res.send('address updated');
+      });
+    }else{
+      Traffic.saveAddress(req.body).then(function(){
+        res.send('address saved');
+      });
+    }
   })
 });
 

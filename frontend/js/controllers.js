@@ -109,17 +109,15 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-    var traffic = this;
-    // $http.post('http://localhost:3000/traffic/getTraffic').then(function(data){
-    //   console.log(data);
-    //   // traffic.redditSubList = data.data.data.children;
-    // })
     this.workAddGet = function(address) {
+        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
         $rootScope.workAddress = address;
-        $http.post('http://localhost:3000/setAddress/' + address.street + '/' + address.city + '/' + address.state + '/' + address.zip).then(function() {
-
+        $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+          $http.post('http://localhost:3000/traffic/getTraffic').then(function(data){
+            console.log(data);
+            $rootScope.traffic = data;
+          })
         })
-        console.log($rootScope.workAddress);
     }
 }])
 
