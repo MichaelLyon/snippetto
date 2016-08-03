@@ -5,3 +5,12 @@ angular.module('myApp.services', [])
     return shit
   }
 })
+
+
+
+
+.service('testService', function() {
+  this.sayShit = function(shit) {
+    return shit
+  }
+})

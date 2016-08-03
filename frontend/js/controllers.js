@@ -15,6 +15,7 @@ angular.module('myApp.controllers', [])
 
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
+    this.currentSection = 'home'
     this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
@@ -23,13 +24,10 @@ angular.module('myApp.controllers', [])
           self.prefTabs = true
           self.preferences = prefs.data.preferences
         } else {
-          console.log('there are no preferences');
+          self.showPrefs = true
         }
       })
-      self.showPrefs = true
-        self.showPrefs = true
     } else {
-        self.showPrefs = false
     }
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
@@ -37,9 +35,9 @@ angular.module('myApp.controllers', [])
 
     this.updateNewsPage = function(section) {
       $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
-        console.log('STARTING NEWS CHANGE');
         self.stories = data.data.results
       })
+      this.currentSection = section
     }
 
     this.gatherPreferences = function() {

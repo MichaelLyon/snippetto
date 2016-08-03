@@ -114,3 +114,18 @@ hr:after {
   height: 100%;
   width: auto;
 }
+.capitalize {
+   text-transform: capitalize;
+}
+
+.pref-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pref-tabs-header {
+  text-align: center;
+
+}
