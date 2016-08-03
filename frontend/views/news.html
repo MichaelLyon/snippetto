@@ -6,6 +6,26 @@
 </div>
     <a ui-sref="reddit" class="btn btn-primary">Reddit</a>
     <a ui-sref="members" class="btn btn-primary">Home Page</a>
+    <div class="set-preferences">
+        <h3>Select the New York Times sections you're interested in seeing</h3>
+        <form action="/" method="post">
+
+        </form>
+        Top Stories<input class="news-checkbox" type="checkbox" name="home" value="home">
+        Opinion<input class="news-checkbox" type="checkbox" name="opinion" value="opinion">
+        World<input class="news-checkbox" type="checkbox" name="world" value="world">
+        National<input class="news-checkbox" type="checkbox" name="national" value="national">
+        Business<input class="news-checkbox" type="checkbox" name="business" value="business">
+        Technology<input class="news-checkbox" type="checkbox" name="technology" value="technology"> <br>
+        Science<input class="news-checkbox" type="checkbox" name="science" value="science">
+        Health<input class="news-checkbox" type="checkbox" name="health" value="health">
+        Sports<input class="news-checkbox" type="checkbox" name="sports" value="sports">
+        Fashion<input class="news-checkbox" type="checkbox" name="fashion" value="fashion">
+        Food<input class="news-checkbox" type="checkbox" name="food" value="food">
+        Real Estate<input class="news-checkbox" type="checkbox" name="realestate" value="realestate"> <br> <br>
+        <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
+    </div>
+
     <h1 class="h1 display-1">New York Times</h1>
     <h3 id='title'>Top News Stories</h3>
     <div class="scroll">

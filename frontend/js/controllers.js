@@ -33,6 +33,19 @@ angular.module('myApp.controllers', [])
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
     })
+
+    this.gatherPreferences = function() {
+      var postObj = {}
+      var preferences = document.getElementsByClassName('news-checkbox')
+      for (var i = 0; i < preferences.length; i++) {
+        if (preferences[i].checked) {
+          postObj[preferences[i].name] = preferences[i].name
+        }
+      }
+      $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+        console.log('post successful');
+      })
+    }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
