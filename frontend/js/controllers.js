@@ -43,6 +43,7 @@ angular.module('myApp.controllers', [])
             console.log('post successful');
         })
     }
+
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -103,7 +104,7 @@ angular.module('myApp.controllers', [])
     this.workAddGet = function(address) {
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/setAddress/' + address.street + '/' + address.city + '/' + address.state + '/' + address.zip).then(function() {
-            
+
         })
         console.log($rootScope.workAddress);
     }
