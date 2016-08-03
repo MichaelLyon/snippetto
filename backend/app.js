@@ -11,6 +11,7 @@ var reddit = require('./routes/reddit');
 var weather = require('./routes/weather');
 var news = require('./routes/news');
 var traffic = require('./routes/traffic');
+var fun = require('./routes/fun');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/reddit', reddit);
 app.use('/weather', weather);
 app.use('/news', news);
 app.use('/traffic', traffic);
+app.use('/fun', fun)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

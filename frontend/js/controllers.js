@@ -132,5 +132,9 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
-
+ this.variable = 'whatevs'
+ var foo = this
+ $http.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=mycallback').then(function(obj){
+   console.log(obj.data);
+ })
 }])
