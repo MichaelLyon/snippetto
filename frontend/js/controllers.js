@@ -21,6 +21,11 @@ angular.module('myApp.controllers', [])
         $rootScope.username = data.data.email
         $http.post('http://localhost:3000/google/new', {username: $rootScope.username}).then(function(message) {
           console.log(message.data);
+          console.log(message.data.split(' ').length);
+          if (message.data.split(' ').length > 1) {
+            $rootScope.firstTimeUser = true
+          }
+          console.log($rootScope);
         })
       })
     })
