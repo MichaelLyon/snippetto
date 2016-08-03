@@ -91,8 +91,18 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-  
-
+  var traffic = this;
+  $http.post('http://localhost:3000/traffic/getTraffic').then(function(data){
+    console.log(data);
+    // traffic.redditSubList = data.data.data.children;
+  })
+  this.workAddGet = function(address){
+    $rootScope.workAddress = address;
+    $http.post('http://localhost:3000/setAddress/'+address.street+'/'+address.city+'/'+address.state+'/'+address.zip).then(function(data){
+      console.log(data);
+    })
+    console.log($rootScope.workAddress);
+  }
 }])
 
 .controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {

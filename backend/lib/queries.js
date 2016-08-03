@@ -28,5 +28,8 @@ module.exports = {
               console.log(results);
             }
         })
+  },
+  saveAddresses: function(street,city,state,zip){
+    return knex.raw(`insert into work_address values(default, '${street}', '${city}', '${state}', ${zip})`);
   }
 }
