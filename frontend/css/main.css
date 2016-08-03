@@ -42,20 +42,23 @@ body{
 }
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
+  font-size: 3vw;
 }
 .left_icons{
+  height: 74vh;
+  width: 18%;
   float: left;
-  /*padding-left: 25%;*/
-  border: 1px solid black;
+  margin-left: 31%;
 }
 .right_icons{
+  height: 74vh;
+  width: 18%;
   float: right;
-  /*padding-right: 25%;*/
-  border: 1px solid black;
+  margin-right: 31%;
 }
 .icons{
-  height: 40%;
-  width: 20%;
+  height: 115%;
+  width: 95%;
   border-radius: 80%;
   border-style:none;
 }
