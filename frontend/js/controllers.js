@@ -113,6 +113,14 @@ angular.module('myApp.controllers', [])
         address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            console.log(pos);
+          })
           $http.post('http://localhost:3000/traffic/getTraffic').then(function(data){
             console.log(data);
             $rootScope.traffic = data;
