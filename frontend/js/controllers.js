@@ -6,10 +6,11 @@ angular.module('myApp.controllers', [])
     if (window.location.href.includes('code')) {
         $state.go('members')
     }
+
+
 }])
 
 .controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
 
 }])
 
@@ -26,30 +27,30 @@ angular.module('myApp.controllers', [])
     })
 
     this.gatherPreferences = function() {
-        if ($rootScope.user_id) {
-            var postObj = {
-                user_id: $rootScope.user_id
+            if ($rootScope.user_id) {
+                var postObj = {
+                    user_id: $rootScope.user_id
+                }
+            } else {
+                var postObj = {}
             }
-        } else {
-            var postObj = {}
-        }
-        var preferences = document.getElementsByClassName('news-checkbox')
-        for (var i = 0; i < preferences.length; i++) {
-            if (preferences[i].checked) {
-                postObj[preferences[i].name] = preferences[i].name
+            var preferences = document.getElementsByClassName('news-checkbox')
+            for (var i = 0; i < preferences.length; i++) {
+                if (preferences[i].checked) {
+                    postObj[preferences[i].name] = preferences[i].name
+                }
             }
+            $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+                console.log('post successful');
+            })
         }
-        $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-            console.log('post successful');
-        })
-    }
-    // Image replacement function -- not working yet
-    // function imgError(image) {
-    //   image.onerror = "";
-    //   image.src = "../images/Snippetto.png";
-    //   console.log('hit');
-    //   return true;
-    // }
+        // Image replacement function -- not working yet
+        // function imgError(image) {
+        //   image.onerror = "";
+        //   image.src = "../images/Snippetto.png";
+        //   console.log('hit');
+        //   return true;
+        // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -73,6 +74,14 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        $rootScope.currentPosition = pos;
+        console.log($rootScope.currentPosition);
+    })
     if (window.location.href.includes('code')) {
         var startingIndex = window.location.search.indexOf('code=') + 5
         $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
@@ -98,25 +107,26 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-  this.variable = 'whatever'
-  var self = this
-  $http.get('http://localhost:3000/weather/getWeather').then(function(data) {
-    self.weatherData = data.data
-    self.city = data.data.name
-    self.desc = data.data.weather[0].description
-    self.temp = Math.ceil(data.data.main.temp) + '°'
-  })
+    this.variable = 'whatever'
+    var self = this
+    $http.get('http://localhost:3000/weather/getWeather').then(function(data) {
+        self.weatherData = data.data
+        self.city = data.data.name
+        self.desc = data.data.weather[0].description
+        self.temp = Math.ceil(data.data.main.temp) + '°'
+    })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+
     this.workAddGet = function(address) {
         address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-          $http.post('http://localhost:3000/traffic/getTraffic').then(function(data){
-            console.log(data);
-            $rootScope.traffic = data;
-          })
+            $http.post('http://localhost:3000/traffic/getTraffic', $rootScope.currentPosition).then(function(data) {
+                console.log(data);
+                $rootScope.traffic = data;
+            })
         })
     }
 }])
