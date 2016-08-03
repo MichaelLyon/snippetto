@@ -25,7 +25,7 @@
     </div>
     <div class="pref-tabs row" ng-show="news.prefTabs">
         <div class="col-md-2" ng-repeat="pref in news.preferences">
-            <button type="button" class="btn btn-primary">{{pref.section}}</button>
+            <button type="button" class="btn btn-primary" ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
         </div>
     </div>
 

@@ -31,5 +31,8 @@ module.exports = {
   },
   getNewsPreferences: function(id) {
     return knex.raw(`select * from nyt_sections where user_id = ${id}`)
+  },
+  saveAddresses: function(street,city,state,zip){
+    return knex.raw(`insert into work_address values(default, '${street}', '${city}', '${state}', ${zip})`);
   }
 }
