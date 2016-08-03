@@ -11,7 +11,7 @@
     <div class="scroll">
       <div class="border" ng-repeat="story in news.stories">
         <div class="story-img">
-          <img id = 'news-icon'src="{{story.multimedia[0].url}}" alt="" />
+          <img id='news-icon' class='img-responsive' src="{{story.multimedia[0].url}}" alt="" />
         </div>
         <div class="story">
           <a href="{{story.url}}" target="blank"><h3 class="display-1">{{story.title}}</h3></a>

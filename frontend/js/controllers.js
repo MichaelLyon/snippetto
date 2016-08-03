@@ -61,7 +61,14 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-
+  this.variable = 'whatever'
+  var self = this
+  $http.get('http://localhost:3000/weather/getWeather').then(function(data) {
+    self.weatherData = data.data
+    self.city = data.data.name
+    self.desc = data.data.weather[0].description
+    self.temp = Math.ceil(data.data.main.temp) + '°'
+  })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
