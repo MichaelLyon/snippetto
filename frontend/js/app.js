@@ -39,5 +39,34 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'membersController',
       controllerAs: 'members'
     })
-
+    .state('weather', {
+      url: '/weather',
+      templateUrl: '/views/weather.html',
+      controller: 'weatherController',
+      controllerAs: 'weather'
+    })
+    .state('traffic', {
+      url: '/traffic',
+      templateUrl: '/views/traffic.html',
+      controller: 'trafficController',
+      controllerAs: 'traffic'
+    })
+    .state('calendar', {
+      url: '/calendar',
+      templateUrl: '/views/calendar.html',
+      controller: 'calendarController',
+      controllerAs: 'calendar'
+    })
+    .state('twitter', {
+      url: '/twitter',
+      templateUrl: '/views/twitter.html',
+      controller: 'twitterController',
+      controllerAs: 'twitter'
+    })
+    .state('fun', {
+      url: '/fun',
+      templateUrl: '/views/fun.html',
+      controller: 'funController',
+      controllerAs: 'fun'
+    })
 }])

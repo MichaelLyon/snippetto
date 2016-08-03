@@ -53,3 +53,29 @@ angular.module('myApp.controllers', [])
       redditSub.redditResults = data.data.data.children;
     })
 }])
+
+
+.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+
+.controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('twitterController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])
+
+.controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
+
+}])

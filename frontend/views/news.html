@@ -4,8 +4,10 @@
   <img class="img-circle" id="img_logo" src="images/Snippetto.png">
   <h1 id='snippetto_title'>Snippetto</h1>
 </div>
-
-    <h1 id='title'>Top News Stories</h1>
+    <a ui-sref="reddit" class="btn btn-primary">Reddit</a>
+    <a ui-sref="members" class="btn btn-primary">Home Page</a>
+    <h1 class="h1 display-1">New York Times</h1>
+    <h3 id='title'>Top News Stories</h3>
     <div class="scroll">
       <div class="border" ng-repeat="story in news.stories">
         <div class="story-img">
@@ -20,4 +22,3 @@
     </div>
   </div>
 </div>
-<!-- list-group-item -->

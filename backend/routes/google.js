@@ -16,9 +16,7 @@ router.post('/oauth', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
   Users.checkForExistingUser(req.body.username).then(function(user) {
-    console.log(user.rows);
     if (user.rows[0]) {
-      console.log(user.rows[0].username);
       res.send(user.rows[0].username)
     } else {
       Users.createNewUser(req.body.username).then(function() {
