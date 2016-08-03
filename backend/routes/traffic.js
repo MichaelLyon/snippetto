@@ -5,6 +5,7 @@ var request = require('request')
 var Traffic = require('../lib/queries')
 
 router.post('/setAddress/:street/:city/:state/:zip', function(req, res, next) {
+  console.log(req.body);
   Traffic.saveAddresses(req.params.street, req.parmas.city, req.params.state, req.params.zip).then(function(data){
     res.send(data);
   })
