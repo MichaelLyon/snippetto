@@ -10,35 +10,32 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
-}])
-
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
     this.currentSection = 'home'
     this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
-      $http.post('http://localhost:3000/news/getPreferences', {user_id: $rootScope.user_id}).then(function(prefs) {
-        if (prefs.data.preferences) {
-          self.prefTabs = true
-          self.preferences = prefs.data.preferences
-        } else {
-          self.showPrefs = true
-        }
-      })
-    } else {
-    }
+        $http.post('http://localhost:3000/news/getPreferences', {
+            user_id: $rootScope.user_id
+        }).then(function(prefs) {
+            if (prefs.data.preferences) {
+                self.prefTabs = true
+                self.preferences = prefs.data.preferences
+            } else {
+                self.showPrefs = true
+            }
+        })
+    } else {}
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
     })
 
     this.updateNewsPage = function(section) {
-      $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
-        self.stories = data.data.results
-      })
-      this.currentSection = section
+        $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
+            self.stories = data.data.results
+        })
+        this.currentSection = section
     }
 
     this.gatherPreferences = function() {
@@ -90,14 +87,19 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
-        $rootScope.currentPosition = pos;
-        console.log($rootScope.currentPosition);
-    })
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            $rootScope.currentPosition = pos;
+            console.log($rootScope.currentPosition);
+        })
+    } else {
+          $rootScope.currentPosition = {lat:39.7392, lng:104.9903};
+    }
+    
     if (window.location.href.includes('code')) {
         var startingIndex = window.location.search.indexOf('code=') + 5
         $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
@@ -134,15 +136,22 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        $rootScope.currentPosition = pos;
+        console.log($rootScope.currentPosition);
+    })
+    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
 
+    })
     this.workAddGet = function(address) {
-        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
+        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-            $http.post('http://localhost:3000/traffic/getTraffic', $rootScope.currentPosition).then(function(data) {
-                console.log(data);
-                $rootScope.traffic = data;
-            })
+
         })
     }
 }])
