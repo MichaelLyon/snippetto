@@ -41,18 +41,17 @@ angular.module('myApp.controllers', [])
     console.log(data);
     reddit.redditSubList = data.data.data.children;
   })
+  this.getSub = function(name){
+    $rootScope.subreddit = name;
+  }
 }])
 
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope){
   var redditSub = this;
-  console.log('Root Object');
-  console.log($rootScope.subreddit);
-  function getSub(){
-    $http.post(`http://localhost:3000/reddit/subreddit/{rootScope.subreddit[0]}`).then(function(data){
+    $http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data){
+      console.log(data);
       redditSub.redditResults = data.data.data.children;
     })
-  }
-
 }])
 
 
