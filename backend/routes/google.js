@@ -17,10 +17,18 @@ router.post('/oauth', function(req, res, next) {
 router.post('/new', function(req, res, next) {
   Users.checkForExistingUser(req.body.username).then(function(user) {
     if (user.rows[0]) {
-      res.send(user.rows[0].username)
+      res.json({
+        username: user.rows[0].username,
+        user_id: user.rows[0].user_id
+      })
+
     } else {
-      Users.createNewUser(req.body.username).then(function() {
-        res.send('USER CREATED')
+      Users.createNewUser(req.body.username).then(function(user) {
+        res.json({
+          username: user.rows[0].username,
+          user_id: user.rows[0].user_id,
+          firstTimeUser: true
+        })
       })
     }
   })
