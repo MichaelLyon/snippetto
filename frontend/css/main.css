@@ -45,22 +45,23 @@ body{
  border-radius: 12px;
  background-color: #DD4B39;
 }
+.members_header{
+  font-family: 'Roboto Slab', serif;
+  color: #DD4B39;
+}
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
-  font-size: 3vw;
 }
 #left_icons{
   text-align: center;
   height: 75%;
   width: auto;
-  float: left;
   margin-left: auto;
 }
 #right_icons{
   text-align: center;
   height: 75%;
   width: auto;
-  float: right;
   margin-right: auto;
 }
 .icons{
