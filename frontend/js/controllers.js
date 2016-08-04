@@ -53,11 +53,11 @@ angular.module('myApp.controllers', [])
         }
         loginAndSuch();
     }
-    
-    function loginAndSuch(){
-      if (window.location.href.includes('code')) {
-          $state.go('home')
-      }
+
+    function loginAndSuch() {
+        if (window.location.href.includes('code')) {
+            $state.go('members')
+        }
     }
 
 }])
@@ -173,7 +173,7 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 
@@ -208,6 +208,7 @@ angular.module('myApp.controllers', [])
     directionsDisplay.setMap(map);
 
     $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
+        console.log(data);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -224,6 +225,15 @@ angular.module('myApp.controllers', [])
             });
         }
     })
+
+
+    this.workAddGet = function(address) {
+        address.id = $rootScope.user_id;// TODO: REPLACE 1 WITH $rootScope.user_id
+        $rootScope.workAddress = address;
+        $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+
+        })
+    }
 }])
 
 .controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
