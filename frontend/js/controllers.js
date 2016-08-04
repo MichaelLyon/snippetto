@@ -241,7 +241,7 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 

@@ -45,11 +45,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'trafficController',
       controllerAs: 'traffic'
     })
-    .state('calendar', {
-      url: '/calendar',
-      templateUrl: '/views/calendar.html',
-      controller: 'calendarController',
-      controllerAs: 'calendar'
+    .state('todo', {
+      url: '/todo',
+      templateUrl: '/views/todo.html',
+      controller: 'todoController',
+      controllerAs: 'todo'
     })
     .state('youtube', {
       url: '/youtube',
