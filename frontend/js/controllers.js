@@ -37,31 +37,31 @@ angular.module('myApp.controllers', [])
     }
 
     this.gatherPreferences = function() {
-      self.showPrefs = false
-      if ($rootScope.user_id) {
-          var postObj = {
-              user_id: $rootScope.user_id
-          }
-      } else {
-          var postObj = {}
-      }
-      var preferences = document.getElementsByClassName('news-checkbox')
-      for (var i = 0; i < preferences.length; i++) {
-          if (preferences[i].checked) {
-              postObj[preferences[i].name] = preferences[i].name
-          }
-      }
-      $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-          console.log('post successful');
-      })
-  }
-  // Image replacement function -- not working yet
-  // function imgError(image) {
-  //   image.onerror = "";
-  //   image.src = "../images/Snippetto.png";
-  //   console.log('hit');
-  //   return true;
-  // }
+            self.showPrefs = false
+            if ($rootScope.user_id) {
+                var postObj = {
+                    user_id: $rootScope.user_id
+                }
+            } else {
+                var postObj = {}
+            }
+            var preferences = document.getElementsByClassName('news-checkbox')
+            for (var i = 0; i < preferences.length; i++) {
+                if (preferences[i].checked) {
+                    postObj[preferences[i].name] = preferences[i].name
+                }
+            }
+            $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+                console.log('post successful');
+            })
+        }
+        // Image replacement function -- not working yet
+        // function imgError(image) {
+        //   image.onerror = "";
+        //   image.src = "../images/Snippetto.png";
+        //   console.log('hit');
+        //   return true;
+        // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -137,22 +137,23 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-    console.log(origin1);
-
-    var origin1 = new google.maps.LatLng(req.body.lat, req.body.lng);
-
     navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
         $rootScope.currentPosition = pos;
-        console.log($rootScope.currentPosition);
+        // console.log($rootScope.currentPosition);
+    })
+    var origin1 = new google.maps.LatLng($rootScope.currentPosition);
+    $http.post('http://localhost:3000/traffic/getAdd', $rootScope.user_id).then(function(address){
+      $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
+        console.log(data);
+
+      })
     })
 
-    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
 
-    })
     this.workAddGet = function(address) {
         address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;

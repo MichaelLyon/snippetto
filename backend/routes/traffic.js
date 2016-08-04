@@ -28,4 +28,11 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.post('/getAdd', function(req, res, next) {
+  console.log(req.body.id);
+  Traffic.selectUser(req.body.id).then(function(){
+    
+  })
+});
+
 module.exports = router;
