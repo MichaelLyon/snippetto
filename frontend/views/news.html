@@ -8,7 +8,7 @@
       <h1 class="h1 display-1">New York Times</h1>
     <div class="set-preferences" ng-show="news.showPrefs">
         <h3>Select the New York Times sections you're interested in seeing</h3>
-        Top Stories<input class="news-checkbox" type="checkbox" name="home" value="home">
+        Top Articles<input class="news-checkbox" type="checkbox" name="home" value="home">
         Opinion<input class="news-checkbox" type="checkbox" name="opinion" value="opinion">
         World<input class="news-checkbox" type="checkbox" name="world" value="world">
         National<input class="news-checkbox" type="checkbox" name="national" value="national">
@@ -28,12 +28,19 @@
         </div>
         <div class="pref-tabs">
             <div ng-repeat="pref in news.preferences">
-                <button type="button" class="btn btn-primary" ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+                <div ng-switch="pref.section">
+                     <button type="button" class="btn btn-primary" ng-switch-when="home" ng-click="news.updateNewsPage(pref.section)">Top Articles</button>
+                     <button type="button" class="btn btn-primary capitalize" ng-switch-default ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+                 </div>
             </div>
         </div>
+        <button class="btn btn-success" type="button" name="button" ng-click="news.showSectionSelections()">Edit Sections</button>
     </div>
 
-    <h3 class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
+    <div ng-switch="news.currentSection">
+        <h3 ng-switch-when="home" class="capitalize" id='news_header'>Top Articles</h3>
+        <h3 ng-switch-default class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
+    </div>
     <hr />
     <div class="scroll">
       <div class="row" ng-repeat="story in news.stories">

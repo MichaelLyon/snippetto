@@ -10,7 +10,7 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
     var self = this
     this.currentSection = 'home'
     this.prefTabs = false
@@ -26,10 +26,10 @@ angular.module('myApp.controllers', [])
                 self.showPrefs = true
             }
         })
-    } else {}
-    $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
+    }
+      $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
-    })
+      })
 
     this.updateNewsPage = function(section) {
         $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
@@ -54,8 +54,12 @@ angular.module('myApp.controllers', [])
           }
       }
       $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-          console.log('post successful');
+          $state.reload()
       })
+  }
+
+  this.showSectionSelections = function() {
+    self.showPrefs = true
   }
   // Image replacement function -- not working yet
   // function imgError(image) {
@@ -99,7 +103,7 @@ angular.module('myApp.controllers', [])
     } else {
           $rootScope.currentPosition = {lat:39.7392, lng:104.9903};
     }
-    
+
     if (window.location.href.includes('code')) {
         var startingIndex = window.location.search.indexOf('code=') + 5
         $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
