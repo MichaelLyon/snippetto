@@ -77,24 +77,27 @@ angular.module('myApp.controllers', [])
     })
   }
 
+  this.deleteArticle = function(article) {
+    var postObj = {
+      user_id: $rootScope.user_id,
+      title: article
+    }
+    $http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
+      self.getSavedArticles()
+    })
+  }
+
   this.getSavedArticles = function() {
-    $http.get('').then(function(data) {
-      console.log(data.data);
+    $http.post('http://localhost:3000/news/retrieveArticles', {user_id: $rootScope.user_id}).then(function(data) {
+      self.stories = data.data
     })
     this.main = false
-    this.saves = false
+    this.saved = true
   }
 
   this.getCurrentArticles = function() {
     $state.reload()
   }
-  // Image replacement function -- not working yet
-  // function imgError(image) {
-  //   image.onerror = "";
-  //   image.src = "../images/Snippetto.png";
-  //   console.log('hit');
-  //   return true;
-  // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
