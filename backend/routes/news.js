@@ -37,6 +37,24 @@ router.post('/save', function(req, res, next) {
   })
 });
 
+router.post('/retrieveArticles', function(req, res, next) {
+  console.log(req.body);
+  News.getSavedArticles(req.body.user_id).then(function(articles) {
+    res.send(articles.rows)
+
+  })
+});
+
+router.post('/deleteArticle', function(req, res, next) {
+  News.deleteArticle(req.body.user_id, req.body.title).then(function() {
+    res.sendStatus(200)
+  })
+});
+
+
+
+
+
 
 
 
