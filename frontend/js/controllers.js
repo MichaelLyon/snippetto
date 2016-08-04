@@ -133,7 +133,6 @@ angular.module('myApp.controllers', [])
             lng: 104.9903
         };
     }
-
     if (window.location.href.includes('code')) {
         var startingIndex = window.location.search.indexOf('code=') + 5
         $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
@@ -159,9 +158,9 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    this.variable = 'whatever'
+    console.log($rootScope);
     var self = this
-    $http.get('http://localhost:3000/weather/getWeather').then(function(data) {
+    $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
         self.city = data.data.name
         self.desc = data.data.weather[0].description
@@ -205,4 +204,22 @@ angular.module('myApp.controllers', [])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
+ var foo = this
+ $http.get('http://localhost:3000/fun/getFun').then(function(obj){
+
+   foo.qoute = obj.data.quoteText
+   foo.author = obj.data.quoteAuthor
+  $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2){
+    foo.word = obj2.data.word
+    foo.definition = obj2.data.definitions[0].text
+    foo.pof = obj2.data.definitions[0].partOfSpeech
+    foo.example = obj2.data.examples[1].text
+    $http.get('http://api.adviceslip.com/advice').then(function(obj3){
+      foo.advice = obj3.data.slip.advice
+      $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4){
+        foo.chuckNorris = obj4.data.value
+      })
+    })
+   })
+ })
 }])
