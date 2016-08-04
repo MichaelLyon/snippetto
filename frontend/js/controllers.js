@@ -13,7 +13,6 @@ angular.module('myApp.controllers', [])
     this.main = true
     this.saved = false
     this.currentSection = 'home'
-
     this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
@@ -121,42 +120,43 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            $rootScope.currentPosition = pos;
-            console.log($rootScope.currentPosition);
-        })
-    } else {
-        $rootScope.currentPosition = {
-            lat: 39.7392,
-            lng: 104.9903
-        };
-    }
-    if (window.location.href.includes('code')) {
-        var startingIndex = window.location.search.indexOf('code=') + 5
-        $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
-        $http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=http://localhost:8000&grant_type=authorization_code`).then(function(response) {
-            $rootScope.accessToken = response.data.access_token
-            var postObj = {
-                accessToken: $rootScope.accessToken
-            }
-            $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
-                $rootScope.username = data.data.email
-                $http.post('http://localhost:3000/google/new', {
-                    username: $rootScope.username
-                }).then(function(data) {
-                    $rootScope.user_id = data.data.user_id
-                    if (data.data.firstTimeUser) {
-                        $rootScope.firstTimeUser = true
-                    }
-                })
-            })
-        })
-    }
+  console.log(window.location);
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+          };
+          $rootScope.currentPosition = pos;
+          console.log($rootScope.currentPosition);
+      })
+  } else {
+      $rootScope.currentPosition = {
+          lat: 39.7392,
+          lng: 104.9903
+      };
+  }
+  if (window.location.href.includes('code')) {
+      var startingIndex = window.location.search.indexOf('code=') + 5
+      $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
+      $http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=http://localhost:8000&grant_type=authorization_code`).then(function(response) {
+          $rootScope.accessToken = response.data.access_token
+          var postObj = {
+              accessToken: $rootScope.accessToken
+          }
+          $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
+              $rootScope.username = data.data.email
+              $http.post('http://localhost:3000/google/new', {
+                  username: $rootScope.username
+              }).then(function(data) {
+                  $rootScope.user_id = data.data.user_id
+                  if (data.data.firstTimeUser) {
+                      $rootScope.firstTimeUser = true
+                  }
+              })
+          })
+      })
+  }
 }])
 
 
@@ -201,8 +201,8 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('twitterController', ['$http', '$rootScope', function($http, $rootScope) {
-
+.controller('youtubeController', ['$http', '$rootScope', function($http, $rootScope) {
+)
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
