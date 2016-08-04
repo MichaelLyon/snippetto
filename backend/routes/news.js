@@ -32,7 +32,9 @@ router.post('/getPreferences', function(req, res, next) {
 });
 
 router.post('/save', function(req, res, next) {
-  console.log(req.body);
+  News.saveArticle(req.body.user_id, req.body.image, req.body.section, req.body.title, req.body.url, req.body.abstract).then(function() {
+    res.sendStatus(200)
+  })
 });
 
 
