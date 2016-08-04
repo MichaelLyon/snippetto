@@ -192,6 +192,7 @@ angular.module('myApp.controllers', [])
         console.log("lat: ",$rootScope.currentPosition.lat)
         console.log("lng: ",$rootScope.currentPosition.lng);
         $http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj){
+          // self.date = obj.data.list[]
           console.log('forecast: ',obj.data);
         })
     })
