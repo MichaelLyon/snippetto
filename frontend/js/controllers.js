@@ -175,7 +175,7 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
-    console.log(window.location);
+
 }])
 
 
@@ -243,8 +243,8 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('twitterController', ['$http', '$rootScope', function($http, $rootScope) {
-
+.controller('youtubeController', ['$http', '$rootScope', function($http, $rootScope) {
+)
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {

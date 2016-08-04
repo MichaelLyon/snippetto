@@ -51,11 +51,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'calendarController',
       controllerAs: 'calendar'
     })
-    .state('twitter', {
-      url: '/twitter',
-      templateUrl: '/views/twitter.html',
-      controller: 'twitterController',
-      controllerAs: 'twitter'
+    .state('youtube', {
+      url: '/youtube',
+      templateUrl: '/views/youtube.html',
+      controller: 'youtubeController',
+      controllerAs: 'youtube'
     })
     .state('fun', {
       url: '/fun',
