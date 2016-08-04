@@ -46,5 +46,8 @@ module.exports = {
   },
   resetUserPrefs: function(id) {
     return knex.raw(`delete from nyt_sections where user_id = ${id}`)
+  },
+  saveArticle: function(user_id, image, section, title, url, abstract) {
+    return knex.raw(`insert into saved_articles values (${user_id}, '${image}', '${section}', '${title}', '${url}', '${abstract}')`)
   }
 }

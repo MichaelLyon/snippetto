@@ -10,7 +10,10 @@ angular.module('myApp.controllers', [])
 
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
     var self = this
+    this.main = true
+    this.saved = false
     this.currentSection = 'home'
+
     this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
@@ -58,6 +61,32 @@ angular.module('myApp.controllers', [])
 
   this.showSectionSelections = function() {
     self.showPrefs = true
+  }
+
+  this.saveArticle = function(img, section, title, url, abstract) {
+    var postObj = {
+      user_id: $rootScope.user_id,
+      image: img,
+      section: section,
+      title: title,
+      url: url,
+      abstract: abstract
+    }
+    $http.post('http://localhost:3000/news/save', postObj).then(function() {
+      console.log('post successful');
+    })
+  }
+
+  this.getSavedArticles = function() {
+    $http.get('').then(function(data) {
+      console.log(data.data);
+    })
+    this.main = false
+    this.saves = false
+  }
+
+  this.getCurrentArticles = function() {
+    $state.reload()
   }
   // Image replacement function -- not working yet
   // function imgError(image) {

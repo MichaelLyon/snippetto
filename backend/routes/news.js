@@ -31,6 +31,11 @@ router.post('/getPreferences', function(req, res, next) {
   })
 });
 
+router.post('/save', function(req, res, next) {
+  console.log(req.body);
+});
+
+
 
 
 module.exports = router;
