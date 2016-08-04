@@ -72,6 +72,11 @@ body{
   margin: 0 3% 0 0;
   float: right;
 }
+#login-button-container{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 .login-hr-linebreak{
   margin: 0;
 }
