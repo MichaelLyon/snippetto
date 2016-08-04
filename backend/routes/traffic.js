@@ -18,31 +18,22 @@ router.post('/setAddress', function(req, res, next) {
     })
 });
 
-// [ anonymous {
-      //  user_id: 2,
-      //  street: '9930 south shadow hill ct',
-      //  city: 'lonetree',
-      //  state: 'CO',
-      //  zip: 80124 } ],
-
-
 router.post('/', function(req, res, next) {
     Traffic.selectUser(req.body.userId).then(function(destinationAddress){
-      var street =  destinationAddress.rows[0].street;
-      var city = destinationAddress.rows[0].city;
-      var state = destinationAddress.rows[0].state;
 
-      request('https://maps.googleapis.com/maps/api/geocode/json?address='+street +','+city+','+state +'&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body){
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        console.log(body);
-        request('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + req.body.origin1 + '&destinations='+ body +'&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.send(body);
-            }
-        })
+      var street =  destinationAddress.rows[0].street.replace(/\s+/g, '+');
+      var city = destinationAddress.rows[0].city.replace(/\s+/g, '+');
+      var state = destinationAddress.rows[0].state;
+      var address = street +','+ '+'+ city +','+'+'+ state;
+
+      request('https://maps.googleapis.com/maps/api/geocode/json?address='+ address +'&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body){
+        var parsedBody = JSON.parse(body);
+        var destinationCordsString = String(parsedBody.results[0].geometry.location.lat + ',' + parsedBody.results[0].geometry.location.lng);
+        res.send(destinationCordsString);
       })
     })
 });
+
 
 router.post('/getAdd', function(req, res, next) {
   console.log(req.body.id);

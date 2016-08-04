@@ -53,10 +53,11 @@ angular.module('myApp.controllers', [])
         }
         loginAndSuch();
     }
-    function loginAndSuch(){
-      if (window.location.href.includes('code')) {
-          $state.go('members')
-      }
+
+    function loginAndSuch() {
+        if (window.location.href.includes('code')) {
+            $state.go('members')
+        }
     }
 
 }])
@@ -186,13 +187,16 @@ angular.module('myApp.controllers', [])
         self.desc = data.data.weather[0].description
         self.temp = Math.ceil(data.data.main.temp) + '°'
         self.weatherImg = data.data.weather[0].icon
-        console.log('data: ',data.data);
+        console.log('data: ', data.data);
     })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
-    var serverObject ={};
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    var serverObject = {};
     serverObject.origin1 = origin1;
     serverObject.userId = $rootScope.user_id;
 
@@ -201,19 +205,25 @@ angular.module('myApp.controllers', [])
         center: origin1,
         mapTypeId: google.maps.MapTypeId.MAP
     }
+    directionsDisplay.setMap(map);
 
-    // $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-      console.log(data);
-      $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: origin1,
+                destination: data.data,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
     })
-    // this.workAddGet = function(address) {
-    //     address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
-    //     $rootScope.workAddress = address;
-    //     $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-    //
-    //     })
-    // }
 }])
 
 .controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -221,33 +231,33 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
-  var self = this
-  $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
-    self.videos = data.data.items.map(function(elem) {
-      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+    var self = this
+    $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
+        self.videos = data.data.items.map(function(elem) {
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+        })
+        console.log(self.videos);
     })
-    console.log(self.videos);
-  })
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
- var foo = this
- $http.get('http://localhost:3000/fun/getFun').then(function(obj){
-   foo.qoute = obj.data.quoteText
-   foo.author = obj.data.quoteAuthor
-  $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2){
-    foo.word = obj2.data.word
-    foo.definition = obj2.data.definitions[0].text
-    foo.pof = obj2.data.definitions[0].partOfSpeech
-    foo.example = obj2.data.examples[1].text
-    $http.get('http://api.adviceslip.com/advice').then(function(obj3){
-      foo.advice = obj3.data.slip.advice
-      $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4){
-        foo.chuckNorris = obj4.data.value
+    var foo = this
+    $http.get('http://localhost:3000/fun/getFun').then(function(obj) {
+        foo.qoute = obj.data.quoteText
+        foo.author = obj.data.quoteAuthor
+        $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {
+            foo.word = obj2.data.word
+            foo.definition = obj2.data.definitions[0].text
+            foo.pof = obj2.data.definitions[0].partOfSpeech
+            foo.example = obj2.data.examples[1].text
+            $http.get('http://api.adviceslip.com/advice').then(function(obj3) {
+                foo.advice = obj3.data.slip.advice
+                $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
+                    foo.chuckNorris = obj4.data.value
+                })
+            })
         })
-      })
     })
-  })
 
 }])
