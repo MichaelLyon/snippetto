@@ -8,9 +8,12 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
     var self = this
+    this.main = true
+    this.saved = false
     this.currentSection = 'home'
+
     this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
@@ -24,10 +27,10 @@ angular.module('myApp.controllers', [])
                 self.showPrefs = true
             }
         })
-    } else {}
-    $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
+    }
+      $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
-    })
+      })
 
     this.updateNewsPage = function(section) {
         $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
@@ -52,8 +55,38 @@ angular.module('myApp.controllers', [])
           }
       }
       $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-          console.log('post successful');
+          $state.reload()
       })
+  }
+
+  this.showSectionSelections = function() {
+    self.showPrefs = true
+  }
+
+  this.saveArticle = function(img, section, title, url, abstract) {
+    var postObj = {
+      user_id: $rootScope.user_id,
+      image: img,
+      section: section,
+      title: title,
+      url: url,
+      abstract: abstract
+    }
+    $http.post('http://localhost:3000/news/save', postObj).then(function() {
+      console.log('post successful');
+    })
+  }
+
+  this.getSavedArticles = function() {
+    $http.get('').then(function(data) {
+      console.log(data.data);
+    })
+    this.main = false
+    this.saves = false
+  }
+
+  this.getCurrentArticles = function() {
+    $state.reload()
   }
   // Image replacement function -- not working yet
   // function imgError(image) {
