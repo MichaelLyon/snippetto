@@ -53,10 +53,11 @@ angular.module('myApp.controllers', [])
         }
         loginAndSuch();
     }
-    function loginAndSuch(){
-      if (window.location.href.includes('code')) {
-          $state.go('members')
-      }
+
+    function loginAndSuch() {
+        if (window.location.href.includes('code')) {
+            $state.go('home')
+        }
     }
 
 }])
@@ -157,7 +158,6 @@ angular.module('myApp.controllers', [])
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
     var reddit = this;
     $http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
-        console.log(data);
         reddit.redditSubList = data.data.data.children;
     })
     this.getSub = function(name) {
@@ -168,13 +168,12 @@ angular.module('myApp.controllers', [])
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
     var redditSub = this;
     $http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
-        console.log(data);
         redditSub.redditResults = data.data.data.children;
     })
 }])
 
 
-.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 
@@ -219,51 +218,48 @@ angular.module('myApp.controllers', [])
           console.log(obj.data.list[0].weather[0].icon);
           self.day3_icon = obj.data.list[2].weather[0].icon
         })
+        console.log('data: ', data.data);
     })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    var serverObject = {};
+    serverObject.origin1 = origin1;
+    serverObject.userId = $rootScope.user_id;
 
     var mapOptions = {
-        zoom: 9,
+        zoom: 15,
         center: origin1,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
+        mapTypeId: google.maps.MapTypeId.MAP
     }
+    directionsDisplay.setMap(map);
 
-    $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
+        console.log(data);
 
-    $rootScope.markers = [];
-
-    var infoWindow = new google.maps.InfoWindow();
-
-    // var createMarker = function (info){
-    //
-    //     var marker = new google.maps.Marker({
-    //         map: $rootScope.map,
-    //         position: new google.maps.LatLng(info.lat, info.long),
-    //         title: info.city
-    //     });
-    //     marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-    //
-    //     google.maps.event.addListener(marker, 'click', function(){
-    //         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-    //         infoWindow.open($rootScope.map, marker);
-    //     });
-    //
-    //     $rootScope.markers.push(marker);
-    //
-    // }
-    // $rootScope.openInfoWindow = function(e, selectedMarker){
-    //     e.preventDefault();
-    //     google.maps.event.trigger(selectedMarker, 'click');
-    // }
-
-    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
-
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: origin1,
+                destination: data.data,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
     })
+
+
     this.workAddGet = function(address) {
-        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
+        address.id = $rootScope.user_id;// TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
 
@@ -271,38 +267,56 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
+  var self = this
+  this.addTask = function() {
+    var postObj = {
+      user_id: $rootScope.user_id,
+      task: self.task,
+      priority: self.priority,
+      dueDate: self.dueDate,
+      time: self.time,
+      description: self.description
+    }
+    console.log(postObj);
+    $http.post('http://localhost:3000/todo/new', postObj).then(function() {
+      console.log('post successful');
+    })
+
+  }
 
 }])
 
 .controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
-  var self = this
-  $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
-    self.videos = data.data.items.map(function(elem) {
-      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+    var self = this
+    $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
+        self.videos = data.data.items.map(function(elem) {
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+        })
+        console.log(self.videos);
     })
-    console.log(self.videos);
-  })
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
- var foo = this
- $http.get('http://localhost:3000/fun/getFun').then(function(obj){
-   foo.qoute = obj.data.quoteText
-   foo.author = obj.data.quoteAuthor
-  $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2){
-    foo.word = obj2.data.word
-    foo.definition = obj2.data.definitions[0].text
-    foo.pof = obj2.data.definitions[0].partOfSpeech
-    foo.example = obj2.data.examples[1].text
-    $http.get('http://api.adviceslip.com/advice').then(function(obj3){
-      foo.advice = obj3.data.slip.advice
-      $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4){
-        foo.chuckNorris = obj4.data.value
+    var foo = this
+    $http.get('http://localhost:3000/fun/getFun').then(function(obj) {
+        foo.qoute = obj.data.quoteText
+        foo.author = obj.data.quoteAuthor
+        $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {
+            foo.word = obj2.data.word
+            foo.definition = obj2.data.definitions[0].text
+            foo.pof = obj2.data.definitions[0].partOfSpeech
+            foo.example = obj2.data.examples[1].text
+            $http.get('http://api.adviceslip.com/advice').then(function(obj3) {
+                foo.advice = obj3.data.slip.advice
+                $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
+                    foo.chuckNorris = obj4.data.value
+                })
+            })
         })
-      })
     })
+
   })
 //   document.getElementById('button').onclick = function() {
 //       this.__toggle = !this.__toggle;
