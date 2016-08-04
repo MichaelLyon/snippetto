@@ -61,16 +61,18 @@
     </div>
 
     <div ng-show="news.saved" class="scroll">
-      <div class="row" ng-repeat="story in news.stories">
-        <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
-          <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
-          <h4 clas='news_section'>Section: {{story.section}}</h4>
-        </div>
-        <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
-          <div class="news_article">
-            <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
-            <p id='news_abstract'>{{story.abstract}}</p>
-            <button class="btn btn-primary" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
+      <div class='news-row-container'>
+        <div class="row" ng-repeat="story in news.stories">
+          <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
+            <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
+            <h4 clas='news_section'>Section: {{story.section}}</h4>
+          </div>
+          <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
+            <div class="news_article">
+              <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
+              <p id='news_abstract'>{{story.abstract}}</p>
+              <button class="btn btn-primary" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
+            </div>
           </div>
         </div>
       </div>
