@@ -166,7 +166,33 @@ hr:after {
 .pref-tabs-header {
   text-align: center;
 }
-
+/*weather page style*/
+#weather-city{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+  padding-top: 22%;
+}
+#weather-icon{
+  height: 15%;
+  width: 15%;
+  color: #4E87A2;
+}
+#weather-description{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+}
+#weather-temp{
+  font-weight: 900;
+  font-family: 'Roboto Slab', serif;
+  font-size: 5em;
+  color: #325B76;
+}
+#back-icon{
+  height: 10%;
+  width: 10%;
+  float: left;
+  padding-top: 15%;
+}
 /*Dat Map*/
 #map {
     height:75vh;
