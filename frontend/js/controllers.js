@@ -191,16 +191,6 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-    //TODO: TURN ON FOR TESTING
-    // navigator.geolocation.getCurrentPosition(function(position) {
-    //     var pos = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //     };
-    //     $rootScope.currentPosition = pos;
-    //     console.log($rootScope.currentPosition);
-    // })
-
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
 
     var mapOptions = {
