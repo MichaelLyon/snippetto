@@ -180,7 +180,8 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    // console.log($rootScope);
+    var lat = $rootScope.currentPosition.lat
+    var lng = $rootScope.currentPosition.lng
     var self = this
     $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
@@ -188,7 +189,11 @@ angular.module('myApp.controllers', [])
         self.desc = data.data.weather[0].description
         self.temp = Math.ceil(data.data.main.temp) + '°'
         self.weatherImg = data.data.weather[0].icon
-        console.log('data: ',data.data);
+        console.log("lat: ",$rootScope.currentPosition.lat)
+        console.log("lng: ",$rootScope.currentPosition.lng);
+        $http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj){
+          console.log('forecast: ',obj.data);
+        })
     })
 }])
 
@@ -268,5 +273,16 @@ angular.module('myApp.controllers', [])
       })
     })
   })
-
+//   document.getElementById('button').onclick = function() {
+//       this.__toggle = !this.__toggle;
+//       var target = document.getElementById('hidden_content');
+//       if( this.__toggle) {
+//           target.style.height = target.scrollHeight+"px";
+//           this.firstChild.nodeValue = "Hide content";
+//       }
+//       else {
+//           target.style.height = 0;
+//           this.firstChild.nodeValue = "Show content";
+//       }
+//   }
 }])
