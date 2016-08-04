@@ -236,7 +236,23 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
+  var self = this
+  this.addTask = function() {
+    var postObj = {
+      user_id: $rootScope.user_id,
+      task: self.task,
+      priority: self.priority,
+      dueDate: self.dueDate,
+      time: self.time,
+      description: self.description
+    }
+    console.log(postObj);
+    $http.post('http://localhost:3000/todo/new', postObj).then(function() {
+      console.log('post successful');
+    })
+
+  }
 
 }])
 
