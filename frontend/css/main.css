@@ -49,6 +49,7 @@ body{
  background-color: #DD4B39;
 }
 .members_header{
+  margin: 0;
   font-family: 'Roboto Slab', serif;
   color: #DD4B39;
 }
@@ -87,7 +88,6 @@ body{
   bottom: 0;
   width: 100%;
   text-align: center;
- /* Set the fixed height of the footer here */
   height: 25px;
 }
 
