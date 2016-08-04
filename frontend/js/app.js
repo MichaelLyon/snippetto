@@ -27,11 +27,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller:'redditSubController',
       controllerAs: 'redditSub'
     })
-    .state('members', {
-      url: '/members',
-      templateUrl: '/views/members.html',
-      controller: 'membersController',
-      controllerAs: 'members'
+    .state('home', {
+      url: '/home',
+      templateUrl: '/views/home.html',
+      controller: 'homeController',
+      controllerAs: 'home'
     })
     .state('weather', {
       url: '/weather',
@@ -45,11 +45,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'trafficController',
       controllerAs: 'traffic'
     })
-    .state('calendar', {
-      url: '/calendar',
-      templateUrl: '/views/calendar.html',
-      controller: 'calendarController',
-      controllerAs: 'calendar'
+    .state('todo', {
+      url: '/todo',
+      templateUrl: '/views/todo.html',
+      controller: 'todoController',
+      controllerAs: 'todo'
     })
     .state('youtube', {
       url: '/youtube',

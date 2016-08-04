@@ -1,6 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,700italic);
-
+.fa.fa-google{
+  height: 7vh;
+  width: 35%;
+  color: white;
+  text-align: center;
+  padding-top: 1%;
+  font-size: 2vw;
+  border-radius: 12px;
+  background-color: #DD4B39;
+}
+/*HTML used for the fixed footer on login page*/
 html {
   position: relative;
   min-height: 100%;
@@ -9,52 +19,74 @@ html {
   margin-right: 50px !important;
   margin-left: 5px !important;
 }
-
 *{
   margin: 0;
   padding: 0;
 }
 body{
 }
-
+#snippetto_title{
+  font-family: 'Roboto Slab', serif;
+}
 #img_logo{
   height: 20%;
   width: 20%;
 }
-.outer_box{
-  height: 70vh;
-  width: 70%;
-  margin-top: 10%;
-  margin-left: 13.5%;
+.row{
+  margin: 0;
+  width: 100%;
+  height: auto;
+  /*margin-bottom: 15px;*/
 }
+.scroll{
+  width: 100%;
+  height: 75vh;
+  overflow: scroll;
+}
+hr {
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+hr:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.5em;
+  padding: 0 0.25em;
+  background: white;
+}
+
+/*START members CSS*/
 .members_wrapper{
   margin: auto;
   /*height: 70vh;*/
   width: 100%;
   text-align: center;
 }
-.outer_box3{
-  height: 80vh;
-  width: 90%;
-  margin: 0 2% 0 4.6%;
-}
-.fa.fa-google{
- height: 7vh;
- width: 35%;
- color: white;
- text-align: center;
- padding-top: 1%;
- font-size: 2vw;
- border-radius: 12px;
- background-color: #DD4B39;
-}
 .members_header{
+  margin: 0;
   font-family: 'Roboto Slab', serif;
   color: #DD4B39;
 }
-#snippetto_title{
-  font-family: 'Roboto Slab', serif;
+#left_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-left: auto;
 }
+#right_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-right: auto;
+}
+/*END members css*/
+
+/*START Login page CSS*/
 .login_jumbo{
   width: 100%;
   height: auto;
@@ -72,6 +104,11 @@ body{
   margin: 0 3% 0 0;
   float: right;
 }
+#login-button-container{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 .login-hr-linebreak{
   margin: 0;
 }
@@ -82,9 +119,9 @@ body{
   bottom: 0;
   width: 100%;
   text-align: center;
- /* Set the fixed height of the footer here */
   height: 25px;
 }
+/*END login page css*/
 
 #left_icons{
   text-align: center;
@@ -221,6 +258,13 @@ hr:after {
 }
 #news_section-and-icon_column {
     text-align: center;
+  }
+/*START news page css*/
+.news-row-container{
+  margin-bottom: 15px;
+}
+#news_section-and-icon_column{
+  text-align: center;
 }
 .news_title {
     margin: 0;
@@ -230,6 +274,8 @@ hr:after {
     height: 100%;
     width: auto;
 }
+/*END news page css*/
+
 .capitalize {
     text-transform: capitalize;
 }
@@ -242,7 +288,7 @@ hr:after {
 .pref-tabs-header {
     text-align: center;
 }
-/*weather page style*/
+/*START weather page CSS*/
 #weather-city{
   font-family: 'Roboto Slab', serif;
   color: #4E87A2;
@@ -263,6 +309,8 @@ hr:after {
   font-size: 5em;
   color: #325B76;
 }
+/*END weather CSS*/
+
 #back-icon{
   height: 10%;
   width: 10%;

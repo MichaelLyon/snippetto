@@ -53,11 +53,11 @@ angular.module('myApp.controllers', [])
         }
         loginAndSuch();
     }
-
-    function loginAndSuch() {
-        if (window.location.href.includes('code')) {
-            $state.go('members')
-        }
+    
+    function loginAndSuch(){
+      if (window.location.href.includes('code')) {
+          $state.go('home')
+      }
     }
 
 }])
@@ -173,7 +173,7 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 
@@ -226,7 +226,7 @@ angular.module('myApp.controllers', [])
     })
 }])
 
-.controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 
