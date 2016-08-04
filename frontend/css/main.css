@@ -1,6 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,700italic);
-
+.fa.fa-google{
+  height: 7vh;
+  width: 35%;
+  color: white;
+  text-align: center;
+  padding-top: 1%;
+  font-size: 2vw;
+  border-radius: 12px;
+  background-color: #DD4B39;
+}
+/*HTML used for the fixed footer on login page*/
 html {
   position: relative;
   min-height: 100%;
@@ -9,108 +19,24 @@ html {
   margin-right: 50px !important;
   margin-left: 5px !important;
 }
-
 *{
   margin: 0;
   padding: 0;
 }
 body{
 }
-
+#snippetto_title{
+  font-family: 'Roboto Slab', serif;
+}
 #img_logo{
   height: 20%;
   width: 20%;
 }
-.outer_box{
-  height: 70vh;
-  width: 70%;
-  margin-top: 10%;
-  margin-left: 13.5%;
-}
-.members_wrapper{
-  margin: auto;
-  /*height: 70vh;*/
-  width: 100%;
-  text-align: center;
-}
-.outer_box3{
-  height: 80vh;
-  width: 90%;
-  margin: 0 2% 0 4.6%;
-}
-.fa.fa-google{
- height: 7vh;
- width: 35%;
- color: white;
- text-align: center;
- padding-top: 1%;
- font-size: 2vw;
- border-radius: 12px;
- background-color: #DD4B39;
-}
-.members_header{
-  font-family: 'Roboto Slab', serif;
-  color: #DD4B39;
-}
-#snippetto_title{
-  font-family: 'Roboto Slab', serif;
-}
-.login_jumbo{
+.row{
+  margin: 0;
   width: 100%;
   height: auto;
-  margin: 0;
-}
-#login-welcome-header{
-  margin: 0;
-  text-align: center;
-}
-#login-lead{
-  margin: 0 0 3% 0;
-  text-align: center;
-}
-#login-label-checkbox{
-  margin: 0 3% 0 0;
-  float: right;
-}
-.login-hr-linebreak{
-  margin: 0;
-}
-#login-footer{
-  margin:0;
-  padding: 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
- /* Set the fixed height of the footer here */
-  height: 25px;
-}
-
-#left_icons{
-  text-align: center;
-  height: 75%;
-  width: auto;
-  margin-left: auto;
-}
-#right_icons{
-  text-align: center;
-  height: 75%;
-  width: auto;
-  margin-right: auto;
-}
-.icons{
-  height: 115%;
-  width: 95%;
-  border-radius: 80%;
-  border-style:none;
-}
-.left_icons button{
-  border-style:none;
-  background-color: white;
-}
-.right_icons button{
-  border-style:none;
-  background-color: white;
+  /*margin-bottom: 15px;*/
 }
 .scroll{
   width: 100%;
@@ -133,13 +59,73 @@ hr:after {
   padding: 0 0.25em;
   background: white;
 }
-.news-row-container{
-  margin-bottom: 15px;
+
+/*START members CSS*/
+.members_wrapper{
+  margin: auto;
+  /*height: 70vh;*/
+  width: 100%;
+  text-align: center;
 }
-.row{
+.members_header{
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  color: #DD4B39;
+}
+#left_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-left: auto;
+}
+#right_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-right: auto;
+}
+/*END members css*/
+
+/*START Login page CSS*/
+.login_jumbo{
   width: 100%;
   height: auto;
-  /*margin-bottom: 15px;*/
+  margin: 0;
+}
+#login-welcome-header{
+  margin: 0;
+  text-align: center;
+}
+#login-lead{
+  margin: 0 0 3% 0;
+  text-align: center;
+}
+#login-label-checkbox{
+  margin: 0 3% 0 0;
+  float: right;
+}
+#login-button-container{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.login-hr-linebreak{
+  margin: 0;
+}
+#login-footer{
+  margin:0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 25px;
+}
+/*END login page css*/
+
+/*START news page css*/
+.news-row-container{
+  margin-bottom: 15px;
 }
 #news_section-and-icon_column{
   text-align: center;
@@ -152,6 +138,8 @@ hr:after {
   height: 100%;
   width: auto;
 }
+/*END news page css*/
+
 .capitalize {
    text-transform: capitalize;
 }
@@ -166,7 +154,7 @@ hr:after {
 .pref-tabs-header {
   text-align: center;
 }
-/*weather page style*/
+/*START weather page CSS*/
 #weather-city{
   font-family: 'Roboto Slab', serif;
   color: #4E87A2;
@@ -187,6 +175,8 @@ hr:after {
   font-size: 5em;
   color: #325B76;
 }
+/*END weather CSS*/
+
 #back-icon{
   height: 10%;
   width: 10%;
