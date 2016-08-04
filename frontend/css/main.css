@@ -132,3 +132,9 @@ hr:after {
 .pref-tabs-header {
   text-align: center;
 }
+
+/*Dat Map*/
+#map {
+    height:75vh;
+    width:85vw;
+}

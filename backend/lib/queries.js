@@ -49,5 +49,11 @@ module.exports = {
   },
   saveArticle: function(user_id, image, section, title, url, abstract) {
     return knex.raw(`insert into saved_articles values (${user_id}, '${image}', '${section}', '${title}', '${url}', '${abstract}')`)
+  },
+  getSavedArticles: function(id) {
+    return knex.raw(`select * from saved_articles where user_id = ${id}`)
+  },
+  deleteArticle: function(id, title) {
+    return knex.raw(`delete from saved_articles where user_id = ${id} and title = '${title}'`)
   }
 }
