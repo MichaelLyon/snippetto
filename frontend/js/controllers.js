@@ -203,10 +203,8 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
-
  var foo = this
  $http.get('http://localhost:3000/fun/getFun').then(function(obj){
-
    foo.qoute = obj.data.quoteText
    foo.author = obj.data.quoteAuthor
   $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2){
@@ -218,8 +216,8 @@ angular.module('myApp.controllers', [])
       foo.advice = obj3.data.slip.advice
       $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4){
         foo.chuckNorris = obj4.data.value
+        })
       })
     })
-   })
- })
+  })
 }])
