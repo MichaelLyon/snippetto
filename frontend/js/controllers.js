@@ -28,9 +28,9 @@ angular.module('myApp.controllers', [])
             }
         })
     }
-      $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
+    $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
-      })
+    })
 
     this.updateNewsPage = function(section) {
         $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
@@ -65,64 +65,66 @@ angular.module('myApp.controllers', [])
         //   console.log('hit');
         //   return true;
         // }
-      self.showPrefs = false
-      if ($rootScope.user_id) {
-          var postObj = {
-              user_id: $rootScope.user_id
-          }
-      } else {
-          var postObj = {}
-      }
-      var preferences = document.getElementsByClassName('news-checkbox')
-      for (var i = 0; i < preferences.length; i++) {
-          if (preferences[i].checked) {
-              postObj[preferences[i].name] = preferences[i].name
-          }
-      }
-      $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-          $state.reload()
-      })
-  }
-
-  this.showSectionSelections = function() {
-    self.showPrefs = true
-  }
-
-  this.saveArticle = function(img, section, title, url, abstract) {
-    var postObj = {
-      user_id: $rootScope.user_id,
-      image: img,
-      section: section,
-      title: title,
-      url: url,
-      abstract: abstract
+    self.showPrefs = false
+    if ($rootScope.user_id) {
+        var postObj = {
+            user_id: $rootScope.user_id
+        }
+    } else {
+        var postObj = {}
     }
-    $http.post('http://localhost:3000/news/save', postObj).then(function() {
-      console.log('post successful');
-    })
-  }
-
-  this.deleteArticle = function(article) {
-    var postObj = {
-      user_id: $rootScope.user_id,
-      title: article
+    var preferences = document.getElementsByClassName('news-checkbox')
+    for (var i = 0; i < preferences.length; i++) {
+        if (preferences[i].checked) {
+            postObj[preferences[i].name] = preferences[i].name
+        }
     }
-    $http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
-      self.getSavedArticles()
+    $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+        $state.reload()
     })
-  }
 
-  this.getSavedArticles = function() {
-    $http.post('http://localhost:3000/news/retrieveArticles', {user_id: $rootScope.user_id}).then(function(data) {
-      self.stories = data.data
-    })
-    this.main = false
-    this.saved = true
-  }
 
-  this.getCurrentArticles = function() {
-    $state.reload()
-  }
+    this.showSectionSelections = function() {
+        self.showPrefs = true
+    }
+
+    this.saveArticle = function(img, section, title, url, abstract) {
+        var postObj = {
+            user_id: $rootScope.user_id,
+            image: img,
+            section: section,
+            title: title,
+            url: url,
+            abstract: abstract
+        }
+        $http.post('http://localhost:3000/news/save', postObj).then(function() {
+            console.log('post successful');
+        })
+    }
+
+    this.deleteArticle = function(article) {
+        var postObj = {
+            user_id: $rootScope.user_id,
+            title: article
+        }
+        $http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
+            self.getSavedArticles()
+        })
+    }
+
+    this.getSavedArticles = function() {
+        $http.post('http://localhost:3000/news/retrieveArticles', {
+            user_id: $rootScope.user_id
+        }).then(function(data) {
+            self.stories = data.data
+        })
+        this.main = false
+        this.saved = true
+    }
+
+    this.getCurrentArticles = function() {
+        $state.reload()
+    }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -206,11 +208,11 @@ angular.module('myApp.controllers', [])
         // console.log($rootScope.currentPosition);
     })
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
-    $http.post('http://localhost:3000/traffic/getAdd', $rootScope.user_id).then(function(address){
-      $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
-        console.log(data);
+    $http.post('http://localhost:3000/traffic/getAdd', $rootScope.user_id).then(function(address) {
+        $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
+            console.log(data);
 
-      })
+        })
     })
 
 
@@ -233,22 +235,22 @@ angular.module('myApp.controllers', [])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
- var foo = this
- $http.get('http://localhost:3000/fun/getFun').then(function(obj){
+    var foo = this
+    $http.get('http://localhost:3000/fun/getFun').then(function(obj) {
 
-   foo.qoute = obj.data.quoteText
-   foo.author = obj.data.quoteAuthor
-  $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2){
-    foo.word = obj2.data.word
-    foo.definition = obj2.data.definitions[0].text
-    foo.pof = obj2.data.definitions[0].partOfSpeech
-    foo.example = obj2.data.examples[1].text
-    $http.get('http://api.adviceslip.com/advice').then(function(obj3){
-      foo.advice = obj3.data.slip.advice
-      $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4){
-        foo.chuckNorris = obj4.data.value
-      })
+        foo.qoute = obj.data.quoteText
+        foo.author = obj.data.quoteAuthor
+        $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {
+            foo.word = obj2.data.word
+            foo.definition = obj2.data.definitions[0].text
+            foo.pof = obj2.data.definitions[0].partOfSpeech
+            foo.example = obj2.data.examples[1].text
+            $http.get('http://api.adviceslip.com/advice').then(function(obj3) {
+                foo.advice = obj3.data.slip.advice
+                $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
+                    foo.chuckNorris = obj4.data.value
+                })
+            })
+        })
     })
-   })
- })
 }])
