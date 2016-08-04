@@ -244,7 +244,7 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('youtubeController', ['$http', '$rootScope', function($http, $rootScope) {
-)
+
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
