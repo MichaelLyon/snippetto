@@ -207,6 +207,42 @@ angular.module('myApp.controllers', [])
         $rootScope.currentPosition = pos;
         // console.log($rootScope.currentPosition);
     })
+
+    var mapOptions = {
+        zoom: 4,
+        center: new google.maps.LatLng(40.0000, -98.0000),
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+
+    $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    $rootScope.markers = [];
+
+    var infoWindow = new google.maps.InfoWindow();
+
+    var createMarker = function (info){
+
+        var marker = new google.maps.Marker({
+            map: $rootScope.map,
+            position: new google.maps.LatLng(info.lat, info.long),
+            title: info.city
+        });
+        marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+
+        google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+            infoWindow.open($rootScope.map, marker);
+        });
+
+        $rootScope.markers.push(marker);
+
+    }
+
+    $rootScope.openInfoWindow = function(e, selectedMarker){
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+    }
+
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
     $http.post('http://localhost:3000/traffic/getAdd', $rootScope.user_id).then(function(address) {
         $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
