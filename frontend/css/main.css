@@ -99,10 +99,13 @@ hr:after {
   padding: 0 0.25em;
   background: white;
 }
+.news-row-container{
+  margin-bottom: 15px;
+}
 .row{
   width: 100%;
   height: auto;
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
 }
 #news_section-and-icon_column{
   text-align: center;
@@ -128,5 +131,4 @@ hr:after {
 
 .pref-tabs-header {
   text-align: center;
-
 }
