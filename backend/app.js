@@ -13,6 +13,7 @@ var news = require('./routes/news');
 var traffic = require('./routes/traffic');
 var fun = require('./routes/fun');
 var youtube = require('./routes/youtube');
+var todo = require('./routes/todo');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/news', news);
 app.use('/traffic', traffic);
 app.use('/fun', fun)
 app.use('/youtube', youtube)
+app.use('/todo', todo)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
