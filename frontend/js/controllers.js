@@ -251,7 +251,6 @@ angular.module('myApp.controllers', [])
     })
     console.log(self.videos);
   })
-}])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
