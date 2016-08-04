@@ -123,6 +123,142 @@ hr:after {
 }
 /*END login page css*/
 
+#left_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-left: auto;
+}
+#right_icons{
+  text-align: center;
+  height: 75%;
+  width: auto;
+  margin-right: auto;
+}
+.icons{
+  height: 115%;
+  width: 95%;
+  border-radius: 80%;
+  border-style:none;
+}
+.left_icons button{
+  border-style:none;
+  background-color: white;
+}
+.right_icons button{
+  border-style:none;
+  background-color: white;
+}
+.scroll{
+  width: 100%;
+  height: 75vh;
+  overflow: scroll;
+}
+.news-checkbox {
+    margin-right: 50px !important;
+    margin-left: 5px !important;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {}
+#img_logo {
+    height: 10%;
+    width: 10%;
+}
+.outer_box {
+    height: 70vh;
+    width: 70%;
+    margin-top: 10%;
+    margin-left: 13.5%;
+}
+.members_wrapper {
+    margin: auto;
+    /*height: 70vh;*/
+    width: 100%;
+    text-align: center;
+}
+.outer_box3 {
+    height: 80vh;
+    width: 90%;
+    margin: 0 2% 0 4.6%;
+}
+.fa.fa-google {
+    height: 7vh;
+    width: 35%;
+    color: white;
+    text-align: center;
+    padding-top: 1%;
+    font-size: 2vw;
+    border-radius: 12px;
+    background-color: #DD4B39;
+}
+.members_header {
+    font-family: 'Roboto Slab', serif;
+    color: #DD4B39;
+}
+#snippetto_title {
+    font-family: 'Roboto Slab', serif;
+}
+#left_icons {
+    text-align: center;
+    height: 75%;
+    width: auto;
+    margin-left: auto;
+}
+#right_icons {
+    text-align: center;
+    height: 75%;
+    width: auto;
+    margin-right: auto;
+}
+.icons {
+    height: 115%;
+    width: 95%;
+    border-radius: 80%;
+    border-style: none;
+}
+.left_icons button {
+    border-style: none;
+    background-color: white;
+}
+.right_icons button {
+    border-style: none;
+    background-color: white;
+}
+.scroll {
+    width: 100%;
+    height: 75vh;
+    overflow: scroll;
+}
+hr {
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+.news-row-container {
+    margin-bottom: 15px;
+}
+.row {
+    width: 100%;
+    height: auto;
+    /*margin-bottom: 15px;*/
+}
+#news_section-and-icon_column {
+    text-align: center;
+  }
 /*START news page css*/
 .news-row-container{
   margin-bottom: 15px;
@@ -130,29 +266,27 @@ hr:after {
 #news_section-and-icon_column{
   text-align: center;
 }
-.news_title{
-  margin: 0;
+.news_title {
+    margin: 0;
 }
-#news_icon{
-  border-radius: 8px;
-  height: 100%;
-  width: auto;
+#news_icon {
+    border-radius: 8px;
+    height: 100%;
+    width: auto;
 }
 /*END news page css*/
 
 .capitalize {
-   text-transform: capitalize;
+    text-transform: capitalize;
 }
-
 .pref-tabs {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
-
 .pref-tabs-header {
-  text-align: center;
+    text-align: center;
 }
 /*START weather page CSS*/
 #weather-city{
@@ -184,9 +318,10 @@ hr:after {
   padding-top: 15%;
 }
 /*Dat Map*/
+
 #map {
-    height:75vh;
-    width:85vw;
+    height: 75vh;
+    width: 85vw;
 }
 
 .video-swipe {
