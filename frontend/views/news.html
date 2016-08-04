@@ -4,11 +4,13 @@
       <h1 id='snippetto_title'>Snippetto</h1>
     </div>
       <a ui-sref="reddit" class="btn btn-primary">Reddit</a>
-      <a ui-sref="members" class="btn btn-primary">Home Page</a>
+      <a ui-sref="members" class="btn btn-primary">Home Page</a> <br>
+      <button class="btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
+      <button class="btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
       <h1 class="h1 display-1">New York Times</h1>
     <div class="set-preferences" ng-show="news.showPrefs">
         <h3>Select the New York Times sections you're interested in seeing</h3>
-        Top Stories<input class="news-checkbox" type="checkbox" name="home" value="home">
+        Top Articles<input class="news-checkbox" type="checkbox" name="home" value="home">
         Opinion<input class="news-checkbox" type="checkbox" name="opinion" value="opinion">
         World<input class="news-checkbox" type="checkbox" name="world" value="world">
         National<input class="news-checkbox" type="checkbox" name="national" value="national">
@@ -28,14 +30,21 @@
         </div>
         <div class="pref-tabs">
             <div ng-repeat="pref in news.preferences">
-                <button type="button" class="btn btn-primary" ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+                <div ng-switch="pref.section">
+                     <button type="button" class="btn btn-primary" ng-switch-when="home" ng-click="news.updateNewsPage(pref.section)">Top Articles</button>
+                     <button type="button" class="btn btn-primary capitalize" ng-switch-default ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+                 </div>
             </div>
         </div>
+        <button class="btn btn-success" type="button" name="button" ng-click="news.showSectionSelections()">Edit Sections</button>
     </div>
 
-    <h3 class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
+    <div ng-switch="news.currentSection">
+        <h3 ng-switch-when="home" class="capitalize" id='news_header'>Top Articles</h3>
+        <h3 ng-switch-default class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
+    </div>
     <hr />
-    <div class="scroll">
+    <div ng-show="news.main" class="scroll">
       <div class="row" ng-repeat="story in news.stories">
         <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
           <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
@@ -45,6 +54,23 @@
           <div class="news_article">
             <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
             <p id='news_abstract'>{{story.abstract}}</p>
+            <button class="btn btn-primary" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="news.saved" class="scroll">
+      <div class="row" ng-repeat="story in news.stories">
+        <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
+          <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
+          <h4 clas='news_section'>Section: {{story.section}}</h4>
+        </div>
+        <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
+          <div class="news_article">
+            <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
+            <p id='news_abstract'>{{story.abstract}}</p>
+            <button class="btn btn-primary" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
           </div>
         </div>
       </div>
