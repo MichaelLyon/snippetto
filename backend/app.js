@@ -12,6 +12,7 @@ var weather = require('./routes/weather');
 var news = require('./routes/news');
 var traffic = require('./routes/traffic');
 var fun = require('./routes/fun');
+var youtube = require('./routes/youtube');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/weather', weather);
 app.use('/news', news);
 app.use('/traffic', traffic);
 app.use('/fun', fun)
+app.use('/youtube', youtube)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

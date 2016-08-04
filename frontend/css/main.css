@@ -138,3 +138,9 @@ hr:after {
     height:75vh;
     width:85vw;
 }
+
+.video-swipe {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
