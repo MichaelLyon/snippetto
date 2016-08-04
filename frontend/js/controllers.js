@@ -157,7 +157,6 @@ angular.module('myApp.controllers', [])
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
     var reddit = this;
     $http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
-        console.log(data);
         reddit.redditSubList = data.data.data.children;
     })
     this.getSub = function(name) {
@@ -168,7 +167,6 @@ angular.module('myApp.controllers', [])
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
     var redditSub = this;
     $http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
-        console.log(data);
         redditSub.redditResults = data.data.data.children;
     })
 }])
@@ -180,7 +178,6 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    console.log($rootScope);
     var self = this
     $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
@@ -192,51 +189,28 @@ angular.module('myApp.controllers', [])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
+    var serverObject ={};
+    serverObject.origin1 = origin1;
+    serverObject.userId = $rootScope.user_id;
 
     var mapOptions = {
-        zoom: 9,
+        zoom: 15,
         center: origin1,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
+        mapTypeId: google.maps.MapTypeId.MAP
     }
 
-    $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    $rootScope.markers = [];
-
-    var infoWindow = new google.maps.InfoWindow();
-
-    // var createMarker = function (info){
-    //
-    //     var marker = new google.maps.Marker({
-    //         map: $rootScope.map,
-    //         position: new google.maps.LatLng(info.lat, info.long),
-    //         title: info.city
-    //     });
-    //     marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-    //
-    //     google.maps.event.addListener(marker, 'click', function(){
-    //         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-    //         infoWindow.open($rootScope.map, marker);
-    //     });
-    //
-    //     $rootScope.markers.push(marker);
-    //
-    // }
-    // $rootScope.openInfoWindow = function(e, selectedMarker){
-    //     e.preventDefault();
-    //     google.maps.event.trigger(selectedMarker, 'click');
-    // }
-
-    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
-
+    // $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
+      console.log(data);
+      $rootScope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     })
-    this.workAddGet = function(address) {
-        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
-        $rootScope.workAddress = address;
-        $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-
-        })
-    }
+    // this.workAddGet = function(address) {
+    //     address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
+    //     $rootScope.workAddress = address;
+    //     $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+    //
+    //     })
+    // }
 }])
 
 .controller('calendarController', ['$http', '$rootScope', function($http, $rootScope) {
