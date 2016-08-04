@@ -6,51 +6,62 @@ angular.module('myApp.controllers', [])
     if (window.location.href.includes('code')) {
         $state.go('members')
     }
-
-
-}])
-
-.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
 }])
 
 .controller('newsController', ['$http', '$rootScope', function($http, $rootScope) {
     var self = this
+    this.currentSection = 'home'
+    this.prefTabs = false
     console.log($rootScope);
     if ($rootScope.username) {
-        self.showPrefs = true
-    } else {
-        self.showPrefs = false
-    }
+        $http.post('http://localhost:3000/news/getPreferences', {
+            user_id: $rootScope.user_id
+        }).then(function(prefs) {
+            if (prefs.data.preferences) {
+                self.prefTabs = true
+                self.preferences = prefs.data.preferences
+            } else {
+                self.showPrefs = true
+            }
+        })
+    } else {}
     $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
         self.stories = data.data.results;
     })
 
+    this.updateNewsPage = function(section) {
+        $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
+            self.stories = data.data.results
+        })
+        this.currentSection = section
+    }
+
     this.gatherPreferences = function() {
-            if ($rootScope.user_id) {
-                var postObj = {
-                    user_id: $rootScope.user_id
-                }
-            } else {
-                var postObj = {}
-            }
-            var preferences = document.getElementsByClassName('news-checkbox')
-            for (var i = 0; i < preferences.length; i++) {
-                if (preferences[i].checked) {
-                    postObj[preferences[i].name] = preferences[i].name
-                }
-            }
-            $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-                console.log('post successful');
-            })
-        }
-        // Image replacement function -- not working yet
-        // function imgError(image) {
-        //   image.onerror = "";
-        //   image.src = "../images/Snippetto.png";
-        //   console.log('hit');
-        //   return true;
-        // }
+      self.showPrefs = false
+      if ($rootScope.user_id) {
+          var postObj = {
+              user_id: $rootScope.user_id
+          }
+      } else {
+          var postObj = {}
+      }
+      var preferences = document.getElementsByClassName('news-checkbox')
+      for (var i = 0; i < preferences.length; i++) {
+          if (preferences[i].checked) {
+              postObj[preferences[i].name] = preferences[i].name
+          }
+      }
+      $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+          console.log('post successful');
+      })
+  }
+  // Image replacement function -- not working yet
+  // function imgError(image) {
+  //   image.onerror = "";
+  //   image.src = "../images/Snippetto.png";
+  //   console.log('hit');
+  //   return true;
+  // }
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
@@ -74,15 +85,21 @@ angular.module('myApp.controllers', [])
 
 
 .controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            $rootScope.currentPosition = pos;
+            console.log($rootScope.currentPosition);
+        })
+    } else {
+        $rootScope.currentPosition = {
+            lat: 39.7392,
+            lng: 104.9903
         };
-        $rootScope.currentPosition = pos;
-        console.log($rootScope.currentPosition);
-
-    })
+    }
     if (window.location.href.includes('code')) {
         var startingIndex = window.location.search.indexOf('code=') + 5
         $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
@@ -119,15 +136,27 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+    console.log(origin1);
 
+    var origin1 = new google.maps.LatLng(req.body.lat, req.body.lng);
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        $rootScope.currentPosition = pos;
+        console.log($rootScope.currentPosition);
+    })
+
+    $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
+
+    })
     this.workAddGet = function(address) {
-        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH rootScope.user_id
+        address.id = 2 //$rootScope.user_id; TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-            $http.post('http://localhost:3000/traffic/getTraffic', $rootScope.currentPosition).then(function(data) {
-                console.log(data);
-                $rootScope.traffic = data;
-            })
+
         })
     }
 }])

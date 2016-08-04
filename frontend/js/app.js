@@ -9,12 +9,6 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'loginController',
       controllerAs: 'login'
     })
-    .state('home', {
-      url: '/home',
-      templateUrl: '/views/home.html',
-      controller: 'homeController',
-      controllerAs: 'home'
-    })
     .state('news', {
       url: '/news',
       templateUrl: '/views/news.html',
