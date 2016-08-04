@@ -1,5 +1,10 @@
-<h1>This is the weather page</h1>
+<div class="members_wrapper">
+  <a href="http://localhost:8000/#/members"><button type="button" name="button"><img id='back-icon'src="images/navigate-left.ico" alt="" /></button></a>
+<div class="col-md-2 col-md-offset-5">
+  <h1 id='weather-city'>{{weather.city}}</h1>
+  <img id='weather-icon'src="http://openweathermap.org/img/w/{{weather.weatherImg}}.png" alt="" />
+  <h3 id='weather-description'>{{weather.desc}}</h3>
+  <h1 id='weather-temp'>{{weather.temp}}</h1>
+</div>
 
-<h1>{{weather.city}}</h1>
-<h2>{{weather.temp}}</h2>
-<h3>{{weather.desc}}</h3>
+</div>

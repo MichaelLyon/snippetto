@@ -161,13 +161,15 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    console.log($rootScope);
+    // console.log($rootScope);
     var self = this
     $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
         self.city = data.data.name
         self.desc = data.data.weather[0].description
         self.temp = Math.ceil(data.data.main.temp) + '°'
+        self.weatherImg = data.data.weather[0].icon
+        console.log('data: ',data.data);
     })
 }])
 
