@@ -243,9 +243,14 @@ angular.module('myApp.controllers', [])
 
 }])
 
-.controller('youtubeController', ['$http', '$rootScope', function($http, $rootScope) {
-
-}])
+.controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
+  var self = this
+  $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
+    self.videos = data.data.items.map(function(elem) {
+      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+    })
+    console.log(self.videos);
+  })
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
 
