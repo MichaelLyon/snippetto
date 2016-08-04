@@ -27,11 +27,11 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller:'redditSubController',
       controllerAs: 'redditSub'
     })
-    .state('members', {
-      url: '/members',
-      templateUrl: '/views/members.html',
-      controller: 'membersController',
-      controllerAs: 'members'
+    .state('home', {
+      url: '/home',
+      templateUrl: '/views/home.html',
+      controller: 'homeController',
+      controllerAs: 'home'
     })
     .state('weather', {
       url: '/weather',

@@ -55,7 +55,7 @@ angular.module('myApp.controllers', [])
     }
     function loginAndSuch(){
       if (window.location.href.includes('code')) {
-          $state.go('members')
+          $state.go('home')
       }
     }
 
@@ -174,7 +174,7 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('membersController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
 
 }])
 
