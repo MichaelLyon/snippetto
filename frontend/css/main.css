@@ -1,7 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,700italic);
 
-
+html {
+  position: relative;
+  min-height: 100%;
+}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
@@ -15,8 +18,8 @@ body{
 }
 
 #img_logo{
-  height: 10%;
-  width: 10%;
+  height: 20%;
+  width: 20%;
 }
 .outer_box{
   height: 70vh;
@@ -52,6 +55,37 @@ body{
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
 }
+.login_jumbo{
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+#login-welcome-header{
+  margin: 0;
+  text-align: center;
+}
+#login-lead{
+  margin: 0 0 3% 0;
+  text-align: center;
+}
+#login-label-checkbox{
+  margin: 0 3% 0 0;
+  float: right;
+}
+.login-hr-linebreak{
+  margin: 0;
+}
+#login-footer{
+  margin:0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+ /* Set the fixed height of the footer here */
+  height: 25px;
+}
+
 #left_icons{
   text-align: center;
   height: 75%;
