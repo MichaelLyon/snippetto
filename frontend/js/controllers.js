@@ -239,8 +239,6 @@ angular.module('myApp.controllers', [])
     directionsDisplay.setMap(map);
 
     $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-        console.log(data);
-
         calculateAndDisplayRoute(directionsService, directionsDisplay);
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             directionsService.route({
@@ -257,7 +255,6 @@ angular.module('myApp.controllers', [])
         }
     })
 
-
     this.workAddGet = function(address) {
         address.id = $rootScope.user_id;// TODO: REPLACE 1 WITH $rootScope.user_id
         $rootScope.workAddress = address;
@@ -265,6 +262,7 @@ angular.module('myApp.controllers', [])
 
         })
     }
+
 }])
 
 .controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
