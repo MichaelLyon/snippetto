@@ -6,8 +6,6 @@ angular.module('myApp.controllers', [])
     if (window.location.href.includes('code')) {
         $state.go('members')
     }
-
-
 }])
 
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
@@ -101,7 +99,10 @@ angular.module('myApp.controllers', [])
             console.log($rootScope.currentPosition);
         })
     } else {
-          $rootScope.currentPosition = {lat:39.7392, lng:104.9903};
+        $rootScope.currentPosition = {
+            lat: 39.7392,
+            lng: 104.9903
+        };
     }
 
     if (window.location.href.includes('code')) {
@@ -140,6 +141,10 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+    console.log(origin1);
+
+    var origin1 = new google.maps.LatLng(req.body.lat, req.body.lng);
+
     navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
             lat: position.coords.latitude,
@@ -148,6 +153,7 @@ angular.module('myApp.controllers', [])
         $rootScope.currentPosition = pos;
         console.log($rootScope.currentPosition);
     })
+
     $http.post('http://localhost:3000/traffic', $rootScope.currentPosition).then(function(data) {
 
     })
