@@ -228,3 +228,7 @@ hr:after {
   display: flex;
   flex-direction: column;
 }
+
+#hiddenButton{
+  display: none;
+}

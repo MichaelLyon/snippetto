@@ -1,29 +1,38 @@
 <div class="login_wrapper">
-    <div class="modal-header" align="center">
-        <img class="img-circle" id="img_logo" src="images/Snippetto.png">
-        <h1 id='snippetto_title'>Snippetto</h1>
-    </div>
-    <hr class="login-hr-linebreak">
-    <div class="jumbotron login_jumbo">
-        <h1 id="login-welcome-header">Welcome!</h1>
-        <p id="login-lead">Snippetto is your daily dosage of news, entertainment, and planning. Enjoy.</p>
-        <div id='login-button-container'>
-          <a href="https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/oauth2/v2/auth?access_type%3Doffline%26scope%3Demail%2Bhttps://www.googleapis.com/auth/calendar%2Bprofile%2Bhttps://www.googleapis.com/auth/plus.login%26response_type%3Dcode%26state%3Dhello%26client_id%3D709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com%26redirect_uri%3Dhttp://localhost:8000%26from_login%3D1%26as%3D1cb293ffbd85eae5&btmpl=authsub&scc=1&oauth=1">
-            <button class="btn btn-primary"> Sign in with Google</button>
-          <a ui-sref="home">
-            <button id="guest_btn" type="button" class="btn btn-primary">Continue as a Guest</button>
-          </a>
+
+  <!--MODAL START  -->
+  <div ng-show="login.loadingNow">
+    <!-- Modal -->
+    <div class="modal fade hide" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            Loading Your Preferences...
+          </div>
         </div>
+      </div>
     </div>
-    <div class="checkbox">
-        <label id='login-label-checkbox'>
-            <input type="checkbox"> Remember me
-        </label>
+  </div>
+
+  <div class="modal-header" align="center">
+    <img class="img-circle" id="img_logo" src="images/Snippetto.png">
+    <h1 id='snippetto_title'>Snippetto</h1>
+  </div>
+  <hr class="login-hr-linebreak">
+  <div class="jumbotron login_jumbo">
+    <h1 id="login-welcome-header">Welcome!</h1>
+    <p id="login-lead">Snippetto is your daily dosage of news, entertainment, and planning. Enjoy.</p>
+    <div id='login-button-container'>
+      <a href="https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/oauth2/v2/auth?access_type%3Doffline%26scope%3Demail%2Bhttps://www.googleapis.com/auth/calendar%2Bprofile%2Bhttps://www.googleapis.com/auth/plus.login%26response_type%3Dcode%26state%3Dhello%26client_id%3D709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com%26redirect_uri%3Dhttp://localhost:8000%26from_login%3D1%26as%3D1cb293ffbd85eae5&btmpl=authsub&scc=1&oauth=1">
+        <button class="btn btn-primary" ng-click="login.updateBool()"> Sign in with Google</button>
+        <a ui-sref="home">
+          <button id="guest_btn" type="button" class="btn btn-primary">Continue as a Guest</button>
+        </a>
     </div>
+  </div>
 </div>
 <!-- <hr class="login-hr-linebreak"> -->
 <div>
-    <p id='login-footer'>&copy;A J.Cole, Tobin, Slick Rick, and Vinny V Production
-    </p>
-</div>
+  <p id='login-footer'>&copy;A J.Cole, Tobin, Slick Rick, and Vinny V Production
+  </p>
 </div>
