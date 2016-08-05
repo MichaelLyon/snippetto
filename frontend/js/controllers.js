@@ -236,22 +236,37 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('todoController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
   var self = this
+
+  $http.post('http://localhost:3000/todo/show', {user_id: $rootScope.user_id}).then(function(list) {
+    self.todoList = list.data
+  })
+
   this.addTask = function() {
     var postObj = {
       user_id: $rootScope.user_id,
       task: self.task,
       priority: self.priority,
-      dueDate: self.dueDate,
-      time: self.time,
+      dueDate: self.dueDate.toString().substring(0, 15),
+      time: self.time.toString().substring(16, 24),
       description: self.description
     }
     console.log(postObj);
     $http.post('http://localhost:3000/todo/new', postObj).then(function() {
-      console.log('post successful');
+      $state.reload()
     })
+  }
+  this.edit = function(task_id) {
+    $http.post('http://localhost:3000/todo/edit', {task_id: task_id}).then(function() {
+      $state.reload()
+    })
+  }
 
+  this.delete = function(task_id) {
+    $http.post('http://localhost:3000/todo/delete', {task_id: task_id}).then(function() {
+      $state.reload()
+    })
   }
 
 }])
