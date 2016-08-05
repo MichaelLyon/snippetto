@@ -174,7 +174,7 @@ angular.module('myApp.controllers', [])
 
 
 .controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
+  
 }])
 
 
@@ -267,7 +267,7 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+.controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
   var self = this
 
   $http.post('http://localhost:3000/todo/show', {user_id: $rootScope.user_id}).then(function(list) {
