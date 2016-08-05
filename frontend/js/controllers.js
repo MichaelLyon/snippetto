@@ -343,7 +343,37 @@ angular.module('myApp.controllers', [])
             })
         })
     })
+
+    this.toggle_visibility1 = function() {
+         var e = document.getElementById('toggle_div1');
+         if(e.style.display == 'block')
+            e.style.display = 'none';
+         else
+            e.style.display = 'block';
+      }
+      this.toggle_visibility2 = function() {
+           var e = document.getElementById('toggle_div2');
+           if(e.style.display == 'block')
+              e.style.display = 'none';
+           else
+              e.style.display = 'block';
+        }
+        this.toggle_visibility3 = function() {
+             var e = document.getElementById('toggle_div3');
+             if(e.style.display == 'block')
+                e.style.display = 'none';
+             else
+                e.style.display = 'block';
+          }
+          this.toggle_visibility4 = function() {
+               var e = document.getElementById('toggle_div4');
+               if(e.style.display == 'block')
+                  e.style.display = 'none';
+               else
+                  e.style.display = 'block';
+            }
 }])
+
 
 
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
