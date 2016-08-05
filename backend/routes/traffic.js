@@ -19,27 +19,32 @@ router.post('/setAddress', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    Traffic.selectUser(req.body.userId).then(function(destinationAddress){
+    Traffic.selectUser(req.body.userId).then(function(destinationAddress) {
+        var originCleanUp = [req.body.origin1.lat, req.body.origin1.lng];
+        var street = destinationAddress.rows[0].street.replace(/\s+/g, '+');
+        var city = destinationAddress.rows[0].city.replace(/\s+/g, '+');
+        var state = destinationAddress.rows[0].state;
+        var address = street + ',' + '+' + city + ',' + '+' + state;
 
-      var street =  destinationAddress.rows[0].street.replace(/\s+/g, '+');
-      var city = destinationAddress.rows[0].city.replace(/\s+/g, '+');
-      var state = destinationAddress.rows[0].state;
-      var address = street +','+ '+'+ city +','+'+'+ state;
+        var sendBackObject = {};
 
-      request('https://maps.googleapis.com/maps/api/geocode/json?address='+ address +'&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body){
-        var parsedBody = JSON.parse(body);
-        var destinationCordsString = String(parsedBody.results[0].geometry.location.lat + ',' + parsedBody.results[0].geometry.location.lng);
-        res.send(destinationCordsString);
-      })
+        request('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body) {
+            var parsedBody = JSON.parse(body);
+            var destinationCordsString = String(parsedBody.results[0].geometry.location.lat + ',' + parsedBody.results[0].geometry.location.lng);
+            request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originCleanUp}&destinations=${address}&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0`, function(error, response, body) {
+                var parsedTheSequel = JSON.parse(body);
+                sendBackObject.destinationCords = destinationCordsString;
+                sendBackObject.durationToWork = parsedTheSequel.rows[0].elements[0].duration;
+                res.send(sendBackObject);
+            })
+        })
     })
 });
 
 
 router.post('/getAdd', function(req, res, next) {
-  console.log(req.body.id);
-  Traffic.selectUser(req.body.id).then(function(){
-
-  })
+    console.log(req.body.id);
+    Traffic.selectUser(req.body.id).then(function() {})
 });
 
 module.exports = router;
