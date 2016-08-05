@@ -10,10 +10,17 @@
   border-radius: 12px;
   background-color: #DD4B39;
 }
+
 /*HTML used for the fixed footer on login page*/
 html {
   position: relative;
   min-height: 100%;
+}
+nav{
+  /*position: relative;*/
+}
+.nav-fixer{
+  height: 50px;
 }
 .news-checkbox {
   margin-right: 50px !important;
@@ -60,7 +67,7 @@ hr:after {
   background: white;
 }
 
-/*START members CSS*/
+/*START members/HOME page CSS*/
 .members_wrapper{
   margin: auto;
   /*height: 70vh;*/
@@ -79,8 +86,8 @@ hr:after {
   color: #DD4B39;
 }
 .icons{
-  height: 115%;
-  width: 95%;
+  width: 100%;
+  height: auto;
   border-radius: 80%;
   border-style:none;
 }
@@ -96,7 +103,7 @@ hr:after {
   width: auto;
   margin-right: auto;
 }
-/*END members css*/
+/*END members/HOME pagecss*/
 
 /*START Login page CSS*/
 .login_jumbo{
@@ -138,6 +145,14 @@ hr:after {
 
 
 /*START news page css*/
+.news-wrapper{
+  /*background-color: blue;*/
+
+}
+/*monkey patch wonky div*/
+#news-header{
+  color: white;
+}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
