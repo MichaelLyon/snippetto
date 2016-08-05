@@ -34,21 +34,21 @@
   </div>
 <h1>This is the traffic page</h1>
 <div ng-controller="trafficController">
-    <div ng-show="traffic.trafficSwitch === true">
-        <div>Duration to Destination: {{traffic.durationToDestination}}</div>
-        <div id="map" data-tap-disabled="true"></div>
-    </div>
-    <div ng-hide="traffic.trafficSwitch === true">
-        <form class="simple-form">
-            <h3>Enter your Destination Address...</h3>
-            <div class="list-group-item">
-                <input type="text" name="street" value="" ng-model="workAddress.street" placeholder="Street">
-                <input type="text" name="city" value="" ng-model="workAddress.city" placeholder="City">
-                <input type="text" name="state" maxlength="2" value="" ng-model="workAddress.state" placeholder="State">
-                <input type="number" name="zip" max="99999" value="" ng-model="workAddress.zip" placeholder="Zip Code">
-                <input type="submit" name="sumbitAddress" value="Save" ng-click='traffic.workAddGet(workAddress)'>
-            </div>
-        </form>
-        <div id="map" data-tap-disabled="true"></div>
-    </div>
+  <div ng-show="traffic.trafficSwitch === true">
+    <div>Duration to Destination: {{traffic.durationToDestination}}</div>
+    <div id="map" data-tap-disabled="true"></div>
+  </div>
+  <div ng-hide="traffic.trafficSwitch === true">
+    <form class="simple-form">
+      <h3>Enter your Destination Address...</h3>
+      <div class="list-group-item">
+        <input type="text" name="street" value="" ng-model="workAddress.street" placeholder="Street">
+        <input type="text" name="city" value="" ng-model="workAddress.city" placeholder="City">
+        <input type="text" name="state" maxlength="2" value="" ng-model="workAddress.state" placeholder="State">
+        <input type="number" name="zip" max="99999" value="" ng-model="workAddress.zip" placeholder="Zip Code">
+        <input type="submit" name="sumbitAddress" value="Save" ng-click='traffic.workAddGet(workAddress)'>
+      </div>
+    </form>
+    <div id="map" data-tap-disabled="true"></div>
+  </div>
 </div>

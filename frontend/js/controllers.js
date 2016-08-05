@@ -1,178 +1,184 @@
 angular.module('myApp.controllers', [])
 
 .controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
-    var self = this
+	var self = this
 
-    var loadingDone = false;
+  var loadingModal = document.getElementById('myModal');
 
-    var intervalID = window.setInterval(getPosition, 1000);
+	var loadingDone = false;
+  this.loadingNow = false;
 
-    function getPosition() {
-        navigator.geolocation.getCurrentPosition(function(position) {
+  if (window.location.href.includes('code')) {
+    this.loadingNow = true;
+    loadingModal.className = 'in';
+  }
 
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            $rootScope.currentPosition = pos;
-            loadingDone = true;
-        })
-        if (loadingDone === true) {
-            clearIntervalAndSuch();
-        }
-    }
+	var intervalID = window.setInterval(getPosition, 1000);
 
-    function clearIntervalAndSuch() {
-        clearInterval(intervalID);
-        displayPage();
-    }
+	function getPosition() {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			$rootScope.currentPosition = pos;
+			loadingDone = true;
+		})
+		if (loadingDone === true) {
+			clearIntervalAndSuch();
+		}
+	}
 
-    function displayPage() {
-        if (window.location.href.includes('code')) {
-            var startingIndex = window.location.search.indexOf('code=') + 5
-            $rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
-            $http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=http://localhost:8000&grant_type=authorization_code`).then(function(response) {
-                $rootScope.accessToken = response.data.access_token
-                var postObj = {
-                    accessToken: $rootScope.accessToken
-                }
-                $http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
-                    $rootScope.username = data.data.email
-                    $http.post('http://localhost:3000/google/new', {
-                        username: $rootScope.username
-                    }).then(function(data) {
-                        $rootScope.user_id = data.data.user_id
-                        if (data.data.firstTimeUser) {
-                            $rootScope.firstTimeUser = true
-                        }
-                    })
-                })
-            })
-        }
-        loginAndSuch();
-    }
+	function clearIntervalAndSuch() {
+		clearInterval(intervalID);
+		displayPage();
+	}
 
-    function loginAndSuch() {
-        if (window.location.href.includes('code')) {
-            $state.go('home')
-        }
-    }
+	function displayPage() {
+		if (window.location.href.includes('code')) {
+			var startingIndex = window.location.search.indexOf('code=') + 5
+			$rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
+			$http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=http://localhost:8000&grant_type=authorization_code`).then(function(response) {
+				$rootScope.accessToken = response.data.access_token
+				var postObj = {
+					accessToken: $rootScope.accessToken
+				}
+				$http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
+					$rootScope.username = data.data.email
+					$http.post('http://localhost:3000/google/new', {
+						username: $rootScope.username
+					}).then(function(data) {
+						$rootScope.user_id = data.data.user_id
+						if (data.data.firstTimeUser) {
+							$rootScope.firstTimeUser = true
+						}
+					})
+				})
+			})
+		}
+		loginAndSuch();
+	}
 
+	function loginAndSuch() {
+		if (window.location.href.includes('code')) {
+			$state.go('home')
+		}
+	}
 }])
 
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-    var self = this
-    this.main = true
-    this.saved = false
-    this.currentSection = 'home'
-    this.prefTabs = false
-    console.log($rootScope);
-    if ($rootScope.username) {
-        $http.post('http://localhost:3000/news/getPreferences', {
-            user_id: $rootScope.user_id
-        }).then(function(prefs) {
-            if (prefs.data.preferences) {
-                self.prefTabs = true
-                self.preferences = prefs.data.preferences
-            } else {
-                self.showPrefs = true
-            }
-        })
-    }
-    $http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
-        self.stories = data.data.results;
-    })
+	var self = this
+	this.main = true
+	this.saved = false
+	this.currentSection = 'home'
+	this.prefTabs = false
+	console.log($rootScope);
+	if ($rootScope.username) {
+		$http.post('http://localhost:3000/news/getPreferences', {
+			user_id: $rootScope.user_id
+		}).then(function(prefs) {
+			if (prefs.data.preferences) {
+				self.prefTabs = true
+				self.preferences = prefs.data.preferences
+			} else {
+				self.showPrefs = true
+			}
+		})
+	}
+	$http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
+		self.stories = data.data.results;
+	})
 
-    this.updateNewsPage = function(section) {
-        $http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
-            self.stories = data.data.results
-        })
-        this.currentSection = section
-    }
+	this.updateNewsPage = function(section) {
+		$http.get(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=6acc556fbac84c2aa266476c82b9d4f2`).then(function(data) {
+			self.stories = data.data.results
+		})
+		this.currentSection = section
+	}
 
-    this.gatherPreferences = function() {
-        self.showPrefs = false
-        if ($rootScope.user_id) {
-            var postObj = {
-                user_id: $rootScope.user_id
-            }
-        } else {
-            var postObj = {}
-        }
-        var preferences = document.getElementsByClassName('news-checkbox')
-        for (var i = 0; i < preferences.length; i++) {
-            if (preferences[i].checked) {
-                postObj[preferences[i].name] = preferences[i].name
-            }
-        }
-        $http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
-            $state.reload()
-        })
-    }
+	this.gatherPreferences = function() {
+		self.showPrefs = false
+		if ($rootScope.user_id) {
+			var postObj = {
+				user_id: $rootScope.user_id
+			}
+		} else {
+			var postObj = {}
+		}
+		var preferences = document.getElementsByClassName('news-checkbox')
+		for (var i = 0; i < preferences.length; i++) {
+			if (preferences[i].checked) {
+				postObj[preferences[i].name] = preferences[i].name
+			}
+		}
+		$http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+			$state.reload()
+		})
+	}
 
-    this.showSectionSelections = function() {
-        self.showPrefs = true
-    }
+	this.showSectionSelections = function() {
+		self.showPrefs = true
+	}
 
-    this.saveArticle = function(img, section, title, url, abstract) {
-        var postObj = {
-            user_id: $rootScope.user_id,
-            image: img,
-            section: section,
-            title: title,
-            url: url,
-            abstract: abstract
-        }
-        $http.post('http://localhost:3000/news/save', postObj).then(function() {
-            console.log('post successful');
-        })
-    }
+	this.saveArticle = function(img, section, title, url, abstract) {
+		var postObj = {
+			user_id: $rootScope.user_id,
+			image: img,
+			section: section,
+			title: title,
+			url: url,
+			abstract: abstract
+		}
+		$http.post('http://localhost:3000/news/save', postObj).then(function() {
+			console.log('post successful');
+		})
+	}
 
-    this.deleteArticle = function(article) {
-        var postObj = {
-            user_id: $rootScope.user_id,
-            title: article
-        }
-        $http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
-            self.getSavedArticles()
-        })
-    }
+	this.deleteArticle = function(article) {
+		var postObj = {
+			user_id: $rootScope.user_id,
+			title: article
+		}
+		$http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
+			self.getSavedArticles()
+		})
+	}
 
-    this.getSavedArticles = function() {
-        $http.post('http://localhost:3000/news/retrieveArticles', {
-            user_id: $rootScope.user_id
-        }).then(function(data) {
-            self.stories = data.data
-        })
-        this.main = false
-        this.saved = true
-    }
+	this.getSavedArticles = function() {
+		$http.post('http://localhost:3000/news/retrieveArticles', {
+			user_id: $rootScope.user_id
+		}).then(function(data) {
+			self.stories = data.data
+		})
+		this.main = false
+		this.saved = true
+	}
 
-    this.getCurrentArticles = function() {
-        $state.reload()
-    }
+	this.getCurrentArticles = function() {
+		$state.reload()
+	}
 }])
 
 .controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
-    var reddit = this;
-    $http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
-        reddit.redditSubList = data.data.data.children;
-    })
-    this.getSub = function(name) {
-        $rootScope.subreddit = name;
-    }
+	var reddit = this;
+	$http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
+		reddit.redditSubList = data.data.data.children;
+	})
+	this.getSub = function(name) {
+		$rootScope.subreddit = name;
+	}
 }])
 
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
-    var redditSub = this;
-    $http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
-        redditSub.redditResults = data.data.data.children;
-    })
+	var redditSub = this;
+
+	$http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
+		redditSub.redditResults = data.data.data.children;
+	})
 }])
 
 
 .controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
-
 }])
 
 
@@ -220,64 +226,64 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-    var selfTraffic = this;
-    //User Origin var
-    var origin1 = new google.maps.LatLng($rootScope.currentPosition);
-    //Google maps objects for displaying/finding directions/showing traffic
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    var trafficLayer = new google.maps.TrafficLayer();
-    //The map object
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    //What's being sent to backend
-    var serverObject = {};
+	var selfTraffic = this;
+	//User Origin var
+	var origin1 = new google.maps.LatLng($rootScope.currentPosition);
+	//Google maps objects for displaying/finding directions/showing traffic
+	var directionsService = new google.maps.DirectionsService;
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var trafficLayer = new google.maps.TrafficLayer();
+	//The map object
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	//What's being sent to backend
+	var serverObject = {};
 
-    serverObject.origin1 = origin1;
-    serverObject.userId = $rootScope.user_id;
+	serverObject.origin1 = origin1;
+	serverObject.userId = $rootScope.user_id;
 
-    this.trafficSwitch = false;
+	this.trafficSwitch = false;
 
-    //Controls the Traffic view and form input to save addresses
-    if ($rootScope.user_id) {
-        this.trafficSwitch = true;
-    }
+	//Controls the Traffic view and form input to save addresses
+	if ($rootScope.user_id) {
+		this.trafficSwitch = true;
+	}
 
-    var mapOptions = {
-        zoom: 15,
-        center: origin1,
-        mapTypeId: google.maps.MapTypeId.MAP
-    }
+	var mapOptions = {
+		zoom: 15,
+		center: origin1,
+		mapTypeId: google.maps.MapTypeId.MAP
+	}
 
-    //Setting the map objects
-    directionsDisplay.setMap(map);
-    trafficLayer.setMap(map);
+	//Setting the map objects
+	directionsDisplay.setMap(map);
+	trafficLayer.setMap(map);
 
-    $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-        selfTraffic.durationToDestination = data.data.durationToWork.text;
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
+	$http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
+		selfTraffic.durationToDestination = data.data.durationToWork.text;
+		calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-            directionsService.route({
-                origin: origin1,
-                destination: data.data.destinationCords,
-                travelMode: 'DRIVING'
-            }, function(response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-        }
-    })
+		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+			directionsService.route({
+				origin: origin1,
+				destination: data.data.destinationCords,
+				travelMode: 'DRIVING'
+			}, function(response, status) {
+				if (status === 'OK') {
+					directionsDisplay.setDirections(response);
+				} else {
+					window.alert('Directions request failed due to ' + status);
+				}
+			});
+		}
+	})
 
-    this.workAddGet = function(address) {
-        address.id = $rootScope.user_id;
-        $rootScope.workAddress = address;
-        $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+	this.workAddGet = function(address) {
+		address.id = $rootScope.user_id;
+		$rootScope.workAddress = address;
+		$http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
 
-        })
-    }
+		})
+	}
 }])
 
 .controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
@@ -339,7 +345,6 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
-
     var foo = this
     $http.get('http://localhost:3000/fun/getFun').then(function(obj) {
         foo.qoute = obj.data.quoteText
@@ -391,32 +396,32 @@ angular.module('myApp.controllers', [])
 
 
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
-    var self = this
-    $http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
-        console.log(task.data);
-        self.task = task.data.task
-        self.task_id = task.data.task_id
-        self.user_id = task.data.user_id
-        self.priority = task.data.priority
-        self.due_date = task.data.due_date
-        self.time = task.data.time
-        self.description = task.data.description
-    })
+	var self = this
+	$http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
+		console.log(task.data);
+		self.task = task.data.task
+		self.task_id = task.data.task_id
+		self.user_id = task.data.user_id
+		self.priority = task.data.priority
+		self.due_date = task.data.due_date
+		self.time = task.data.time
+		self.description = task.data.description
+	})
 
-    this.edit = function() {
-        var postObj = {
-            user_id: $stateParams.user_id,
-            task_id: $stateParams.task_id,
-            task: self.task,
-            priority: self.priority,
-            due_date: self.due_date,
-            time: self.time,
-            description: self.description
-        }
-        $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
-            $state.go('todo')
-        })
-    }
+	this.edit = function() {
+		var postObj = {
+			user_id: $stateParams.user_id,
+			task_id: $stateParams.task_id,
+			task: self.task,
+			priority: self.priority,
+			due_date: self.due_date,
+			time: self.time,
+			description: self.description
+		}
+		$http.post('http://localhost:3000/todo/edit', postObj).then(function() {
+			$state.go('todo')
+		})
+	}
 }])
 
 

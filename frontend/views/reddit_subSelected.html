@@ -1,5 +1,4 @@
-<div class="outer_box3">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -31,20 +30,10 @@
       </div>
     </div>
   </nav>
-  <div class='nav-fixer'>
-  </div>
-
-  <h1 class="h1 display-1">Reddit View</h1>
-  <div ng-show="news.saved" class="scroll">
-<div class="news-row-container">
-  <div class="row list-group-item" ng-repeat="sub in redditSub.redditResults">
-    <img id='news_icon' src="{{sub.data.thumbnail}}" alt="" />
+  <br>
+  <br>
+<h1>Reddit View</h1>
+  <div class="list-group-item" ng-repeat="sub in redditSub.redditResults">
+    <img src="{{sub.data.thumbnail}}" alt="" />
     <a href="{{sub.data.url}}" target="blank"><h3 class="display-1">{{sub.data.title}}</h3></href>
-      <!-- <input type="submit" name="name" value="{{sub.data.url}}"> -->
-    </div>
-
-</div>
-
-  </div>
-
-</div>
+   </div>

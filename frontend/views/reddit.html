@@ -1,5 +1,4 @@
-<!-- Stuff here? -->
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -31,15 +30,17 @@
       </div>
     </div>
   </nav>
-  <div class='nav-fixer'>
-</div>
-
+  <br>
+  <br>
+<h1>Reddit Subreddits</h1>
 <form class="subReddit_Post">
     <div class="list-group-item">
         <a href="/#/reddit_sub" ng-model="subreddit" ng-click="reddit.getSub(all)"><h3 class="display-1">/r/all</h3></href>
   </div>
   <div class="list-group-item" ng-repeat="sub in reddit.redditSubList">
       <!-- <img src="{{sub.data.header_img}}" alt="" /> -->
-      <a href="/#/reddit_sub" ng-model="subreddit" ng-click="reddit.getSub(sub.data.display_name)"><h3 class="display-1">{{sub.data.url}}</h3></href>
+      <!-- <a ui-sref="redditSub"><button type="button" name="twitter"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/youtube-logo.png" alt="" /></button></a> -->
+
+      <a ui-sref="reddit_sub" ng-model="subreddit" ng-click="reddit.getSub(sub.data.display_name)"><h3 class="display-1">{{sub.data.url}}</h3></href>
   </div>
 </form>
