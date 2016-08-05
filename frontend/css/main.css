@@ -212,12 +212,12 @@ hr:after {
   align-content: center;
 }
 .weather-3{
-  /*border: 1px solid red;*/
+  border: 1px solid red;
   padding: 0 0 0 0;
 }
 .weather-3-rows{
-  padding: 0 0 0 18%;
-  /*border: 1px solid green;*/
+  padding: 0 0 0 0;
+  border: 1px solid green;
 }
 /*END weather CSS*/
 
@@ -236,28 +236,51 @@ hr:after {
 }
 
 /*start fun css */
+.fun_body{
+background: url('../images/Awesome.jpg') no-repeat center center fixed;
+position:absolute;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+height: 100%;
+width: 100%;
+}
+
 .fun_mid{
-  color: #4E87A2;
+  color: #67B940;
+  height: 100%;
+  z-index: 1;
+  background-color: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 }
 .fun_font{
   font-weight: 900;
   font-family: 'Roboto Slab', serif;
-  color: #325B76;
+  color: white;
+  /*color: #325B76;*/
 }
 .fun_p{
   font-family: 'Roboto Slab', serif;
-  color: #4E87A2;
+  /*color: #4E87A2;*/
 }
 .fun_p_word{
   font-family: 'Roboto Slab', serif;
-  font-size: 1.8vw;
-  color: #4E87A2;
+  font-size: 1.5em;
+  color: white;
+  /*color: #4E87A2;*/
 }
 .fun_author{
   font-family: 'Roboto Slab', serif;
-  color: #4E87A2;
+  color: white;
+  /*color: #4E87A2;*/
 }
-/*Buzz Out */
+
 /* Buzz Out */
 @-webkit-keyframes hvr-buzz-out {
   10% {
