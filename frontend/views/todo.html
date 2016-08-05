@@ -1,4 +1,4 @@
-<div> <!-- ng-show="logged-in" -->
+<div class="container"> <!-- ng-show="logged-in" -->
     <h1>Your ToDo List</h1>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,29 +49,8 @@
       </div>
     </div>
     </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Add Item</h4>
-          </div>
-          <div class="modal-body">
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="todo.addTask()">Add Item</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Item</button>
+    <button ui-sref="home" class="btn btn-primary todo-home-page" type="button" name="button">Home Page</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">+ Add Item</button>
 
     <table class="table table-striped">
   <thead>
@@ -99,7 +78,7 @@
     </tr>
   </tbody>
 </table>
-
 <div> <!-- ng-hide="logged-in" -->
     <h1>Please Log In to Use This Feature</h1>
+</div>
 </div>
