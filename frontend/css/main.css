@@ -144,6 +144,7 @@ hr:after {
 }
 #fixed_footer{
   height: 20px;
+  opacity: .9;
 }
 .navbar{
   min-height: 20px;
