@@ -17,7 +17,10 @@ html {
   min-height: 100%;
 }
 nav{
-  position: relative;
+  /*position: relative;*/
+}
+.nav-fixer{
+  height: 50px;
 }
 .news-checkbox {
   margin-right: 50px !important;
