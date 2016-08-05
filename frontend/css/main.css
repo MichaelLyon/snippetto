@@ -36,6 +36,7 @@ button{
   padding: 0;
 }
 body{
+  padding-bottom: 70px;
 }
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
@@ -138,17 +139,16 @@ hr:after {
   margin: 0;
 }
 #login-footer{
-  margin:0;
-  padding: 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   text-align: center;
-  height: 25px;
+  color: white;
+}
+#fixed_footer{
+  height: 20px;
+}
+.navbar{
+  min-height: 20px;
 }
 /*END login page css*/
-
-
 
 /*START news page css*/
 .news-wrapper{
@@ -408,8 +408,4 @@ hr:after {
 .video-swipe {
   display: flex;
   flex-direction: column;
-}
-
-#hiddenButton{
-  display: none;
 }
