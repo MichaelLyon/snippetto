@@ -60,7 +60,7 @@ hr:after {
   background: white;
 }
 
-/*START members CSS*/
+/*START members/HOME page CSS*/
 .members_wrapper{
   margin: auto;
   /*height: 70vh;*/
@@ -79,8 +79,8 @@ hr:after {
   color: #DD4B39;
 }
 .icons{
-  height: 115%;
-  width: 95%;
+  width: 100%;
+  height: auto;
   border-radius: 80%;
   border-style:none;
 }
@@ -96,7 +96,7 @@ hr:after {
   width: auto;
   margin-right: auto;
 }
-/*END members css*/
+/*END members/HOME pagecss*/
 
 /*START Login page CSS*/
 .login_jumbo{
@@ -138,6 +138,18 @@ hr:after {
 
 
 /*START news page css*/
+.news-wrapper{
+  /*background-color: blue;*/
+
+}
+/*#news-reddit-btn{
+  margin-left: auto;
+  margin-right: right;
+  text-align: center;
+}*/
+.news-header{
+  /*margin-top: 7%;*/
+}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
