@@ -407,9 +407,81 @@ hr:after {
 
 .video-swipe {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+iframe {
+  border: 2px solid blue;
+  box-shadow: 10px 10px 5px #888;
 }
 
 #hiddenButton{
   display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-header {
+  font-size: 3em;
+}
+
+.video-container {
+  margin: 0 5px 40px 5px;
+}
+
+.video-title {
+  height: 50px;
+  width: 560px;
+  font-size: 1.5em;
+}
+
+.video-favorite {
+  font-size: 1.3em;
+  cursor: pointer;
 }

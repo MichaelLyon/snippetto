@@ -328,7 +328,11 @@ angular.module('myApp.controllers', [])
     var self = this
     $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
         self.videos = data.data.items.map(function(elem) {
-            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+            return {
+              videoId: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id),
+              videoTitle: elem.snippet.title,
+              originalVideoId: elem.id
+            }
         })
         self.videosLoaded = true
     })
@@ -341,6 +345,12 @@ angular.module('myApp.controllers', [])
         self.videoResults = data.data.items.map(function(elem) {
             return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id.videoId)
         })
+      })
+    }
+
+    this.addToFavorites = function(videoId) {
+      $http.post('http://localhost:3000/youtube/addToFavorites', {user_id: $rootScope.user_id, videoId: videoId}).then(function() {
+        console.log('post successful');
       })
     }
 }])
