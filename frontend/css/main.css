@@ -10,10 +10,20 @@
   border-radius: 12px;
   background-color: #DD4B39;
 }
+
 /*HTML used for the fixed footer on login page*/
 html {
   position: relative;
   min-height: 100%;
+}
+nav{
+  /*position: relative;*/
+}
+button{
+  width: auto;
+}
+.nav-fixer{
+  height: 50px;
 }
 .news-checkbox {
   margin-right: 50px !important;
@@ -60,10 +70,10 @@ hr:after {
   background: white;
 }
 
-/*START members CSS*/
-.members_wrapper{
+/*START members/HOME page CSS*/
+/*.members_wrapper{
   margin: auto;
-  /*height: 70vh;*/
+  height: 70vh;
   width: 100%;
   text-align: center;
 }
@@ -77,14 +87,15 @@ hr:after {
   margin: 0;
   font-family: 'Roboto Slab', serif;
   color: #DD4B39;
-}
+}*/
 .icons{
-  height: 115%;
-  width: 95%;
+  width: 40%;
+  height: auto;
   border-radius: 80%;
-  border-style:none;
+  border-style: none;
+  margin: 0 auto 0 auto;
 }
-#left_icons{
+/*#left_icons{
   text-align: center;
   height: 75%;
   width: auto;
@@ -95,8 +106,8 @@ hr:after {
   height: 75%;
   width: auto;
   margin-right: auto;
-}
-/*END members css*/
+}*/
+/*END members/HOME pagecss*/
 
 /*START Login page CSS*/
 .login_jumbo{
@@ -138,6 +149,14 @@ hr:after {
 
 
 /*START news page css*/
+.news-wrapper{
+  /*background-color: blue;*/
+
+}
+/*monkey patch wonky div*/
+#news-header{
+  color: white;
+}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
@@ -197,11 +216,12 @@ hr:after {
   align-content: center;
 }
 .weather-3{
-  /*border: 1px solid green;*/
+  /*border: 1px solid red;*/
+  padding: 0 0 0 0;
 }
 .weather-3-rows{
-
-  border: 1px solid green;
+  padding: 0 0 0 18%;
+  /*border: 1px solid green;*/
 }
 /*END weather CSS*/
 
@@ -209,7 +229,166 @@ hr:after {
   height: 10%;
   width: 10%;
   float: left;
+  border-style:none;
 }
+.back-btn{
+  border-style:none;
+  background-color: white;
+  height: 80%;
+  width: 80%;
+  border: 1px solid black;
+}
+
+/*start fun css */
+.fun_mid{
+  color: #4E87A2;
+}
+.fun_font{
+  font-weight: 900;
+  font-family: 'Roboto Slab', serif;
+  color: #325B76;
+}
+.fun_p{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+}
+.fun_p_word{
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.8vw;
+  color: #4E87A2;
+}
+.fun_author{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+}
+/*Buzz Out */
+/* Buzz Out */
+@-webkit-keyframes hvr-buzz-out {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+@keyframes hvr-buzz-out {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+.hvr-buzz-out {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {
+  -webkit-animation-name: hvr-buzz-out;
+  animation-name: hvr-buzz-out;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+/*Buzz Out end*/
+/*end fun css*/
 /*Dat Map*/
 
 #map {

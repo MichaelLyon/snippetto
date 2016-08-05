@@ -1,10 +1,42 @@
-<div class="members_wrapper">
-  <div class="modal-header" align="center">
-    <img class="img-circle" id="img_logo" src="images/Snippetto.png">
-    <h1 id='snippetto_title' class='img-responsive'>Snippetto</h1>
-    <a ui-sref="login">Not logged in? Click here</a>
+<div class="container">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ui-sref="login">Snippetto</a>
+      </div>
+      <div id='navbar' class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a ui-sref="home">Home</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="News">News
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="news">New York Times</a></li>
+              <li><a ui-sref="reddit">Reddit</a></li>
+              <li><a ui-sref="#">Page 1-3</a></li>
+            </ul>
+          </li>
+          <li><a ui-sref="youtube">Youtube</a></li>
+          <li><a ui-sref="weather">Weather</a></li>
+          <li><a ui-sref="todo">To-Do</a></li>
+          <li><a ui-sref="traffic">Traffic</a></li>
+          <li><a ui-sref="fun">Fun</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class='nav-fixer'>
   </div>
+
+  <!-- Widget Row -->
   <div class="row">
+<<<<<<< HEAD
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <section id='left_icons'>
         <p><h2 class='members_header'>News</h2>
@@ -30,6 +62,40 @@
           <a ui-sref="fun"><button type="button" name="quote_of_the_day"><img class='img-responsive icons' src="images/blue-logos/signs-1.png" alt="" /></button></a>
         </p>
       </section>
+=======
+    <div class="col-lg-12">
+      <h2 class="page-header">Snippetto</h2>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="news"><button type="button" name="news"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/interface.png" alt="" /></button></a>
+      <h3>News</h3>
+      <p>Stay up-to-date on your favorite news from The New York Times and Reddit.</p>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="weather"><button type="button" name="weather"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/sky.png" alt="" /></button></a>
+      <h3>Weather</h3>
+      <p>Jacket? Shorts? Umbrella? Plan your day accordingly using our three day forecast.</p>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="traffic"><button type="button" name="traffic"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/signs.png" alt="" /></button></a>
+      <h3>Traffic</h3>
+      <p>Never take long way again! Track your daily commute and beat the congestion!</p>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="youtube"><button type="button" name="twitter"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/youtube-logo.png" alt="" /></button></a>
+      <h3>Youtube</h3>
+      <p>Need the perfect song for your commute? Dive into a rabbit hole of Today's top YouTube videos.</p>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="todo"><button type="button" name="calendar"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/checklist-and-pencil.png" alt="" /></button></a>
+      <h3>To Do</h3>
+      <p>"Planning and tracking daily activities increases your productivity by 175%" - Albert Einstein</p>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+      <a ui-sref="fun"><button type="button" name="quote_of_the_day"><img class='img-circle img-responsive img-center icons' src="images/blue-logos/signs-1.png" alt="" /></button></a>
+      <h3>FUN!</h3>
+      <p>Life is about fun! Daily quotes, words of the day, and much more!</p>
+>>>>>>> upstream/master
     </div>
   </div>
 </div>

@@ -177,7 +177,21 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    // console.log($rootScope);
+    var lat = $rootScope.currentPosition.lat
+    var lng = $rootScope.currentPosition.lng
+    function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(); var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+    var sec = a.getSeconds();
+    var mdy = month + ' ' + date + ' ' + year
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return mdy;
+    }
     var self = this
     $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
@@ -185,6 +199,7 @@ angular.module('myApp.controllers', [])
         self.desc = data.data.weather[0].description
         self.temp = Math.ceil(data.data.main.temp) + '°'
         self.weatherImg = data.data.weather[0].icon
+        // console.log('root: ',$rootScope.currentPosition.lat);
 
         $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
             self.day1 = timeConverter(obj.data.list[0].dt)
@@ -342,7 +357,37 @@ angular.module('myApp.controllers', [])
             })
         })
     })
+
+    this.toggle_visibility1 = function() {
+         var e = document.getElementById('toggle_div1');
+         if(e.style.display == 'block')
+            e.style.display = 'none';
+         else
+            e.style.display = 'block';
+      }
+      this.toggle_visibility2 = function() {
+           var e = document.getElementById('toggle_div2');
+           if(e.style.display == 'block')
+              e.style.display = 'none';
+           else
+              e.style.display = 'block';
+        }
+        this.toggle_visibility3 = function() {
+             var e = document.getElementById('toggle_div3');
+             if(e.style.display == 'block')
+                e.style.display = 'none';
+             else
+                e.style.display = 'block';
+          }
+          this.toggle_visibility4 = function() {
+               var e = document.getElementById('toggle_div4');
+               if(e.style.display == 'block')
+                  e.style.display = 'none';
+               else
+                  e.style.display = 'block';
+            }
 }])
+
 
 
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
