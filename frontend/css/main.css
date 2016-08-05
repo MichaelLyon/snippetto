@@ -37,6 +37,7 @@ button{
 }
 body{
   padding-bottom: 70px;
+  padding-top:30px;
 }
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
@@ -148,6 +149,9 @@ hr:after {
 }
 .navbar{
   min-height: 20px;
+}
+#navbar_Options{
+  float:right;
 }
 /*END login page css*/
 
