@@ -355,6 +355,7 @@ angular.module('myApp.controllers', [])
     }
   }])
 
+
 //   document.getElementById('button').onclick = function() {
 //       this.__toggle = !this.__toggle;
 //       var target = document.getElementById('hidden_content');
