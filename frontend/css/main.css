@@ -21,6 +21,8 @@ nav{
 }
 button{
   width: auto;
+  background-color: white;
+  border-style: none;
 }
 .nav-fixer{
   height: 50px;

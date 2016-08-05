@@ -280,8 +280,8 @@ angular.module('myApp.controllers', [])
     }
 }])
 
-.controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-    var self = this
+.controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
+  var self = this
 
     $http.post('http://localhost:3000/todo/show', {
         user_id: $rootScope.user_id
@@ -290,6 +290,8 @@ angular.module('myApp.controllers', [])
     })
 
     this.addTask = function() {
+      console.log(self.time);
+      console.log(self.dueDate);
         var postObj = {
             user_id: $rootScope.user_id,
             task: self.task,
@@ -315,13 +317,25 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
+  this.videosLoaded = false
     var self = this
     $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
         self.videos = data.data.items.map(function(elem) {
             return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
         })
-        console.log(self.videos);
+        self.videosLoaded = true
     })
+
+    this.searchVideos = function() {
+      var postObj = {
+        searchString: self.searchString
+      }
+      $http.post('http://localhost:3000/youtube/search', postObj).then(function(data) {
+        self.videoResults = data.data.items.map(function(elem) {
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id.videoId)
+        })
+      })
+    }
 }])
 
 .controller('funController', ['$http', '$rootScope', function($http, $rootScope) {

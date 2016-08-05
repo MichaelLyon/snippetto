@@ -1,4 +1,4 @@
-<div class="video-swipe-container">
+<div class="container">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -33,9 +33,20 @@
   </nav>
   <div class='nav-fixer'>
   </div>
-    <h1>Top Trending Videos on Youtube</h1>
+      <p class="display-1 page-header">Top Trending Videos on Youtube</p>
     <div class="video-swipe">
         <div ng-repeat="video in youtube.videos">
+            <iframe width="560" height="315" ng-src={{video}}  frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div ng-show="youtube.videosLoaded">
+        <p class="display-1 page-header">Search For Videos</p>
+        <input class="form-control youtube-search-string" type="text" ng-model="youtube.searchString">
+        <button type="button" class="btn btn-primary" ng-click="youtube.searchVideos()">Search</button>
+        <br><br><br>
+    </div>
+    <div class="video-swipe">
+        <div ng-repeat="video in youtube.videoResults">
             <iframe width="560" height="315" ng-src={{video}}  frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
