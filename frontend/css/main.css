@@ -217,14 +217,35 @@ hr:after {
     width: 85vw;
 }
 
-.video-swipe-container {
+/*.video-swipe-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  width: 100vw;
+}*/
 
 .video-swipe {
   display: flex;
-  flex-direction: column;
+  width: 100vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+iframe {
+  margin: 10px;
+  box-shadow: 10px 10px 5px #888;
+  border: 2px solid blue;
+}
+
+.youtube-header {
+  text-align: center;
+}
+
+.page-header {
+  font-size: 3em;
+}
+
+.youtube-search-string {
+  margin-bottom: 20px;
 }
