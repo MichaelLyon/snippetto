@@ -165,14 +165,13 @@ angular.module('myApp.controllers', [])
 		reddit.redditSubList = data.data.data.children;
 	})
 	this.getSub = function(name) {
-    console.log('getSub Name');
-		console.log(name);
 		$rootScope.subreddit = name;
 	}
 }])
 
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
 	var redditSub = this;
+
 	$http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
 		redditSub.redditResults = data.data.data.children;
 	})
