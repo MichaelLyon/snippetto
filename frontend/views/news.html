@@ -1,17 +1,48 @@
-<div class="outer_box3">
-    <div class="modal-header" align="center">
+<div class="news-wrapper">
+    <!-- <div class="modal-header" align="center">
       <img class="img-circle" id="img_logo" src="images/Snippetto.png">
       <h1 id='snippetto_title'>Snippetto</h1>
-    </div>
-
-
-      <a href="http://localhost:8000/#/reddit" class="btn btn-primary">Reddit</a>
-      <a ui-sref="home" class="btn btn-primary">Home Page</a> <br>
-      <div ng-show="news.prefTabs">
-          <button class="btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
-          <button class="btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
+    </div> -->
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ui-sref="login">Snippetto</a>
       </div>
-      <h1 class="h1 display-1">New York Times</h1>
+      <div id='navbar' class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a ui-sref="home">Home</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="News">News
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="news">New York Times</a></li>
+              <li><a ui-sref="reddit">Reddit</a></li>
+              <li><a ui-sref="#">Page 1-3</a></li>
+            </ul>
+          </li>
+          <li><a ui-sref="youtube">Youtube</a></li>
+          <li><a ui-sref="weather">Weather</a></li>
+          <li><a ui-sref="todo">To-Do</a></li>
+          <li><a ui-sref="traffic">Traffic</a></li>
+          <li><a ui-sref="fun">Fun</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <h1 id='news-header' class="h1 display-1">New York Times</h1>
+  </div>
+    <div ng-show="news.prefTabs">
+        <button class="btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
+        <button class="btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
+    </div>
     <div class="set-preferences" ng-show="news.showPrefs">
         <h3>Select the New York Times sections you're interested in seeing</h3>
         Top Articles<input class="news-checkbox" type="checkbox" name="home" value="home">
@@ -44,7 +75,7 @@
     </div>
     <div ng-show="news.main">
         <div ng-switch="news.currentSection">
-            <h3 ng-switch-when="home" class="capitalize" id='news_header'>Top Articles</h3>
+            <h3 ng-switch-when="home" class="capitalize" id='news_header'>The New York Times - Top Articles</h3>
             <h3 ng-switch-default class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
         </div>
     <div ng-show="news.saved">
