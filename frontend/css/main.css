@@ -19,6 +19,9 @@ html {
 nav{
   /*position: relative;*/
 }
+button{
+  width: auto;
+}
 .nav-fixer{
   height: 50px;
 }
@@ -86,10 +89,11 @@ hr:after {
   color: #DD4B39;
 }
 .icons{
-  width: 100%;
+  width: 40%;
   height: auto;
   border-radius: 80%;
-  border-style:none;
+  border-style: none;
+  margin: 0 auto 0 auto;
 }
 #left_icons{
   text-align: center;
