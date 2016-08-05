@@ -163,25 +163,16 @@ angular.module('myApp.controllers', [])
 	var reddit = this;
 	$http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
 		reddit.redditSubList = data.data.data.children;
-    console.log(reddit.redditSubList);
 	})
-  console.log('1');
 	this.getSub = function(name) {
-    console.log('getSub Name');
-		console.log(name);
 		$rootScope.subreddit = name;
-    console.log($rootScope.subreddit);
 	}
 }])
 
 .controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
 	var redditSub = this;
 
-  console.log($rootScope.subreddit);
-
 	$http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
-    console.log('Subreddit API CALL');
-    console.log(data.data.data);
 		redditSub.redditResults = data.data.data.children;
 	})
 }])
