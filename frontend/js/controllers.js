@@ -288,11 +288,6 @@ angular.module('myApp.controllers', [])
       $state.reload()
     })
   }
-  this.edit = function(task_id) {
-    $http.post('http://localhost:3000/todo/edit', {task_id: task_id}).then(function() {
-      $state.reload()
-    })
-  }
 
   this.delete = function(task_id) {
     $http.post('http://localhost:3000/todo/delete', {task_id: task_id}).then(function() {
@@ -331,12 +326,38 @@ angular.module('myApp.controllers', [])
             })
         })
     })
-
-<<<<<<< HEAD
   }])
-=======
 
->>>>>>> upstream/master
+
+  .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
+    var self = this
+    $http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
+      console.log(task.data);
+      self.task = task.data.task
+      self.task_id = task.data.task_id
+      self.user_id = task.data.user_id
+      self.priority = task.data.priority
+      self.due_date = task.data.due_date
+      self.time = task.data.time
+      self.description = task.data.description
+    })
+
+    this.edit = function() {
+      var postObj = {
+        user_id: $stateParams.user_id,
+        task_id: $stateParams.task_id,
+        task: self.task,
+        priority: self.priority,
+        due_date: self.due_date,
+        time: self.time,
+        description: self.description
+      }
+      $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
+        $state.go('todo')
+      })
+    }
+  }])
+
 //   document.getElementById('button').onclick = function() {
 //       this.__toggle = !this.__toggle;
 //       var target = document.getElementById('hidden_content');

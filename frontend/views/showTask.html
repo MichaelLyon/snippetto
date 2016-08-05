@@ -1,0 +1,27 @@
+<h1 class="h1">Edit Your Task</h1>
+
+<table class="table table-striped">
+<thead>
+<tr>
+  <th></th>
+  <th>Task</th>
+  <th>Priority</th>
+  <th>Due Date</th>
+  <th>Time</th>
+  <th>Description</th>
+  <th>Submit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <th scope="row"></th>
+
+  <td><input type="text" value="{{showTask.task.task}}" ng-model="showTask.task"></td>
+  <td><input type="number" value="{{showTask.task.priority}}" min="0" max="3" ng-model="showTask.priority"></td>
+  <td><input type="text" value="{{showTask.task.due_date}}" ng-model="showTask.due_date"></td>
+  <td><input type="text" value="{{showTask.task.time}}" ng-model="showTask.time"></td>
+  <td><input type="text" value="{{showTask.task.description}}" ng-model="showTask.description"></td>
+  <td><button type="button" name="button" class="btn btn-primary" ng-click="showTask.edit()">Submit Changes</button>
+</tr>
+</tbody>
+</table>

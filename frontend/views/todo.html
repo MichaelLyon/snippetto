@@ -94,7 +94,7 @@
       <td>{{task.due_date}}</td>
       <td>{{task.time}}</td>
       <td>{{task.description}}</td>
-      <td><button type="button" name="button" class="btn btn-primary" ng-click="todo.edit(task.task_id)">Edit</button></td>
+      <td><button type="button" name="button" class="btn btn-primary" ui-sref="showTask({user_id: task.user_id, task_id: task.task_id})">Edit</button></td>
       <td><button type="button" name="button" class="btn btn-danger" ng-click="todo.delete(task.task_id)">Delete</button></td>
     </tr>
   </tbody>
