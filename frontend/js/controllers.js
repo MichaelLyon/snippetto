@@ -16,8 +16,6 @@ angular.module('myApp.controllers', [])
             };
             $rootScope.currentPosition = pos;
             loadingDone = true;
-            console.log('BOOL = true');
-            console.log($rootScope.currentPosition);
         })
         if (loadingDone === true) {
             clearIntervalAndSuch();
@@ -179,23 +177,8 @@ angular.module('myApp.controllers', [])
 
 
 .controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    var lat = $rootScope.currentPosition.lat
-    var lng = $rootScope.currentPosition.lng
+    // console.log($rootScope);
     var self = this
-
-    function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(); var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-    var sec = a.getSeconds();
-    var mdy = month+ ' ' +date+' '+year
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return mdy;
-    }
     $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
         self.weatherData = data.data
         self.city = data.data.name
@@ -203,49 +186,65 @@ angular.module('myApp.controllers', [])
         self.temp = Math.ceil(data.data.main.temp) + '°'
         self.weatherImg = data.data.weather[0].icon
 
-        $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj){
-          self.day1 = timeConverter(obj.data.list[0].dt)
-          self.day2 = timeConverter(obj.data.list[1].dt)
-          self.day3 = timeConverter(obj.data.list[2].dt)
-          self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
-          self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
-          self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
-          self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
-          self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
-          self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
-          self.day1_icon = obj.data.list[0].weather[0].icon
-          self.day2_icon = obj.data.list[1].weather[0].icon
+        $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
+            self.day1 = timeConverter(obj.data.list[0].dt)
+            self.day2 = timeConverter(obj.data.list[1].dt)
+            self.day3 = timeConverter(obj.data.list[2].dt)
+            self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
+            self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
+            self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
+            self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
+            self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
+            self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
+            self.day1_icon = obj.data.list[0].weather[0].icon
+            self.day2_icon = obj.data.list[1].weather[0].icon
 
-          self.day3_icon = obj.data.list[2].weather[0].icon
+            self.day3_icon = obj.data.list[2].weather[0].icon
         })
-
     })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+    var selfTraffic = this;
+    //User Origin var
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
+    //Google maps objects for displaying/finding directions/showing traffic
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
+    var trafficLayer = new google.maps.TrafficLayer();
+    //The map object
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    //What's being sent to backend
     var serverObject = {};
+
     serverObject.origin1 = origin1;
     serverObject.userId = $rootScope.user_id;
+
+    this.trafficSwitch = false;
+
+    //Controls the Traffic view and form input to save addresses
+    if ($rootScope.user_id) {
+        this.trafficSwitch = true;
+    }
 
     var mapOptions = {
         zoom: 15,
         center: origin1,
         mapTypeId: google.maps.MapTypeId.MAP
     }
+
+    //Setting the map objects
     directionsDisplay.setMap(map);
+    trafficLayer.setMap(map);
 
     $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-        console.log(data);
-
+        selfTraffic.durationToDestination = data.data.durationToWork.text;
         calculateAndDisplayRoute(directionsService, directionsDisplay);
+
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             directionsService.route({
                 origin: origin1,
-                destination: data.data,
+                destination: data.data.destinationCords,
                 travelMode: 'DRIVING'
             }, function(response, status) {
                 if (status === 'OK') {
@@ -257,9 +256,8 @@ angular.module('myApp.controllers', [])
         }
     })
 
-
     this.workAddGet = function(address) {
-        address.id = $rootScope.user_id;// TODO: REPLACE 1 WITH $rootScope.user_id
+        address.id = $rootScope.user_id;
         $rootScope.workAddress = address;
         $http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
 
@@ -267,6 +265,7 @@ angular.module('myApp.controllers', [])
     }
 }])
 
+<<<<<<< HEAD
 .controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
   var self = this
 
@@ -288,12 +287,39 @@ angular.module('myApp.controllers', [])
       $state.reload()
     })
   }
+=======
+.controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+    var self = this
+>>>>>>> upstream/master
 
-  this.delete = function(task_id) {
-    $http.post('http://localhost:3000/todo/delete', {task_id: task_id}).then(function() {
-      $state.reload()
+    $http.post('http://localhost:3000/todo/show', {
+        user_id: $rootScope.user_id
+    }).then(function(list) {
+        self.todoList = list.data
     })
-  }
+
+    this.addTask = function() {
+        var postObj = {
+            user_id: $rootScope.user_id,
+            task: self.task,
+            priority: self.priority,
+            dueDate: self.dueDate.toString().substring(0, 15),
+            time: self.time.toString().substring(16, 24),
+            description: self.description
+        }
+        console.log(postObj);
+        $http.post('http://localhost:3000/todo/new', postObj).then(function() {
+            $state.reload()
+        })
+    }
+
+    this.delete = function(task_id) {
+        $http.post('http://localhost:3000/todo/delete', {
+            task_id: task_id
+        }).then(function() {
+            $state.reload()
+        })
+    }
 
 }])
 
@@ -326,37 +352,38 @@ angular.module('myApp.controllers', [])
             })
         })
     })
-  }])
+}])
 
 
-  .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
+.controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
     var self = this
     $http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
-      console.log(task.data);
-      self.task = task.data.task
-      self.task_id = task.data.task_id
-      self.user_id = task.data.user_id
-      self.priority = task.data.priority
-      self.due_date = task.data.due_date
-      self.time = task.data.time
-      self.description = task.data.description
+        console.log(task.data);
+        self.task = task.data.task
+        self.task_id = task.data.task_id
+        self.user_id = task.data.user_id
+        self.priority = task.data.priority
+        self.due_date = task.data.due_date
+        self.time = task.data.time
+        self.description = task.data.description
     })
 
     this.edit = function() {
-      var postObj = {
-        user_id: $stateParams.user_id,
-        task_id: $stateParams.task_id,
-        task: self.task,
-        priority: self.priority,
-        due_date: self.due_date,
-        time: self.time,
-        description: self.description
-      }
-      $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
-        $state.go('todo')
-      })
+        var postObj = {
+            user_id: $stateParams.user_id,
+            task_id: $stateParams.task_id,
+            task: self.task,
+            priority: self.priority,
+            due_date: self.due_date,
+            time: self.time,
+            description: self.description
+        }
+        $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
+            $state.go('todo')
+        })
     }
-  }])
+}])
+
 
 //   document.getElementById('button').onclick = function() {
 //       this.__toggle = !this.__toggle;
