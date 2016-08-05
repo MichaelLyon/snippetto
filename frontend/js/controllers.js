@@ -9,7 +9,7 @@ angular.module('myApp.controllers', [])
 
     function getPosition() {
         navigator.geolocation.getCurrentPosition(function(position) {
-            // clearIntervalAndSuch();
+
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -215,10 +215,10 @@ angular.module('myApp.controllers', [])
           self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
           self.day1_icon = obj.data.list[0].weather[0].icon
           self.day2_icon = obj.data.list[1].weather[0].icon
-          console.log(obj.data.list[0].weather[0].icon);
+
           self.day3_icon = obj.data.list[2].weather[0].icon
         })
-        console.log('data: ', data.data);
+
     })
 }])
 
@@ -332,7 +332,11 @@ angular.module('myApp.controllers', [])
         })
     })
 
+<<<<<<< HEAD
   }])
+=======
+
+>>>>>>> upstream/master
 //   document.getElementById('button').onclick = function() {
 //       this.__toggle = !this.__toggle;
 //       var target = document.getElementById('hidden_content');
