@@ -10,10 +10,14 @@
   border-radius: 12px;
   background-color: #DD4B39;
 }
+
 /*HTML used for the fixed footer on login page*/
 html {
   position: relative;
   min-height: 100%;
+}
+nav{
+  position: relative;
 }
 .news-checkbox {
   margin-right: 50px !important;
@@ -142,13 +146,9 @@ hr:after {
   /*background-color: blue;*/
 
 }
-/*#news-reddit-btn{
-  margin-left: auto;
-  margin-right: right;
-  text-align: center;
-}*/
-.news-header{
-  /*margin-top: 7%;*/
+/*monkey patch wonky div*/
+#news-header{
+  color: white;
 }
 .news-checkbox {
   margin-right: 50px !important;

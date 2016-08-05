@@ -37,7 +37,7 @@
       </div>
     </div>
   </nav>
-  <div class='news-header'>
+  <div class="container-fluid">
     <h1 id='news-header' class="h1 display-1">New York Times</h1>
   </div>
     <div ng-show="news.prefTabs">
@@ -76,7 +76,7 @@
     </div>
     <div ng-show="news.main">
         <div ng-switch="news.currentSection">
-            <h3 ng-switch-when="home" class="capitalize" id='news_header'>Top Articles</h3>
+            <h3 ng-switch-when="home" class="capitalize" id='news_header'>The New York Times - Top Articles</h3>
             <h3 ng-switch-default class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
         </div>
     <div ng-show="news.saved">
