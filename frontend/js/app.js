@@ -63,4 +63,10 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
       controller: 'funController',
       controllerAs: 'fun'
     })
+    .state('showTask', {
+      url: '/showTask/:user_id/:task_id',
+      templateUrl: '/views/showTask.html',
+      controller: 'showTaskController',
+      controllerAs: 'showTask'
+    })
 }])
