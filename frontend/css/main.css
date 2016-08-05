@@ -19,6 +19,9 @@ html {
 nav{
   /*position: relative;*/
 }
+button{
+  width: auto;
+}
 .nav-fixer{
   height: 50px;
 }
@@ -68,9 +71,9 @@ hr:after {
 }
 
 /*START members/HOME page CSS*/
-.members_wrapper{
+/*.members_wrapper{
   margin: auto;
-  /*height: 70vh;*/
+  height: 70vh;
   width: 100%;
   text-align: center;
 }
@@ -84,14 +87,15 @@ hr:after {
   margin: 0;
   font-family: 'Roboto Slab', serif;
   color: #DD4B39;
-}
+}*/
 .icons{
-  width: 100%;
+  width: 40%;
   height: auto;
   border-radius: 80%;
-  border-style:none;
+  border-style: none;
+  margin: 0 auto 0 auto;
 }
-#left_icons{
+/*#left_icons{
   text-align: center;
   height: 75%;
   width: auto;
@@ -102,7 +106,7 @@ hr:after {
   height: 75%;
   width: auto;
   margin-right: auto;
-}
+}*/
 /*END members/HOME pagecss*/
 
 /*START Login page CSS*/
