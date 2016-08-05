@@ -206,11 +206,11 @@ hr:after {
 #weather-city{
   font-family: 'Roboto Slab', serif;
   text-shadow:
-  -1px -1px 0 white,
-  1px -1px 0 white,
-  -1px 1px 0 white,
-  1px 1px 0 white;
-  color: cornflowerblue;
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
+  color: #ADD8E6;
   /*color: #4E87A2;*/
   padding-top: 22%;
 }
@@ -222,11 +222,11 @@ hr:after {
 #weather-description{
   font-family: 'Roboto Slab', serif;
   text-shadow:
-  -1px -1px 0 white,
-  1px -1px 0 white,
-  -1px 1px 0 white,
-  1px 1px 0 white;
-  color: cornflowerblue;
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
+  color: #ADD8E6;
   /*color: #4E87A2;*/
 }
 #weather-temp{
@@ -239,13 +239,22 @@ hr:after {
   -1px 1px 0 white,
   1px 1px 0 white;
   /*color: cornflowerblue;*/
-  color: #325B76;
+  color: #3964C3;
 }
 .weather-mid{
+  position: relative;
+  padding: 0 0 20% 0;
+  height: 100%;
   text-align: center;
   align-content: center;
   overflow: scroll;
-  padding: -20% 0 0 0;
+  background-color: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
   /*border: 1px blue solid;*/
 }
 .weather-3{
@@ -255,6 +264,22 @@ hr:after {
 }
 .weather-3-rows{
   padding: 0 0 0 20%;
+  /*border: 1px solid green;*/
+}
+.weather-3-rows h4{
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
+  /*border: 1px solid green;*/
+}
+.weather-3-rows h5{
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
   /*border: 1px solid green;*/
 }
 
