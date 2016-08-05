@@ -186,26 +186,26 @@ angular.module('myApp.controllers', [])
         self.temp = Math.ceil(data.data.main.temp) + '°'
         self.weatherImg = data.data.weather[0].icon
 
-        $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj){
-          self.day1 = timeConverter(obj.data.list[0].dt)
-          self.day2 = timeConverter(obj.data.list[1].dt)
-          self.day3 = timeConverter(obj.data.list[2].dt)
-          self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
-          self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
-          self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
-          self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
-          self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
-          self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
-          self.day1_icon = obj.data.list[0].weather[0].icon
-          self.day2_icon = obj.data.list[1].weather[0].icon
+        $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
+            self.day1 = timeConverter(obj.data.list[0].dt)
+            self.day2 = timeConverter(obj.data.list[1].dt)
+            self.day3 = timeConverter(obj.data.list[2].dt)
+            self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
+            self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
+            self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
+            self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
+            self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
+            self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
+            self.day1_icon = obj.data.list[0].weather[0].icon
+            self.day2_icon = obj.data.list[1].weather[0].icon
 
-          self.day3_icon = obj.data.list[2].weather[0].icon
+            self.day3_icon = obj.data.list[2].weather[0].icon
         })
     })
 }])
 
 .controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
-  var selfTraffic = this;
+    var selfTraffic = this;
     //User Origin var
     var origin1 = new google.maps.LatLng($rootScope.currentPosition);
     //Google maps objects for displaying/finding directions/showing traffic
@@ -223,8 +223,8 @@ angular.module('myApp.controllers', [])
     this.trafficSwitch = false;
 
     //Controls the Traffic view and form input to save addresses
-    if($rootScope.user_id){
-      this.trafficSwitch = true;
+    if ($rootScope.user_id) {
+        this.trafficSwitch = true;
     }
 
     var mapOptions = {
@@ -238,8 +238,9 @@ angular.module('myApp.controllers', [])
     trafficLayer.setMap(map);
 
     $http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-      selfTraffic.durationToDestination = data.data.durationToWork.text;
+        selfTraffic.durationToDestination = data.data.durationToWork.text;
         calculateAndDisplayRoute(directionsService, directionsDisplay);
+
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             directionsService.route({
                 origin: origin1,
@@ -265,32 +266,36 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('todoController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-  var self = this
+    var self = this
 
-  $http.post('http://localhost:3000/todo/show', {user_id: $rootScope.user_id}).then(function(list) {
-    self.todoList = list.data
-  })
+    $http.post('http://localhost:3000/todo/show', {
+        user_id: $rootScope.user_id
+    }).then(function(list) {
+        self.todoList = list.data
+    })
 
-  this.addTask = function() {
-    var postObj = {
-      user_id: $rootScope.user_id,
-      task: self.task,
-      priority: self.priority,
-      dueDate: self.dueDate.toString().substring(0, 15),
-      time: self.time.toString().substring(16, 24),
-      description: self.description
+    this.addTask = function() {
+        var postObj = {
+            user_id: $rootScope.user_id,
+            task: self.task,
+            priority: self.priority,
+            dueDate: self.dueDate.toString().substring(0, 15),
+            time: self.time.toString().substring(16, 24),
+            description: self.description
+        }
+        console.log(postObj);
+        $http.post('http://localhost:3000/todo/new', postObj).then(function() {
+            $state.reload()
+        })
     }
-    console.log(postObj);
-    $http.post('http://localhost:3000/todo/new', postObj).then(function() {
-      $state.reload()
-    })
-  }
 
-  this.delete = function(task_id) {
-    $http.post('http://localhost:3000/todo/delete', {task_id: task_id}).then(function() {
-      $state.reload()
-    })
-  }
+    this.delete = function(task_id) {
+        $http.post('http://localhost:3000/todo/delete', {
+            task_id: task_id
+        }).then(function() {
+            $state.reload()
+        })
+    }
 
 }])
 
@@ -323,37 +328,37 @@ angular.module('myApp.controllers', [])
             })
         })
     })
-  }])
+}])
 
 
-  .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
+.controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
     var self = this
     $http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
-      console.log(task.data);
-      self.task = task.data.task
-      self.task_id = task.data.task_id
-      self.user_id = task.data.user_id
-      self.priority = task.data.priority
-      self.due_date = task.data.due_date
-      self.time = task.data.time
-      self.description = task.data.description
+        console.log(task.data);
+        self.task = task.data.task
+        self.task_id = task.data.task_id
+        self.user_id = task.data.user_id
+        self.priority = task.data.priority
+        self.due_date = task.data.due_date
+        self.time = task.data.time
+        self.description = task.data.description
     })
 
     this.edit = function() {
-      var postObj = {
-        user_id: $stateParams.user_id,
-        task_id: $stateParams.task_id,
-        task: self.task,
-        priority: self.priority,
-        due_date: self.due_date,
-        time: self.time,
-        description: self.description
-      }
-      $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
-        $state.go('todo')
-      })
+        var postObj = {
+            user_id: $stateParams.user_id,
+            task_id: $stateParams.task_id,
+            task: self.task,
+            priority: self.priority,
+            due_date: self.due_date,
+            time: self.time,
+            description: self.description
+        }
+        $http.post('http://localhost:3000/todo/edit', postObj).then(function() {
+            $state.go('todo')
+        })
     }
-  }])
+}])
 
 
 //   document.getElementById('button').onclick = function() {
