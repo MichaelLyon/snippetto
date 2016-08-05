@@ -197,11 +197,12 @@ hr:after {
   align-content: center;
 }
 .weather-3{
-  /*border: 1px solid green;*/
+  /*border: 1px solid red;*/
+  padding: 0 0 0 0;
 }
 .weather-3-rows{
-
-  border: 1px solid green;
+  padding: 0 0 0 18%;
+  /*border: 1px solid green;*/
 }
 /*END weather CSS*/
 
@@ -209,7 +210,39 @@ hr:after {
   height: 10%;
   width: 10%;
   float: left;
+  border-style:none;
 }
+.back-btn{
+  border-style:none;
+  background-color: white;
+  height: 80%;
+  width: 80%;
+  border: 1px solid black;
+}
+
+/*start fun css */
+.fun_mid{
+  color: #4E87A2;
+}
+.fun_font{
+  font-weight: 900;
+  font-family: 'Roboto Slab', serif;
+  color: #325B76;
+}
+.fun_p{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+}
+.fun_p_word{
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.8vw;
+  color: #4E87A2;
+}
+.fun_author{
+  font-family: 'Roboto Slab', serif;
+  color: #4E87A2;
+}
+/*end fun css*/
 /*Dat Map*/
 
 #map {
