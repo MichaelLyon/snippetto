@@ -1,6 +1,20 @@
-<h1>Reddit View</h1>
-  <div class="list-group-item" ng-repeat="sub in redditSub.redditResults">
-    <img src="{{sub.data.thumbnail}}" alt="" />
-    <a href="{{sub.data.url}}" target="blank"><h3 class="display-1">{{sub.data.title}}</h3></href>
-    <!-- <input type="submit" name="name" value="{{sub.data.url}}"> -->
+<div class="outer_box3">
+  <div class="modal-header" align="center">
+    <img class="img-circle" id="img_logo" src="images/Snippetto.png">
+    <h1 id='snippetto_title'>Snippetto</h1>
   </div>
+
+  <h1 class="h1 display-1">Reddit View</h1>
+  <div ng-show="news.saved" class="scroll">
+<div class="news-row-container">
+  <div class="row list-group-item" ng-repeat="sub in redditSub.redditResults">
+    <img id='news_icon' src="{{sub.data.thumbnail}}" alt="" />
+    <a href="{{sub.data.url}}" target="blank"><h3 class="display-1">{{sub.data.title}}</h3></href>
+      <!-- <input type="submit" name="name" value="{{sub.data.url}}"> -->
+    </div>
+
+</div>
+
+  </div>
+
+</div>
