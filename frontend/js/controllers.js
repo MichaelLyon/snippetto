@@ -332,6 +332,8 @@ angular.module('myApp.controllers', [])
 	}
 
 }])
+
+
 .controller('youtubeController', ['$http', '$rootScope', '$sce', '$state', function($http, $rootScope, $sce, $state) {
 	$rootScope.header = 'views/header.html';
   this.view = 'search'
@@ -372,9 +374,17 @@ angular.module('myApp.controllers', [])
         self.favoritedVideos = data.data.map(function(elem) {
             return {
               videoId: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.video_id),
-              videoTitle: elem.video_title
+              videoTitle: elem.video_title,
+              favorites: elem.favorites,
+              originalVideoId: elem.video_id
             }
         })
+      })
+    }
+    this.getVideoFavoriteUsers = function(videoId) {
+      console.log(videoId);
+      $http.get('http://localhost:3000/youtube/getVideoFavoriteUsers/' + videoId).then(function(data) {
+        self.favoritedUsers = data.data
       })
     }
 }])
