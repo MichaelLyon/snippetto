@@ -1,54 +1,25 @@
 <div class="members_wrapper">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" ui-sref="login">Snippetto</a>
-      </div>
-      <div id='navbar' class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a ui-sref="home">Home</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="News">News
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ui-sref="news">New York Times</a></li>
-              <li><a ui-sref="reddit">Reddit</a></li>
-              <li><a ui-sref="#">Page 1-3</a></li>
-            </ul>
-          </li>
-          <li><a ui-sref="youtube">Youtube</a></li>
-          <li><a ui-sref="weather">Weather</a></li>
-          <li><a ui-sref="todo">To-Do</a></li>
-          <li><a ui-sref="traffic">Traffic</a></li>
-          <li><a ui-sref="fun">Fun</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div ng-include="header"> </div>
+  <br>
+  <br>
   <div class='nav-fixer'>
   </div>
   <div class="fun_mid col-md-5 col-md-offset-3">
-  <h3 class="fun_font">Quote of the Day!</h3>
-  <p class="fun_p">{{fun.qoute}}</p>
-  <p class="fun_author">Author: {{fun.author}} </p>
+    <h3 class="fun_font">Quote of the Day!</h3>
+    <p class="fun_p">{{fun.qoute}}</p>
+    <p class="fun_author">Author: {{fun.author}} </p>
 
-  <h3 class="fun_font">Word of the Day!</h3>
-  <strong><u><p class="fun_p_word">{{fun.word}}</p></u></strong>
-  <p class="fun_p">Definition: {{fun.definition}}</p>
-  <p class="fun_p">Part of speech: {{fun.pof}}</p>
-  <p class="fun_p">{{fun.example}}</p>
+    <h3 class="fun_font">Word of the Day!</h3>
+    <strong><u><p class="fun_p_word">{{fun.word}}</p></u></strong>
+    <p class="fun_p">Definition: {{fun.definition}}</p>
+    <p class="fun_p">Part of speech: {{fun.pof}}</p>
+    <p class="fun_p">{{fun.example}}</p>
 
-  <h3 class="fun_font">Advice of the Day!</h3>
-  <p class="fun_p">{{fun.advice}}</p>
+    <h3 class="fun_font">Advice of the Day!</h3>
+    <p class="fun_p">{{fun.advice}}</p>
 
-  <h3 class="fun_font">What would Chuck Norris do?</h3>
-  <p class="fun_p">{{fun.chuckNorris}}</p>
+    <h3 class="fun_font">What would Chuck Norris do?</h3>
+    <p class="fun_p">{{fun.chuckNorris}}</p>
 
   </div>
 
