@@ -34,10 +34,20 @@ var Youtube = require('../lib/queries')
 
 
   router.get('/getFavorites', function(req, res, next) {
-    Youtube.getFavorites().then(function(videos) {
-      res.send(videos.rows)
+    Youtube.getFavoritedRank().then(function(favoritedRank) {
+      res.json(favoritedRank.rows)
     })
   });
+
+  router.get('/getVideoFavoriteUsers/:videoId', function(req, res, next) {
+    Youtube.getVideoFavoriteUsers(req.params.videoId).then(function(users) {
+      res.json(users.rows)
+    })
+  });
+
+
+
+
 
 
 

@@ -38,12 +38,44 @@
 
     <div ng-show="youtube.view == 'favorited'">
         <p class="display-1 page-header">Favorited Videos</p>
-        <div class="video-swipe">
+        <div class="favorite-container">
             <div ng-repeat="video in youtube.favoritedVideos">
-                <div class="video-container">
-                    <p class="video-title display-1">{{video.videoTitle}}</p>
+                <div class="video-container favorite-video">
+                    <p class="video-title display-1">{{$index + 1}}. {{video.videoTitle}}</p>
                     <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                    <div class="video-stats">
+                        <p class="display-1 video-title">Favorites: {{video.favorites}}</p>
+                        <button type="button" name="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="youtube.getVideoFavoriteUsers(video.originalVideoId)">See Who's Liked This Video</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Hello</h4>
+              </div>
+              <div class="modal-body">
+                  <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Users</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="user in youtube.favoritedUsers">
+                          <td>{{user.username}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
 </div>
