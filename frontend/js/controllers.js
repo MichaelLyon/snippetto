@@ -91,7 +91,14 @@ angular.module('myApp.controllers', [])
 		})
 	}
 	$http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
-		self.stories = data.data.results;
+		self.stories = data.data.results.map(function(elem) {
+      if (elem.multimedia[0]) {
+        return elem
+      } else {
+        elem.multimedia.push({url: 'images/dog-black-small.png'})
+        return elem
+      }
+    });
 	})
 
 	this.updateNewsPage = function(section) {
@@ -150,7 +157,7 @@ angular.module('myApp.controllers', [])
 	}
 
 	this.getSavedArticles = function() {
-    // self.currentArticles = false
+    self.prefTabs = false
 		$http.post('http://localhost:3000/news/retrieveArticles', {
 			user_id: $rootScope.user_id
 		}).then(function(data) {

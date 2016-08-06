@@ -561,3 +561,7 @@ iframe {
   flex-direction: row;
   justify-content: center;
 }
+
+#news-icon {
+  overflow: hidden;
+}
