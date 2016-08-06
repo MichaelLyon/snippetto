@@ -72,7 +72,10 @@ module.exports = {
 	getTask: function(user_id, task_id) {
 		return knex.raw(`select * from todo_list where user_id = ${user_id} and task_id = ${task_id}`)
 	},
-  addVideo: function(user_id, videoId) {
-    return knex.raw(`insert into youtube_videos values (default, ${user_id}, '${videoId}')`)
+  addVideo: function(user_id, videoId, videoTitle) {
+    return knex.raw(`insert into youtube_videos values (default, ${user_id}, '${videoId}', '${videoTitle}')`)
+  },
+  getFavorites: function() {
+    return knex.raw(`select * from youtube_videos`)
   }
 }

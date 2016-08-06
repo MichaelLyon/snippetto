@@ -27,11 +27,20 @@ var Youtube = require('../lib/queries')
 
 
   router.post('/addToFavorites', function(req, res, next) {
-    console.log(req.body);
-    Youtube.addVideo(req.body.user_id, req.body.videoId).then(function() {
+    Youtube.addVideo(req.body.user_id, req.body.videoId, req.body.videoTitle).then(function() {
       res.sendStatus(200)
     })
   });
+
+
+  router.get('/getFavorites', function(req, res, next) {
+    Youtube.getFavorites().then(function(videos) {
+      res.send(videos.rows)
+    })
+  });
+
+
+
 
 
 

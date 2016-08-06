@@ -520,3 +520,7 @@ iframe {
   font-size: 1.3em;
   cursor: pointer;
 }
+
+.video-favorite:onclick {
+  color: green;
+}

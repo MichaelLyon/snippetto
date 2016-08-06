@@ -323,7 +323,7 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
-  this.videosLoaded = false
+  this.view = 'search'
     var self = this
     $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
         self.videos = data.data.items.map(function(elem) {
@@ -347,9 +347,23 @@ angular.module('myApp.controllers', [])
       })
     }
 
-    this.addToFavorites = function(videoId) {
-      $http.post('http://localhost:3000/youtube/addToFavorites', {user_id: $rootScope.user_id, videoId: videoId}).then(function() {
-        console.log('post successful');
+    this.addToFavorites = function(videoId, videoTitle) {
+      $http.post('http://localhost:3000/youtube/addToFavorites', {user_id: $rootScope.user_id, videoId: videoId, videoTitle: videoTitle}).then(function() {
+      })
+    }
+
+    this.changeView = function(view) {
+      this.view = view
+    }
+
+    this.getFavoritedVideos = function() {
+      $http.get('http://localhost:3000/youtube/getFavorites').then(function(data) {
+        self.favoritedVideos = data.data.map(function(elem) {
+            return {
+              videoId: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.video_id),
+              videoTitle: elem.video_title
+            }
+        })
       })
     }
 }])
