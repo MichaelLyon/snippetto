@@ -31,7 +31,8 @@ router.post('/', function(req, res, next) {
         request('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body) {
             var parsedBody = JSON.parse(body);
             var destinationCordsString = String(parsedBody.results[0].geometry.location.lat + ',' + parsedBody.results[0].geometry.location.lng);
-            request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originCleanUp}&destinations=${address}&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0`, function(error, response, body) {
+            request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originCleanUp}&destinations=${address}&departure_time=1470538545&traffic_model&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0`, function(error, response, body) {
+              console.log(body);
                 var parsedTheSequel = JSON.parse(body);
                 sendBackObject.destinationCords = destinationCordsString;
                 sendBackObject.durationToWork = parsedTheSequel.rows[0].elements[0].duration;

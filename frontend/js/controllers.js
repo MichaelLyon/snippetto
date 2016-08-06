@@ -26,6 +26,7 @@ angular.module('myApp.controllers', [])
 			$rootScope.currentPosition = pos;
       console.log(pos);
 			loadingDone = true;
+
 		})
 		if (loadingDone === true) {
 			clearIntervalAndSuch();

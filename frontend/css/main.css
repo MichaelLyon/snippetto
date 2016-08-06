@@ -28,9 +28,6 @@ button{
   background-color: white;
   border-style: none;
 }
-.nav-fixer{
-  height: 50px;
-}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
@@ -337,6 +334,7 @@ width: 100%;
 }
 
 .fun_mid{
+  margin-top: 50px;
   color: #F4BB51;
   height: 100%;
   /*z-index: 1;*/
@@ -503,6 +501,7 @@ width: 100%;
 #map {
     height: 75vh;
     width: 85vw;
+    margin: 0px auto;
 }
 
 .video-swipe-container {
