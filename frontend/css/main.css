@@ -214,6 +214,7 @@ hr:after {
 }
 /*START weather page CSS*/
 .weather_body{
+  margin: 0px;
   background: url('../images/weatherApp.jpg') no-repeat center center fixed;
   position:absolute;
   -webkit-background-size: cover;
@@ -262,6 +263,7 @@ hr:after {
   color: #3964C3;
 }
 .weather-mid{
+  /*margin: 0px;  */
   position: relative;
   padding: 0 0 20% 0;
   height: 100%;
