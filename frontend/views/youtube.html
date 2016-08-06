@@ -4,23 +4,50 @@
   <br>
   <div class='nav-fixer'>
   </div>
-  <p class="display-1 page-header">Top Trending Videos on Youtube</p>
-  <div class="video-swipe">
-    <div ng-repeat="video in youtube.videos">
-      <iframe width="560" height="315" ng-src={{video}} frameborder="0" allowfullscreen></iframe>
+  <button type="button" name="button" ng-click="youtube.changeView('search')" class="btn btn-primary">Search</button>
+  <button type="button" name="button" ng-click="youtube.changeView('trending')" class="btn btn-primary">Trending Videos</button>
+  <button type="button" name="button" ng-click="youtube.changeView('favorited'); youtube.getFavoritedVideos()" class="btn btn-primary">Favorited Videos</button>
+
+    <div ng-show="youtube.view == 'trending'">
+        <p class="display-1 page-header">Top Trending Videos on Youtube</p>
+        <div class="video-swipe">
+            <div ng-repeat="video in youtube.videos">
+                <div class="video-container">
+                    <p class="video-title display-1">{{video.videoTitle}} <i class="fa fa-star video-favorite" aria-hidden="true" ng-click="youtube.addToFavorites(video.originalVideoId, video.videoTitle)"></i></p>
+                    <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div ng-show="youtube.videosLoaded">
-    <p class="display-1 page-header">Search For Videos</p>
-    <input class="form-control youtube-search-string" type="text" ng-model="youtube.searchString">
-    <button type="button" class="btn btn-primary" ng-click="youtube.searchVideos()">Search</button>
-    <br>
-    <br>
-    <br>
-  </div>
-  <div class="video-swipe">
-    <div ng-repeat="video in youtube.videoResults">
-      <iframe width="560" height="315" ng-src={{video}} frameborder="0" allowfullscreen></iframe>
+
+
+
+    <div ng-show="youtube.view == 'search'">
+        <p class="display-1 page-header">Search For Videos</p>
+        <div class="row">
+            <div class="col-md-11">
+                <input class="form-control youtube-search-string" type="text" ng-model="youtube.searchString">
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary" ng-click="youtube.searchVideos()">Search</button>
+            </div>
+        </div>
+        <div class="video-swipe">
+            <div ng-repeat="video in youtube.videoResults">
+                <iframe width="560" height="315" ng-src={{video}}  frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
-  </div>
+
+
+    <div ng-show="youtube.view == 'favorited'">
+        <p class="display-1 page-header">Favorited Videos</p>
+        <div class="video-swipe">
+            <div ng-repeat="video in youtube.favoritedVideos">
+                <div class="video-container">
+                    <p class="video-title display-1">{{video.videoTitle}}</p>
+                    <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
 </div>

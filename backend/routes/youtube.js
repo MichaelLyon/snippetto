@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var httpRequest = require('fd-http-request');
 var request = require('request');
+var Youtube = require('../lib/queries')
 
 
 
@@ -23,5 +24,25 @@ var request = require('request');
       }
     })
   });
+
+
+  router.post('/addToFavorites', function(req, res, next) {
+    Youtube.addVideo(req.body.user_id, req.body.videoId, req.body.videoTitle).then(function() {
+      res.sendStatus(200)
+    })
+  });
+
+
+  router.get('/getFavorites', function(req, res, next) {
+    Youtube.getFavorites().then(function(videos) {
+      res.send(videos.rows)
+    })
+  });
+
+
+
+
+
+
 
   module.exports = router;
