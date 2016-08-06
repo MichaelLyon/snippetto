@@ -3,15 +3,18 @@ angular.module('myApp.controllers', [])
 .controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
 	var self = this
 
-  var loadingModal = document.getElementById('myModal');
+	//Bool scope variable to control the navbar in index.html
+	$rootScope.header = 'views/header.html';
+
+	var loadingModal = document.getElementById('myModal');
 
 	var loadingDone = false;
-  this.loadingNow = false;
+	this.loadingNow = false;
 
-  if (window.location.href.includes('code')) {
-    this.loadingNow = true;
-    loadingModal.className = 'in';
-  }
+	if (window.location.href.includes('code')) {
+		this.loadingNow = true;
+		loadingModal.className = 'in';
+	}
 
 	var intervalID = window.setInterval(getPosition, 1000);
 
@@ -67,12 +70,12 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
 	var self = this
 	this.main = true
 	this.saved = false
 	this.currentSection = 'home'
 	this.prefTabs = false
-	console.log($rootScope);
 	if ($rootScope.username) {
 		$http.post('http://localhost:3000/news/getPreferences', {
 			user_id: $rootScope.user_id
@@ -159,7 +162,8 @@ angular.module('myApp.controllers', [])
 	}
 }])
 
-.controller('redditController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('redditController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
 	var reddit = this;
 	$http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
 		reddit.redditSubList = data.data.data.children;
@@ -169,7 +173,8 @@ angular.module('myApp.controllers', [])
 	}
 }])
 
-.controller('redditSubController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('redditSubController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
 	var redditSub = this;
 
 	$http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
@@ -178,54 +183,59 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('homeController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('homeController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
 }])
 
 
-.controller('weatherController', ['$http', '$rootScope', function($http, $rootScope) {
-    var lat = $rootScope.currentPosition.lat
-    var lng = $rootScope.currentPosition.lng
-    function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes(); var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-    var sec = a.getSeconds();
-    var mdy = month + ' ' + date + ' ' + year
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return mdy;
-    }
-    var self = this
-    $http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
-        self.weatherData = data.data
-        self.city = data.data.name
-        self.desc = data.data.weather[0].description
-        self.temp = Math.ceil(data.data.main.temp) + '°'
-        self.weatherImg = data.data.weather[0].icon
-        // console.log('root: ',$rootScope.currentPosition.lat);
+.controller('weatherController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
+	var lat = $rootScope.currentPosition.lat
+	var lng = $rootScope.currentPosition.lng
 
-        $http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
-            self.day1 = timeConverter(obj.data.list[0].dt)
-            self.day2 = timeConverter(obj.data.list[1].dt)
-            self.day3 = timeConverter(obj.data.list[2].dt)
-            self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
-            self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
-            self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
-            self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
-            self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
-            self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
-            self.day1_icon = obj.data.list[0].weather[0].icon
-            self.day2_icon = obj.data.list[1].weather[0].icon
+	function timeConverter(UNIX_timestamp) {
+		var a = new Date(UNIX_timestamp * 1000);
+		var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+		var year = a.getFullYear();
+		var month = months[a.getMonth()];
+		var date = a.getDate();
+		var hour = a.getHours();
+		var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
+		var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+		var sec = a.getSeconds();
+		var mdy = month + ' ' + date + ' ' + year
+		var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+		return mdy;
+	}
+	var self = this
+	$http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
+		self.weatherData = data.data
+		self.city = data.data.name
+		self.desc = data.data.weather[0].description
+		self.temp = Math.ceil(data.data.main.temp) + '°'
+		self.weatherImg = data.data.weather[0].icon
+			// console.log('root: ',$rootScope.currentPosition.lat);
 
-            self.day3_icon = obj.data.list[2].weather[0].icon
-        })
-    })
+		$http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
+			self.day1 = timeConverter(obj.data.list[0].dt)
+			self.day2 = timeConverter(obj.data.list[1].dt)
+			self.day3 = timeConverter(obj.data.list[2].dt)
+			self.min_temp1 = Math.ceil(obj.data.list[0].temp.min) + '°'
+			self.max_temp1 = Math.ceil(obj.data.list[0].temp.max) + '°'
+			self.min_temp2 = Math.ceil(obj.data.list[1].temp.min) + '°'
+			self.max_temp2 = Math.ceil(obj.data.list[1].temp.max) + '°'
+			self.min_temp3 = Math.ceil(obj.data.list[2].temp.min) + '°'
+			self.max_temp3 = Math.ceil(obj.data.list[2].temp.max) + '°'
+			self.day1_icon = obj.data.list[0].weather[0].icon
+			self.day2_icon = obj.data.list[1].weather[0].icon
+
+			self.day3_icon = obj.data.list[2].weather[0].icon
+		})
+	})
 }])
 
-.controller('trafficController', ['$http', '$rootScope', function($http, $rootScope) {
+.controller('trafficController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
 	var selfTraffic = this;
 	//User Origin var
 	var origin1 = new google.maps.LatLng($rootScope.currentPosition);
@@ -287,115 +297,119 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
-  var self = this
+	$rootScope.header = 'views/header.html';
+	var self = this
 
-    $http.post('http://localhost:3000/todo/show', {
-        user_id: $rootScope.user_id
-    }).then(function(list) {
-        self.todoList = list.data
-    })
+	$http.post('http://localhost:3000/todo/show', {
+		user_id: $rootScope.user_id
+	}).then(function(list) {
+		self.todoList = list.data
+	})
 
-    this.addTask = function() {
-      console.log(self.time);
-      console.log(self.dueDate);
-        var postObj = {
-            user_id: $rootScope.user_id,
-            task: self.task,
-            priority: self.priority,
-            dueDate: self.dueDate.toString().substring(0, 15),
-            time: self.time.toString().substring(16, 24),
-            description: self.description
-        }
-        console.log(postObj);
-        $http.post('http://localhost:3000/todo/new', postObj).then(function() {
-            $state.reload()
-        })
-    }
+	this.addTask = function() {
+		console.log(self.time);
+		console.log(self.dueDate);
+		var postObj = {
+			user_id: $rootScope.user_id,
+			task: self.task,
+			priority: self.priority,
+			dueDate: self.dueDate.toString().substring(0, 15),
+			time: self.time.toString().substring(16, 24),
+			description: self.description
+		}
+		console.log(postObj);
+		$http.post('http://localhost:3000/todo/new', postObj).then(function() {
+			$state.reload()
+		})
+	}
 
-    this.delete = function(task_id) {
-        $http.post('http://localhost:3000/todo/delete', {
-            task_id: task_id
-        }).then(function() {
-            $state.reload()
-        })
-    }
+	this.delete = function(task_id) {
+		$http.post('http://localhost:3000/todo/delete', {
+			task_id: task_id
+		}).then(function() {
+			$state.reload()
+		})
+	}
 
 }])
 
-.controller('youtubeController', ['$http', '$rootScope', '$sce', function($http, $rootScope, $sce) {
-  this.videosLoaded = false
-    var self = this
-    $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
-        self.videos = data.data.items.map(function(elem) {
-            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
-        })
-        self.videosLoaded = true
-    })
+.controller('youtubeController', ['$http', '$rootScope', '$sce', '$state', function($http, $rootScope, $sce, $state) {
+	$rootScope.header = 'views/header.html';
+	this.videosLoaded = false
+	var self = this
+	$http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {
+		self.videos = data.data.items.map(function(elem) {
+			return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id)
+		})
+		self.videosLoaded = true
+	})
 
-    this.searchVideos = function() {
-      var postObj = {
-        searchString: self.searchString
-      }
-      $http.post('http://localhost:3000/youtube/search', postObj).then(function(data) {
-        self.videoResults = data.data.items.map(function(elem) {
-            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id.videoId)
-        })
-      })
-    }
+	this.searchVideos = function() {
+		var postObj = {
+			searchString: self.searchString
+		}
+		$http.post('http://localhost:3000/youtube/search', postObj).then(function(data) {
+			self.videoResults = data.data.items.map(function(elem) {
+				return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.id.videoId)
+			})
+		})
+	}
 }])
 
-.controller('funController', ['$http', '$rootScope', function($http, $rootScope) {
-    var foo = this
-    $http.get('http://localhost:3000/fun/getFun').then(function(obj) {
-        foo.qoute = obj.data.quoteText
-        foo.author = obj.data.quoteAuthor
-        $http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {
-            foo.word = obj2.data.word
-            foo.definition = obj2.data.definitions[0].text
-            foo.pof = obj2.data.definitions[0].partOfSpeech
-            foo.example = obj2.data.examples[1].text
-            $http.get('http://api.adviceslip.com/advice').then(function(obj3) {
-                foo.advice = obj3.data.slip.advice
-                $http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
-                    foo.chuckNorris = obj4.data.value
-                })
-            })
-        })
-    })
+.controller('funController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+	$rootScope.header = 'views/header.html';
+	var foo = this
+	$http.get('http://localhost:3000/fun/getFun').then(function(obj) {
+		foo.qoute = obj.data.quoteText
+		foo.author = obj.data.quoteAuthor
+		$http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {
+			foo.word = obj2.data.word
+			foo.definition = obj2.data.definitions[0].text
+			foo.pof = obj2.data.definitions[0].partOfSpeech
+			foo.example = obj2.data.examples[1].text
+			$http.get('http://api.adviceslip.com/advice').then(function(obj3) {
+				foo.advice = obj3.data.slip.advice
+				$http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
+					foo.chuckNorris = obj4.data.value
+				})
+			})
+		})
+	})
 
-    this.toggle_visibility1 = function() {
-         var e = document.getElementById('toggle_div1');
-         if(e.style.display == 'block')
-            e.style.display = 'none';
-         else
-            e.style.display = 'block';
-      }
-      this.toggle_visibility2 = function() {
-           var e = document.getElementById('toggle_div2');
-           if(e.style.display == 'block')
-              e.style.display = 'none';
-           else
-              e.style.display = 'block';
-        }
-        this.toggle_visibility3 = function() {
-             var e = document.getElementById('toggle_div3');
-             if(e.style.display == 'block')
-                e.style.display = 'none';
-             else
-                e.style.display = 'block';
-          }
-          this.toggle_visibility4 = function() {
-               var e = document.getElementById('toggle_div4');
-               if(e.style.display == 'block')
-                  e.style.display = 'none';
-               else
-                  e.style.display = 'block';
-            }
+	this.toggle_visibility1 = function() {
+		var e = document.getElementById('toggle_div1');
+		if (e.style.display == 'block')
+			e.style.display = 'none';
+		else
+			e.style.display = 'block';
+	}
+	this.toggle_visibility2 = function() {
+		var e = document.getElementById('toggle_div2');
+		if (e.style.display == 'block')
+			e.style.display = 'none';
+		else
+			e.style.display = 'block';
+	}
+	this.toggle_visibility3 = function() {
+		var e = document.getElementById('toggle_div3');
+		if (e.style.display == 'block')
+			e.style.display = 'none';
+		else
+			e.style.display = 'block';
+	}
+	this.toggle_visibility4 = function() {
+		var e = document.getElementById('toggle_div4');
+		if (e.style.display == 'block')
+			e.style.display = 'none';
+		else
+			e.style.display = 'block';
+	}
 }])
 
 
 
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
+	$rootScope.header = 'views/header.html';
 	var self = this
 	$http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
 		console.log(task.data);
