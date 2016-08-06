@@ -16,6 +16,10 @@ html {
   position: relative;
   min-height: 100%;
 }
+*{
+  margin: 0;
+  padding: 0;
+}
 nav{
   /*position: relative;*/
 }
@@ -31,14 +35,12 @@ button{
   margin-right: 50px !important;
   margin-left: 5px !important;
 }
-*{
-  margin: 0;
-  padding: 0;
-}
+
 body{
   padding-bottom: 70px;
   padding-top:30px;
 }
+
 #snippetto_title{
   font-family: 'Roboto Slab', serif;
 }

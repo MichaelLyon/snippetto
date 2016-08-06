@@ -15,8 +15,7 @@ angular.module('myApp.controllers', [])
 		this.loadingNow = true;
 		loadingModal.className = 'in';
 	}
-
-	var intervalID = window.setInterval(getPosition, 1000);
+	var intervalID = window.setInterval(getPosition, 500);
 
 	function getPosition() {
 		navigator.geolocation.getCurrentPosition(function(position) {
@@ -25,6 +24,7 @@ angular.module('myApp.controllers', [])
 				lng: position.coords.longitude
 			};
 			$rootScope.currentPosition = pos;
+      console.log(pos);
 			loadingDone = true;
 		})
 		if (loadingDone === true) {
