@@ -2,9 +2,6 @@
   <div ng-include="header"> </div>
   <br>
   <br>
-  <div class='nav-fixer'>
-  </div>
-
   <button type="button" name="button" ng-click="youtube.changeView('search')" class="btn btn-primary">Search</button>
   <button type="button" name="button" ng-click="youtube.changeView('trending')" class="btn btn-primary">Trending Videos</button>
   <button type="button" name="button" ng-click="youtube.changeView('favorited'); youtube.getFavoritedVideos()" class="btn btn-primary">Favorited Videos</button>
@@ -20,8 +17,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div ng-show="youtube.view == 'search'">
         <p class="display-1 page-header">Search For Videos</p>
