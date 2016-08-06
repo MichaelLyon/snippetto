@@ -73,6 +73,7 @@ angular.module('myApp.controllers', [])
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
 	$rootScope.header = 'views/header.html';
 	var self = this
+  this.currentArticles = true
 	this.main = true
 	this.saved = false
 	this.currentSection = 'home'
@@ -149,16 +150,19 @@ angular.module('myApp.controllers', [])
 	}
 
 	this.getSavedArticles = function() {
+    // self.currentArticles = false
 		$http.post('http://localhost:3000/news/retrieveArticles', {
 			user_id: $rootScope.user_id
 		}).then(function(data) {
 			self.stories = data.data
+      console.log(self.stories);
 		})
 		this.main = false
 		this.saved = true
 	}
 
 	this.getCurrentArticles = function() {
+    self.currentArticles = true
 		$state.reload()
 	}
 }])
