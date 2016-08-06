@@ -160,6 +160,7 @@ angular.module('myApp.controllers', [])
 
 	serverObject.origin1 = origin1;
 	serverObject.userId = $rootScope.user_id;
+  serverObject.currentTime = (Date.now() / 1000);
 
 	this.trafficSwitch = false;
 
@@ -179,7 +180,7 @@ angular.module('myApp.controllers', [])
 	trafficLayer.setMap(map);
 
 	$http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
-		selfTraffic.durationToDestination = data.data.durationToWork.text;
+		selfTraffic.durationToDestination = data.data.durationInTraffic.text;
 		calculateAndDisplayRoute(directionsService, directionsDisplay);
 
 		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
