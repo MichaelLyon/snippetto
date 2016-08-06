@@ -574,9 +574,9 @@ iframe {
   align-items: center;
 }
 
-.favorite-video {
+/*.favorite-video {
   margin-bottom: 50px;
-}
+}*/
 
 .video-stats {
   display: flex;
@@ -585,4 +585,8 @@ iframe {
 }
 .fun_font {
   cursor: pointer;
+}
+
+.search-iframe {
+  margin: 200px !important;
 }

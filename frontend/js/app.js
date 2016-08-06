@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
+angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.newsController', 'myApp.services'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('login')//login
