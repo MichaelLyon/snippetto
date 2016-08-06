@@ -2,7 +2,7 @@ angular.module('myApp.controllers', [])
 
 .controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
 	var self = this
-
+  this.showLogin = true
 	//Bool scope variable to control the navbar in index.html
 	$rootScope.header = 'views/header.html';
 
@@ -14,6 +14,7 @@ angular.module('myApp.controllers', [])
 	if (window.location.href.includes('code')) {
 		this.loadingNow = true;
 		loadingModal.className = 'in';
+    self.showLogin = false
 	}
 	var intervalID = window.setInterval(getPosition, 500);
 
@@ -73,6 +74,7 @@ angular.module('myApp.controllers', [])
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
 	$rootScope.header = 'views/header.html';
 	var self = this
+  this.currentArticles = true
 	this.main = true
 	this.saved = false
 	this.currentSection = 'home'
@@ -90,7 +92,14 @@ angular.module('myApp.controllers', [])
 		})
 	}
 	$http.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6acc556fbac84c2aa266476c82b9d4f2').then(function(data) {
-		self.stories = data.data.results;
+		self.stories = data.data.results.map(function(elem) {
+      if (elem.multimedia[0]) {
+        return elem
+      } else {
+        elem.multimedia.push({url: 'images/dog-black-small.png'})
+        return elem
+      }
+    });
 	})
 
 	this.updateNewsPage = function(section) {
@@ -149,16 +158,19 @@ angular.module('myApp.controllers', [])
 	}
 
 	this.getSavedArticles = function() {
+    self.prefTabs = false
 		$http.post('http://localhost:3000/news/retrieveArticles', {
 			user_id: $rootScope.user_id
 		}).then(function(data) {
 			self.stories = data.data
+      console.log(self.stories);
 		})
 		this.main = false
 		this.saved = true
 	}
 
 	this.getCurrentArticles = function() {
+    self.currentArticles = true
 		$state.reload()
 	}
 }])
@@ -334,6 +346,8 @@ angular.module('myApp.controllers', [])
 	}
 
 }])
+
+
 .controller('youtubeController', ['$http', '$rootScope', '$sce', '$state', function($http, $rootScope, $sce, $state) {
 	$rootScope.header = 'views/header.html';
   this.view = 'search'
@@ -374,9 +388,17 @@ angular.module('myApp.controllers', [])
         self.favoritedVideos = data.data.map(function(elem) {
             return {
               videoId: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + elem.video_id),
-              videoTitle: elem.video_title
+              videoTitle: elem.video_title,
+              favorites: elem.favorites,
+              originalVideoId: elem.video_id
             }
         })
+      })
+    }
+    this.getVideoFavoriteUsers = function(videoId) {
+      console.log(videoId);
+      $http.get('http://localhost:3000/youtube/getVideoFavoriteUsers/' + videoId).then(function(data) {
+        self.favoritedUsers = data.data
       })
     }
 }])
@@ -391,11 +413,14 @@ angular.module('myApp.controllers', [])
 			foo.word = obj2.data.word
 			foo.definition = obj2.data.definitions[0].text
 			foo.pof = obj2.data.definitions[0].partOfSpeech
-			foo.example = obj2.data.examples[1].text
+			foo.example = obj2.data.examples[0].text
+      console.log('example: ',obj2.data);
 			$http.get('http://api.adviceslip.com/advice').then(function(obj3) {
 				foo.advice = obj3.data.slip.advice
+        console.log('advice: ', foo.advice);
 				$http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
 					foo.chuckNorris = obj4.data.value
+          console.log('chuck: ',foo.chuckNorris);
 				})
 			})
 		})

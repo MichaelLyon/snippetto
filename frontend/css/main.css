@@ -350,6 +350,11 @@ width: 100%;
 .fun_font{
   font-weight: 900;
   font-family: 'Roboto Slab', serif;
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
   color: white;
 }
 .fun_font:hover{
@@ -358,14 +363,29 @@ width: 100%;
 .fun_p{
   font-weight: bolder;
   font-family: 'Roboto Slab', serif;
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
 }
 .fun_p_word{
   font-family: 'Roboto Slab', serif;
   font-size: 1.5em;
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
   color: white;
 }
 .fun_author{
   font-family: 'Roboto Slab', serif;
+  text-shadow:
+  -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
   color: white;
 }
 
@@ -504,7 +524,7 @@ width: 100%;
     margin: 0px auto;
 }
 
-.video-swipe-container {
+.ipe-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -543,4 +563,23 @@ iframe {
 
 .video-favorite:onclick {
   color: green;
+}
+
+.favorite-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favorite-video {
+  margin-bottom: 50px;
+}
+
+.video-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.fun_font {
+  cursor: pointer;
 }
