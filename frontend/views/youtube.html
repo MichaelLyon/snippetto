@@ -8,7 +8,7 @@
 
     <div ng-show="youtube.view == 'trending'">
         <p class="display-1 page-header">Top Trending Videos on Youtube</p>
-        <div class="video-swipe">
+        <div class="video-swipe ">
             <div ng-repeat="video in youtube.videos">
                 <div class="video-container">
                     <p class="video-title display-1">{{video.videoTitle}} <i class="fa fa-star video-favorite" aria-hidden="true" ng-click="youtube.addToFavorites(video.originalVideoId, video.videoTitle)"></i></p>
@@ -28,7 +28,7 @@
                 <button type="button" class="btn btn-primary" ng-click="youtube.searchVideos()">Search</button>
             </div>
         </div>
-        <div class="video-swipe">
+        <div class="video-swipe ">
             <div ng-repeat="video in youtube.videoResults">
                 <iframe width="560" height="315" ng-src={{video}}  frameborder="0" allowfullscreen></iframe>
             </div>
