@@ -2,7 +2,7 @@ angular.module('myApp.controllers', [])
 
 .controller('loginController', ['$http', '$state', '$rootScope', function($http, $state, $rootScope) {
 	var self = this
-
+  this.showLogin = true
 	//Bool scope variable to control the navbar in index.html
 	$rootScope.header = 'views/header.html';
 
@@ -14,6 +14,7 @@ angular.module('myApp.controllers', [])
 	if (window.location.href.includes('code')) {
 		this.loadingNow = true;
 		loadingModal.className = 'in';
+    self.showLogin = false
 	}
 	var intervalID = window.setInterval(getPosition, 500);
 
