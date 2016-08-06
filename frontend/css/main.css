@@ -304,14 +304,19 @@ hr:after {
 }
 
 /*start fun css */
+/*.fun_wrapper{
+  margin: auto;
+  height: 90vh;
+  width: 100%;
+}*/
 .fun_body{
 background: url('../images/Awesome.jpg') no-repeat center center fixed;
-position:absolute;
+position:absolute;;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-height: 100%;
+height: 100vh;
 width: 100%;
 }
 
