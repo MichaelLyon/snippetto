@@ -28,9 +28,6 @@ button{
   background-color: white;
   border-style: none;
 }
-.nav-fixer{
-  height: 50px;
-}
 .news-checkbox {
   margin-right: 50px !important;
   margin-left: 5px !important;
@@ -151,6 +148,8 @@ hr:after {
 }
 .navbar{
   min-height: 20px;
+  background: #45484d;
+  background: linear-gradient(to bottom,  #45484d 0%,#000000 100%);
 }
 #navbar_Options{
   float:right;
@@ -214,6 +213,7 @@ hr:after {
 }
 /*START weather page CSS*/
 .weather_body{
+  margin: 0px;
   background: url('../images/weatherApp.jpg') no-repeat center center fixed;
   position:absolute;
   -webkit-background-size: cover;
@@ -262,6 +262,7 @@ hr:after {
   color: #3964C3;
 }
 .weather-mid{
+  /*margin: 0px;  */
   position: relative;
   padding: 0 0 20% 0;
   height: 100%;
@@ -335,8 +336,23 @@ background-size: cover;
 height: 100vh;
 width: 100%;
 }
+.current {
+  position: fixed;
+  margin-top: 5px;
+  margin-left:5px;
 
+}
+.currentSaved{
+  position: fixed;
+  margin-top: 5px;
+  margin-left: 13%;
+}
+.nytTop{
+  margin-top: 5%;
+  margin-left: 10px;
+}
 .fun_mid{
+  margin-top: 50px;
   color: #F4BB51;
   height: 100%;
   /*z-index: 1;*/
@@ -523,6 +539,7 @@ width: 100%;
 #map {
     height: 75vh;
     width: 85vw;
+    margin: 0px auto;
 }
 
 .ipe-container {
@@ -562,24 +579,14 @@ iframe {
   cursor: pointer;
 }
 
-.video-favorite:onclick {
-  color: green;
+.green {
+  color: green !important;
 }
 
 .favorite-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.favorite-video {
-  margin-bottom: 50px;
-}
-
-.video-stats {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 
 .fun_font {

@@ -1,26 +1,21 @@
 <div class="container">
-  <div ng-include="header"> </div>
+  <div ng-include src="'views/header.html'"></div>
   <br>
   <br>
   <button type="button" name="button" ng-click="youtube.changeView('search')" class="btn btn-primary">Search</button>
   <button type="button" name="button" ng-click="youtube.changeView('trending')" class="btn btn-primary">Trending Videos</button>
   <button type="button" name="button" ng-click="youtube.changeView('favorited'); youtube.getFavoritedVideos()" class="btn btn-primary">Favorited Videos</button>
-
-  <div class="youScroll">
     <div ng-show="youtube.view == 'trending'">
-      <p class="display-1 page-header">Top Trending Videos on Youtube</p>
-      <div class="video-swipe ">
-        <div ng-repeat="video in youtube.videos">
-          <div class="video-container">
-            <p class="video-title display-1">{{video.videoTitle}} <i class="fa fa-star video-favorite" aria-hidden="true" ng-click="youtube.addToFavorites(video.originalVideoId, video.videoTitle)"></i></p>
-            <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
-          </div>
+        <p class="display-1 page-header">Top Trending Videos on Youtube</p>
+        <div class="video-swipe">
+            <div ng-repeat="video in youtube.videos">
+                <div class="video-container">
+                    <p class="video-title display-1">{{video.videoTitle}} <i id="{{$index}}videos" class="fa fa-star video-favorite" aria-hidden="true" ng-click="youtube.addToFavorites(video.originalVideoId, video.videoTitle, $event)"></i></p>
+                    <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
-
     <div ng-show="youtube.view == 'search'">
         <p class="display-1 page-header">Search For Videos</p>
         <div class="row">
@@ -31,29 +26,32 @@
                 <button type="button" class="btn btn-primary" ng-click="youtube.searchVideos()">Search</button>
             </div>
         </div>
-        <div class="video-swipe ">
-            <div ng-repeat="video in youtube.videoResults">
-                <iframe width="560" height="315" ng-src={{video}}  frameborder="0" allowfullscreen></iframe>
+        <br>
+        <div class="video-swipe">
+            <div ng-repeat="video in youtube.searchVideoResults">
+                <div class="video-container">
+                    <p class="video-title display-1">{{video.videoTitle}} <i id="{{$index}}searchVideoResults" class="fa fa-star video-favorite" aria-hidden="true" ng-click="youtube.addToFavorites(video.originalVideoId, video.videoTitle, $event)"></i></p>
+                    <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
-
-
     <div ng-show="youtube.view == 'favorited'">
         <p class="display-1 page-header">Favorited Videos</p>
         <div class="favorite-container">
             <div ng-repeat="video in youtube.favoritedVideos">
-                <div class="video-container favorite-video ">
+                <div class="video-container favorite-video">
                     <p class="video-title display-1">{{$index + 1}}. {{video.videoTitle}}</p>
                     <iframe width="560" height="315" ng-src={{video.videoId}}  frameborder="0" allowfullscreen></iframe>
+                    <br> <br>
                     <div class="video-stats">
                         <p class="display-1 video-title">Favorites: {{video.favorites}}</p>
                         <button type="button" name="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="youtube.getVideoFavoriteUsers(video.originalVideoId)">See Who's Liked This Video</button>
                     </div>
                 </div>
+                <hr>
             </div>
         </div>
-
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -61,7 +59,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Hello</h4>
+                <h4 class="modal-title" id="myModalLabel">Users</h4>
               </div>
               <div class="modal-body">
                   <table class="table table-striped">
@@ -80,5 +78,5 @@
             </div>
           </div>
         </div>
-
-</div>
+    </div>
+</div

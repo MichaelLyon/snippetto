@@ -1,7 +1,7 @@
 angular.module('myApp.services', [])
 
 .service('testService', function() {
-  this.sayShit = function(shit) {
-    console.log(shit);
+  this.saySomething = function(something) {
+    console.log(something);
   }
 })

@@ -1,10 +1,13 @@
-<div ng-include="header"> </div>
+<div ng-include src="'views/header.html'"></div>
 <br>
 <br>
 <h1>This is the traffic page</h1>
 <div ng-controller="trafficController">
   <div ng-show="traffic.trafficSwitch === true">
-    <div>Duration to Destination: {{traffic.durationToDestination}}</div>
+    <div>Duration to destination with traffic considered: {{traffic.durationToDestination}}</div>
+    <form class="" action="http://localhost:3000/traffic/" method="post">
+      <input type="submit" name="name" value="Enter a New Address">
+    </form>
     <div id="map" data-tap-disabled="true"></div>
   </div>
   <div ng-hide="traffic.trafficSwitch === true">
