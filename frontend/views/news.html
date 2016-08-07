@@ -1,10 +1,6 @@
 <div class="news-wrapper">
   <div ng-include src="'views/header.html'"></div>
     <br>
-  <div>
-    <button class="current btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
-    <button class="currentSaved btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
-  </div>
   <div class="set-preferences" ng-show="news.showPrefs">
     <br />
     <h3>Select the New York Times sections you're interested in seeing</h3>
@@ -50,7 +46,6 @@
       <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
     </div>
     <br>
-    <br>
     <button class="btn btn-primary" type="button" name="button" ng-click="news.showSectionSelections()">Edit Sections</button>
 
   <div ng-show="news.prefTabs">
@@ -66,10 +61,14 @@
       </div>
     </div>
   </div>
+  <div class='savedArticles'>
+    <button class="current btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
+    <button class="currentSaved btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
+  </div>
   <div>
     <div ng-switch="news.currentSection">
       <h3 ng-show="news.main" ng-switch-when="home" class="nytTop capitalize" id='news_header'>The New York Times - Top Articles</h3>
-      <h3 ng-switch-default class="capitalize" id='news_header'>{{news.currentSection}} Articles</h3>
+      <h3 ng-switch-default class="capitalize" id='news_header'>The New York Times - {{news.currentSection}} Articles</h3>
     </div>
     <div ng-show="news.saved">
       <h3 id='news_header'>Saved Articles</h3>
