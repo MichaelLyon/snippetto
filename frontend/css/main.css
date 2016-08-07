@@ -564,8 +564,8 @@ iframe {
   cursor: pointer;
 }
 
-.video-favorite:onclick {
-  color: green;
+.green {
+  color: green !important;
 }
 
 .favorite-container {
@@ -574,19 +574,6 @@ iframe {
   align-items: center;
 }
 
-/*.favorite-video {
-  margin-bottom: 50px;
-}*/
-
-.video-stats {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 .fun_font {
   cursor: pointer;
-}
-
-.search-iframe {
-  margin: 200px !important;
 }
