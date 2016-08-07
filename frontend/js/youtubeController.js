@@ -2,7 +2,6 @@ angular.module('myApp.youtubeController', [])
 
 
 .controller('youtubeController', ['$http', '$rootScope', '$sce', '$state', function($http, $rootScope, $sce, $state) {
-	$rootScope.header = 'views/header.html';
   this.view = 'search'
     var self = this
     $http.get('http://localhost:3000/youtube/getTopVideos').then(function(data) {

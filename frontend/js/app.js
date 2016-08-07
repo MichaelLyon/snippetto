@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.newsController', 'myApp.youtubeController', 'myApp.services'])
+angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.newsController', 'myApp.youtubeController','myApp.redditController', 'myApp.redditSubController','myApp.trafficController', 'myApp.services'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('login')//login
