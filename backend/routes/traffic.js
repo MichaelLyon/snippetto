@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
         request('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0', function(error, response, body1) {
             var parsedBody = JSON.parse(body1);
             var destinationCordsString = String(parsedBody.results[0].geometry.location.lat + ',' + parsedBody.results[0].geometry.location.lng);
-            request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originCleanUp}&destinations=${address}&departure_time=${req.body.currentTime.toFixed(0)}&traffic_model&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0`, function(error, response, body2) {
+            request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originCleanUp}&destinations=${address}&departure_time=${req.body.currentTime.toFixed(0)+100}&traffic_model&key=AIzaSyCx0Ga7DUSfnNyk8Am0sipc2lJ1EFTHIg0`, function(error, response, body2) {
                 var parsedTheSequel = JSON.parse(body2);
                 sendBackObject.destinationCords = destinationCordsString;
                 sendBackObject.durationInTraffic = parsedTheSequel.rows[0].elements[0].duration_in_traffic;

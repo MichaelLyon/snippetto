@@ -49,13 +49,13 @@ angular.module('myApp.controllers', [])
 					accessToken: $rootScope.accessToken
 				}
 				$http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
-					$rootScope.username = data.data.email
+					$rootScope.username = data.data.email;
 					$http.post('http://localhost:3000/google/new', {
 						username: $rootScope.username
 					}).then(function(data) {
-						$rootScope.user_id = data.data.user_id
+						$rootScope.user_id = data.data.user_id;
 						if (data.data.firstTimeUser) {
-							$rootScope.firstTimeUser = true
+							$rootScope.firstTimeUser = true;
 						}
 					})
 				})
@@ -66,7 +66,7 @@ angular.module('myApp.controllers', [])
 
 	function loginAndSuch() {
 		if (window.location.href.includes('code')) {
-			$state.go('home')
+			$state.go('home');
 		}
 	}
 }])
