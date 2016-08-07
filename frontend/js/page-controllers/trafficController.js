@@ -1,6 +1,7 @@
 angular.module('myApp.trafficController', [])
 
 .controller('trafficController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+
 	var selfTraffic = this;
 	//User Origin var
 	var origin1 = new google.maps.LatLng($rootScope.currentPosition);
@@ -47,6 +48,7 @@ angular.module('myApp.trafficController', [])
 			}, function(response, status) {
 				if (status === 'OK') {
 					directionsDisplay.setDirections(response);
+
 				} else {
 					window.alert('Directions request failed due to ' + status);
 				}
@@ -67,6 +69,7 @@ angular.module('myApp.trafficController', [])
 		$rootScope.workAddress = address;
 		$http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
 			this.trafficAddNewAddress = false;
+			$state.reload();
 			console.log(some);
 		})
 	}
