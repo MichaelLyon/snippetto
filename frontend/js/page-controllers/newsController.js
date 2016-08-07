@@ -56,7 +56,7 @@ angular.module('myApp.newsController', [])
 		} else {
 			var postObj = {}
 		}
-		var preferences = document.getElementsByClassName('news-checkbox')
+		var preferences = document.getElementsByClassName('custom-control-input')
 		for (var i = 0; i < preferences.length; i++) {
 			if (preferences[i].checked) {
 				postObj[preferences[i].name] = preferences[i].name
