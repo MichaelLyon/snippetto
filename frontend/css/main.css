@@ -585,3 +585,7 @@ iframe {
 .fun_font {
   cursor: pointer;
 }
+.youScroll{
+  overflow: scroll;
+  height: 100%;
+}
