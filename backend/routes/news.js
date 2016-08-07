@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request')
-var News = require('../lib/queries')
+var News = require('../lib/newsQueries')
 
 
 router.post('/setPreferences', function(req, res, next) {
@@ -50,12 +50,5 @@ router.post('/deleteArticle', function(req, res, next) {
     res.sendStatus(200)
   })
 });
-
-
-
-
-
-
-
 
 module.exports = router;

@@ -72,4 +72,10 @@ angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.newsController
       controller: 'showTaskController',
       controllerAs: 'showTask'
     })
+    .state('nyt', {
+      url: '/nytTemp',
+      templateUrl: '/views/nytsearchtemp.html',
+      controller: 'nytTempController',
+      controllerAs: 'nytTemp'
+    })
 }])

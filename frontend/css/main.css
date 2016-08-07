@@ -595,3 +595,13 @@ iframe {
   overflow: scroll;
   height: 100%;
 }
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.article-date {
+  margin-right: 10px !important;
+  color: #337AB7;
+}
