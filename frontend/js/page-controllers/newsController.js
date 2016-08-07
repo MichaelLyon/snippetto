@@ -10,7 +10,7 @@ angular.module('myApp.newsController', [])
 	this.currentSection = 'home'
 	this.prefTabs = false
 	if ($rootScope.username) {
-		$http.post('http://localhost:3000/news/getPreferences', {
+		$http.post('https://snippetto.herokuapp.com/news/getPreferences', {
 			user_id: $rootScope.user_id
 		}).then(function(prefs) {
 			if (prefs.data.preferences) {
@@ -61,7 +61,7 @@ angular.module('myApp.newsController', [])
 				postObj[preferences[i].name] = preferences[i].name
 			}
 		}
-		$http.post('http://localhost:3000/news/setPreferences', postObj).then(function() {
+		$http.post('https://snippetto.herokuapp.com/news/setPreferences', postObj).then(function() {
 			$state.reload()
 		})
 	}
@@ -80,7 +80,7 @@ angular.module('myApp.newsController', [])
 			url: url,
 			abstract: abstract.replace(/'/, '')
 		}
-		$http.post('http://localhost:3000/news/save', postObj).then(function() {
+		$http.post('https://snippetto.herokuapp.com/news/save', postObj).then(function() {
 			console.log('post successful');
 		})
 	}
@@ -90,7 +90,7 @@ angular.module('myApp.newsController', [])
 			user_id: $rootScope.user_id,
 			title: article
 		}
-		$http.post('http://localhost:3000/news/deleteArticle', postObj).then(function() {
+		$http.post('https://snippetto.herokuapp.com/news/deleteArticle', postObj).then(function() {
 			self.getSavedArticles()
 		})
 	}
@@ -98,7 +98,7 @@ angular.module('myApp.newsController', [])
 	this.getSavedArticles = function() {
 		self.searchPage = false
     self.prefTabs = false
-		$http.post('http://localhost:3000/news/retrieveArticles', {
+		$http.post('https://snippetto.herokuapp.com/news/retrieveArticles', {
 			user_id: $rootScope.user_id
 		}).then(function(data) {
 			self.stories = data.data
@@ -131,7 +131,6 @@ angular.module('myApp.newsController', [])
 					return elem
 				}
 			})
-			console.log(self.searchArticleResults);
 		})
 	}
 

@@ -20,7 +20,7 @@ angular.module('myApp.weatherController', [])
 		return mdy;
 	}
 	var self = this
-	$http.post('http://localhost:3000/weather/getWeather', $rootScope.currentPosition).then(function(data) {
+	$http.post('https://snippetto.herokuapp.com/weather/getWeather', $rootScope.currentPosition).then(function(data) {
 		self.weatherData = data.data
 		self.city = data.data.name
 		self.desc = data.data.weather[0].description
