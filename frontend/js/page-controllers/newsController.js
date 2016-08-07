@@ -124,12 +124,15 @@ angular.module('myApp.newsController', [])
 			self.searchArticleResults = data.data.response.docs.map(function(elem) {
 				if (elem.multimedia[0]) {
 					elem.multimedia[0].url = 'images/dog-black-small.png'
+					elem.pub_date = elem.pub_date.toString().substring(0, 10)
 					return elem
 				} else {
 					elem.multimedia.push({url: 'images/dog-black-small.png'})
+					elem.pub_date = elem.pub_date.toString().substring(0, 10)
 					return elem
 				}
 			})
+			console.log(self.searchArticleResults);
 		})
 	}
 
