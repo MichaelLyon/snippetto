@@ -2,7 +2,7 @@ angular.module('myApp.funController', [])
 
 .controller('funController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
 	var foo = this
-	$http.get('http://localhost:3000/fun/getFun').then(function(obj) {
+	$http.get('https://snippetto.herokuapp.com/fun/getFun').then(function(obj) {
 		foo.qoute = obj.data.quoteText
 		foo.author = obj.data.quoteAuthor
 		$http.get('http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5').then(function(obj2) {

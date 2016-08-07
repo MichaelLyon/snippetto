@@ -46,9 +46,9 @@ angular.module('myApp.loginController', [])
 				var postObj = {
 					accessToken: $rootScope.accessToken
 				}
-				$http.post('http://localhost:3000/google/oauth', postObj).then(function(data) {
+				$http.post('https://snippetto.herokuapp.com/google/oauth', postObj).then(function(data) {
 					$rootScope.username = data.data.email
-					$http.post('http://localhost:3000/google/new', {
+					$http.post('https://snippetto.herokuapp.com/google/new', {
 						username: $rootScope.username
 					}).then(function(data) {
 						$rootScope.user_id = data.data.user_id

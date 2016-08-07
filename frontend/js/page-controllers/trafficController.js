@@ -36,7 +36,7 @@ angular.module('myApp.trafficController', [])
 	directionsDisplay.setMap(map);
 	trafficLayer.setMap(map);
 
-	$http.post('http://localhost:3000/traffic', serverObject).then(function(data) {
+	$http.post('https://snippetto.herokuapp.com/traffic', serverObject).then(function(data) {
 		selfTraffic.durationToDestination = data.data.durationInTraffic.text;
 		calculateAndDisplayRoute(directionsService, directionsDisplay);
 
@@ -67,7 +67,7 @@ angular.module('myApp.trafficController', [])
 			address.id = 12; //REMOVE
 		}//REMOVE
 		$rootScope.workAddress = address;
-		$http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
+		$http.post('https://snippetto.herokuapp.com/traffic/setAddress', $rootScope.workAddress).then(function(some) {
 			this.trafficAddNewAddress = false;
 			$state.reload();
 			console.log(some);

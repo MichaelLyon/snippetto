@@ -3,7 +3,7 @@ angular.module('myApp.todoControllers', [])
 .controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
 	var self = this
 
-	$http.post('http://localhost:3000/todo/show', {
+	$http.post('https://snippetto.herokuapp.com/todo/show', {
 		user_id: $rootScope.user_id
 	}).then(function(list) {
 		self.todoList = list.data
@@ -21,13 +21,13 @@ angular.module('myApp.todoControllers', [])
 			description: self.description
 		}
 		console.log(postObj);
-		$http.post('http://localhost:3000/todo/new', postObj).then(function() {
+		$http.post('https://snippetto.herokuapp.com/todo/new', postObj).then(function() {
 			$state.reload()
 		})
 	}
 
 	this.delete = function(task_id) {
-		$http.post('http://localhost:3000/todo/delete', {
+		$http.post('https://snippetto.herokuapp.com/todo/delete', {
 			task_id: task_id
 		}).then(function() {
 			$state.reload()
@@ -40,7 +40,7 @@ angular.module('myApp.todoControllers', [])
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
 	$rootScope.header = 'views/header.html';
 	var self = this
-	$http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
+	$http.get(`https://snippetto.herokuapp.com/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
 		console.log(task.data);
 		self.task = task.data.task
 		self.task_id = task.data.task_id
@@ -61,7 +61,7 @@ angular.module('myApp.todoControllers', [])
 			time: self.time,
 			description: self.description
 		}
-		$http.post('http://localhost:3000/todo/edit', postObj).then(function() {
+		$http.post('https://snippetto.herokuapp.com/todo/edit', postObj).then(function() {
 			$state.go('todo')
 		})
 	}
