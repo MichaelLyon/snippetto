@@ -21,7 +21,6 @@ router.post('/new', function(req, res, next) {
         username: user.rows[0].username,
         user_id: user.rows[0].user_id
       })
-
     } else {
       Users.createNewUser(req.body.username).then(function(user) {
         res.json({

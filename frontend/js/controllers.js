@@ -4,7 +4,6 @@ angular.module('myApp.controllers', [])
 	var self = this
   this.showLogin = true
 	//Bool scope variable to control the navbar in index.html
-	$rootScope.header = 'views/header.html';
 
 	var loadingModal = document.getElementById('myModal');
 
@@ -72,12 +71,10 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('homeController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 }])
 
 
 .controller('weatherController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var lat = $rootScope.currentPosition.lat
 	var lng = $rootScope.currentPosition.lng
 
@@ -123,45 +120,7 @@ angular.module('myApp.controllers', [])
 	})
 }])
 
-.controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
-	$rootScope.header = 'views/header.html';
-	var self = this
-
-	$http.post('http://localhost:3000/todo/show', {
-		user_id: $rootScope.user_id
-	}).then(function(list) {
-		self.todoList = list.data
-	})
-
-	this.addTask = function() {
-		console.log(self.time);
-		console.log(self.dueDate);
-		var postObj = {
-			user_id: $rootScope.user_id,
-			task: self.task,
-			priority: self.priority,
-			dueDate: self.dueDate.toString().substring(0, 15),
-			time: self.time.toString().substring(16, 24),
-			description: self.description
-		}
-		console.log(postObj);
-		$http.post('http://localhost:3000/todo/new', postObj).then(function() {
-			$state.reload()
-		})
-	}
-
-	this.delete = function(task_id) {
-		$http.post('http://localhost:3000/todo/delete', {
-			task_id: task_id
-		}).then(function() {
-			$state.reload()
-		})
-	}
-
-}])
-
 .controller('funController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var foo = this
 	$http.get('http://localhost:3000/fun/getFun').then(function(obj) {
 		foo.qoute = obj.data.quoteText
@@ -183,37 +142,15 @@ angular.module('myApp.controllers', [])
 		})
 	})
 
-	this.toggle_visibility1 = function() {
-		var e = document.getElementById('toggle_div1');
+  this.toggleVisibility = function (id) {
+    console.log(id);
+    var e = document.getElementById(id);
 		if (e.style.display == 'block')
 			e.style.display = 'none';
 		else
 			e.style.display = 'block';
-	}
-	this.toggle_visibility2 = function() {
-		var e = document.getElementById('toggle_div2');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
-	this.toggle_visibility3 = function() {
-		var e = document.getElementById('toggle_div3');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
-	this.toggle_visibility4 = function() {
-		var e = document.getElementById('toggle_div4');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
+  }
 }])
-
-
 
 .controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
 	$rootScope.header = 'views/header.html';

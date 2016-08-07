@@ -31,7 +31,8 @@ angular.module('myApp.youtubeController', [])
       })
     }
 
-    this.addToFavorites = function(videoId, videoTitle) {
+    this.addToFavorites = function(videoId, videoTitle, event) {
+      document.getElementById(event.target.id).className += ' green'
       $http.post('http://localhost:3000/youtube/addToFavorites', {user_id: $rootScope.user_id, videoId: videoId, videoTitle: videoTitle}).then(function() {
       })
     }
