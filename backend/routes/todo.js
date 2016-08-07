@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request')
-var Todo = require('../lib/queries')
+var Todo = require('../lib/todoQueries')
 
 
 router.post('/new', function(req, res, next) {
