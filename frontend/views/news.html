@@ -1,111 +1,146 @@
 <div class="news-wrapper">
-  <div ng-include src="'views/header.html'"></div>
+    <div ng-include src="'views/header.html'"></div>
     <br>
-  <div class="set-preferences" ng-show="news.showPrefs">
-    <br />
-    <h3>Select the New York Times sections you're interested in seeing</h3>
-    <div class='preferences-container'>
-      <div class='row'>
-        <div class="col-md-12">
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="opinion" value="opinion"> Opinion
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="world" value="world"> World
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="national" value="National"> National
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="business" value="business"> Business
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="technology" value="technology"> Tech
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="science" value="science"> Science
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="health" value="health"> Health
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="sports" value="sports"> Sports
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="fashion" value="fashion"> Fashion
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="food" value="food"> Food
-          </label>
-          <label class='checkbox-inline'>
-            <input class="custom-control-input" type="checkbox" name="realestate" value="realestate"> Real Estate
-          </label>
-          </div>
-        </div>
-      </div>
-      <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
+    <div class='savedArticles'>
+        <button class="btn btn-primary" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
+        <button class="btn btn-primary" type="button" ng-click="news.switchToSearh()">Search Articles</button>
+        <button class="btn btn-primary" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
     </div>
-    <br>
-    <button class="btn btn-primary" type="button" name="button" ng-click="news.showSectionSelections()">Edit Sections</button>
+    <div ng-hide="news.searchPage">
+        <div class="set-preferences" ng-show="news.showPrefs">
+            <br />
+            <h3>Select the New York Times sections you're interested in seeing</h3>
+            <div class='preferences-container'>
+                <div class='row'>
+                    <div class="col-md-12">
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="opinion" value="opinion"> Opinion
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="world" value="world"> World
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="national" value="National"> National
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="business" value="business"> Business
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="technology" value="technology"> Tech
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="science" value="science"> Science
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="health" value="health"> Health
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="sports" value="sports"> Sports
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="fashion" value="fashion"> Fashion
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="food" value="food"> Food
+                        </label>
+                        <label class='checkbox-inline'>
+                            <input class="custom-control-input" type="checkbox" name="realestate" value="realestate"> Real Estate
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="button" name="button" ng-click="news.showSectionSelections()">Edit Sections</button>
+        <div ng-show="news.prefTabs">
+            <div class="pref-tabs-header">
+                <h3 class="h3">Browse Sections</h3>
+            </div>
+            <div class="pref-tabs" ng-show="news.currentArticles">
+                <div ng-repeat="pref in news.preferences">
+                    <div ng-switch="pref.section">
+                        <button type="button" class="btn btn-primary" ng-switch-when="home" ng-click="news.updateNewsPage(pref.section)">Top Articles</button>
+                        <button type="button" class="btn btn-primary capitalize" ng-switch-default ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div ng-switch="news.currentSection">
+                <h3 ng-show="news.main" ng-switch-when="home" class="nytTop capitalize" id='news_header'>The New York Times - Top Articles</h3>
+                <h3 ng-switch-default class="capitalize" id='news_header'>The New York Times - {{news.currentSection}} Articles</h3>
+            </div>
+            <div ng-show="news.saved">
+                <h3 id='news_header'>Saved Articles</h3>
+            </div>
+        </div>
+        <hr />
+        <div ng-show="news.main" class="scroll">
+            <div class="row" ng-repeat="story in news.stories">
+                <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
+                    <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
+                    <h4 clas='news_section'>Section: {{story.section}}</h4>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
+                    <div class="news_article">
+                        <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
+                        <p id='news_abstract'>{{story.abstract}}</p>
+                        <button ng-show="news.prefTabs" class="btn btn-success" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="news.saved" class="scroll">
+            <div class='news-row-container'>
+                <div class="row" ng-repeat="story in news.stories">
+                    <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
+                        <img id='news_icon' ng-src="{{story.image}}" alt='No Article Image' />
+                        <h4 class='news_section'>Section: {{story.section}}</h4>
+                    </div>
+                    <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
+                        <div class="news_article">
+                            <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
+                            <p id='news_abstract'>{{story.abstract}}</p>
+                            <button class="btn btn-danger" type="button" ng-click="news.deleteArticle(story.title)">Delete Article</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div ng-show="news.prefTabs">
-    <div class="pref-tabs-header">
-      <h3 class="h3">Browse Sections</h3>
-    </div>
-    <div class="pref-tabs" ng-show="news.currentArticles">
-      <div ng-repeat="pref in news.preferences">
-        <div ng-switch="pref.section">
-          <button type="button" class="btn btn-primary" ng-switch-when="home" ng-click="news.updateNewsPage(pref.section)">Top Articles</button>
-          <button type="button" class="btn btn-primary capitalize" ng-switch-default ng-click="news.updateNewsPage(pref.section)">{{pref.section}}</button>
+    <div ng-show="news.searchPage">
+        <p class="display-1 page-header">Search For Articles</p>
+        <div class="row">
+            <div class="col-md-11">
+                <input class="form-control youtube-search-string" type="text" ng-model="news.searchString">
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary" ng-click="news.searchArticles(news.searchString)">Search</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class='savedArticles'>
-    <button class="current btn btn-success" type="button" ng-click="news.getCurrentArticles()">Current Articles</button>
-    <button class="currentSaved btn btn-success" type="button" ng-click="news.getSavedArticles()">Saved Articles</button>
-  </div>
-  <div>
-    <div ng-switch="news.currentSection">
-      <h3 ng-show="news.main" ng-switch-when="home" class="nytTop capitalize" id='news_header'>The New York Times - Top Articles</h3>
-      <h3 ng-switch-default class="capitalize" id='news_header'>The New York Times - {{news.currentSection}} Articles</h3>
-    </div>
-    <div ng-show="news.saved">
-      <h3 id='news_header'>Saved Articles</h3>
-    </div>
-  </div>
-  <hr />
-  <div ng-show="news.main" class="scroll">
-    <div class="row" ng-repeat="story in news.stories">
-      <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
-        <img id='news_icon' ng-src="{{story.multimedia[0].url}}" alt='No Article Image' />
-        <h4 clas='news_section'>Section: {{story.section}}</h4>
-      </div>
-      <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
-        <div class="news_article">
-          <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
-          <p id='news_abstract'>{{story.abstract}}</p>
-          <button ng-show="news.prefTabs" class="btn btn-success" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
-        </div>
-      </div>
-    </div>
-  </div>
+        <br>
+        <hr>
 
-  <div ng-show="news.saved" class="scroll">
-    <div class='news-row-container'>
-      <div class="row" ng-repeat="story in news.stories">
-        <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
-          <img id='news_icon' ng-src="{{story.image}}" alt='No Article Image' />
-          <h4 class='news_section'>Section: {{story.section}}</h4>
+        <div class="scroll">
+            <div class="row" ng-repeat="article in news.searchArticleResults">
+                <div id='news_section-and-icon_column' class="col-xs-3 col-sm-3 col-m-3 col-lg-3">
+                    <img id='news_icon' ng-src="{{article.multimedia[0].url}}" alt='No Article Image' />
+                    <h4 clas='news_section'>Section: {{article.section_name}}</h4>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
+                    <div class="news_article">
+                        <a href="{{article.web_url}}" target="blank"><h3 class="news_title">{{article.headline.main}}</h3></a>
+                        <p id='news_abstract'>{{article.snippet}}</p>
+                        <div class="date-container">
+                            <h4 class="article-date">Date: {{article.pub_date}}</h4>
+                            <button class="btn btn-success" type="button" ng-click="news.saveArticle(article.multimedia[0].url, article.section_name, article.headline.main, article.web_url, article.snippet)">Save Article</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-9 col-sm-9 col-m-9 col-lg-9">
-          <div class="news_article">
-            <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
-            <p id='news_abstract'>{{story.abstract}}</p>
-            <button class="btn btn-danger" type="button" ng-click="news.deleteArticle(story.title)">Delete Article</button>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+
 </div>
