@@ -1,7 +1,6 @@
 angular.module('myApp.todoControllers', [])
 
 .controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
-	$rootScope.header = 'views/header.html';
 	var self = this
 
 	$http.post('http://localhost:3000/todo/show', {

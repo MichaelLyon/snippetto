@@ -1,7 +1,6 @@
 angular.module('myApp.trafficController', [])
 
 .controller('trafficController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var selfTraffic = this;
 	//User Origin var
 	var origin1 = new google.maps.LatLng($rootScope.currentPosition);
@@ -19,11 +18,12 @@ angular.module('myApp.trafficController', [])
   serverObject.currentTime = (Date.now() / 1000);
 
 	this.trafficSwitch = false;
-
+	// this.trafficAddNewAddress = false;
 	//Controls the Traffic view and form input to save addresses
 	if ($rootScope.user_id) {
 		this.trafficSwitch = true;
 	}
+
 
 	var mapOptions = {
 		zoom: 15,
@@ -54,11 +54,21 @@ angular.module('myApp.trafficController', [])
 		}
 	})
 
+	this.showSaveNewAddress = function(address){
+		this.trafficAddNewAddress = true;
+	}
+
 	this.workAddGet = function(address) {
-		address.id = $rootScope.user_id;
+		if($rootScope.user_id){
+			address.id = $rootScope.user_id;
+		}else{ //TODO : REMOVE THIS
+			address.id = 12; //REMOVE
+		}//REMOVE
 		$rootScope.workAddress = address;
 		$http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-
+			this.trafficAddNewAddress = false;
+			console.log(some);
 		})
 	}
+
 }])

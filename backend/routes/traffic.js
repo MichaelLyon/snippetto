@@ -8,17 +8,20 @@ router.post('/setAddress', function(req, res, next) {
     Traffic.selectUser(req.body.id).then(function(condition) {
         if (condition.rowCount != 0) {
             Traffic.updateAddress(req.body).then(function() {
-                res.send('address updated');
+              console.log('updated');
+                res.send('updated');
             });
         } else {
             Traffic.saveAddress(req.body).then(function() {
-                res.send('address saved');
+              console.log('saved');
+                res.send('saved');
             });
         }
     })
 });
 
 router.post('/', function(req, res, next) {
+  Traffic.checkForExistingUser()
     Traffic.selectUser(req.body.userId).then(function(destinationAddress) {
         var originCleanUp = [req.body.origin1.lat, req.body.origin1.lng];
         var street = destinationAddress.rows[0].street.replace(/\s+/g, '+');
@@ -43,7 +46,9 @@ router.post('/', function(req, res, next) {
 
 router.post('/getAdd', function(req, res, next) {
     console.log(req.body.id);
-    Traffic.selectUser(req.body.id).then(function() {})
+    Traffic.selectUser(req.body.id).then(function() {
+
+    })
 });
 
 module.exports = router;

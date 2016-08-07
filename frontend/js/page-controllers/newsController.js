@@ -3,7 +3,6 @@ angular.module('myApp.newsController', [])
 
 
 .controller('newsController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var self = this
   this.currentArticles = true
 	this.main = true
