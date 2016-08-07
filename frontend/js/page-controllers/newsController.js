@@ -72,13 +72,14 @@ angular.module('myApp.newsController', [])
 	}
 
 	this.saveArticle = function(img, section, title, url, abstract) {
+		console.log('SAVING ARTICLE');
 		var postObj = {
 			user_id: $rootScope.user_id,
 			image: img,
 			section: section,
 			title: title,
 			url: url,
-			abstract: abstract
+			abstract: abstract.replace(/'/, '')
 		}
 		$http.post('http://localhost:3000/news/save', postObj).then(function() {
 			console.log('post successful');
@@ -96,6 +97,7 @@ angular.module('myApp.newsController', [])
 	}
 
 	this.getSavedArticles = function() {
+		self.searchPage = false
     self.prefTabs = false
 		$http.post('http://localhost:3000/news/retrieveArticles', {
 			user_id: $rootScope.user_id
@@ -108,7 +110,31 @@ angular.module('myApp.newsController', [])
 	}
 
 	this.getCurrentArticles = function() {
+		self.searchPage = false
     self.currentArticles = true
 		$state.reload()
 	}
+
+	this.switchToSearh = function() {
+		self.searchPage = true
+	}
+
+	this.searchArticles = function(search) {
+		$http.get('https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=a04d3cbd56d94daba43213c5277372a6&q=' + search + '&sort=newest').then(function(data) {
+			self.searchArticleResults = data.data.response.docs.map(function(elem) {
+				if (elem.multimedia[0]) {
+					elem.multimedia[0].url = 'images/dog-black-small.png'
+					return elem
+				} else {
+					elem.multimedia.push({url: 'images/dog-black-small.png'})
+					return elem
+				}
+			})
+		})
+	}
+
+
+
+
+
 }])
