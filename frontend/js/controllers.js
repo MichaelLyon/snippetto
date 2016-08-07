@@ -4,7 +4,6 @@ angular.module('myApp.controllers', [])
 	var self = this
   this.showLogin = true
 	//Bool scope variable to control the navbar in index.html
-	$rootScope.header = 'views/header.html';
 
 	var loadingModal = document.getElementById('myModal');
 
@@ -72,7 +71,6 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('redditController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var reddit = this;
 	$http.post('http://localhost:3000/reddit/subredditList').then(function(data) {
 		reddit.redditSubList = data.data.data.children;
@@ -83,7 +81,6 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('redditSubController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var redditSub = this;
 
 	$http.post(`http://localhost:3000/reddit/subreddit/${$rootScope.subreddit}`).then(function(data) {
@@ -93,12 +90,10 @@ angular.module('myApp.controllers', [])
 
 
 .controller('homeController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 }])
 
 
 .controller('weatherController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var lat = $rootScope.currentPosition.lat
 	var lng = $rootScope.currentPosition.lng
 
@@ -145,7 +140,6 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('trafficController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var selfTraffic = this;
 	//User Origin var
 	var origin1 = new google.maps.LatLng($rootScope.currentPosition);
@@ -202,50 +196,11 @@ angular.module('myApp.controllers', [])
 		address.id = $rootScope.user_id;
 		$rootScope.workAddress = address;
 		$http.post('http://localhost:3000/traffic/setAddress', $rootScope.workAddress).then(function(some) {
-
 		})
 	}
-}])
-
-.controller('todoController', ['$http', '$rootScope', '$state', 'testService', function($http, $rootScope, $state, testService) {
-	$rootScope.header = 'views/header.html';
-	var self = this
-
-	$http.post('http://localhost:3000/todo/show', {
-		user_id: $rootScope.user_id
-	}).then(function(list) {
-		self.todoList = list.data
-	})
-
-	this.addTask = function() {
-		console.log(self.time);
-		console.log(self.dueDate);
-		var postObj = {
-			user_id: $rootScope.user_id,
-			task: self.task,
-			priority: self.priority,
-			dueDate: self.dueDate.toString().substring(0, 15),
-			time: self.time.toString().substring(16, 24),
-			description: self.description
-		}
-		console.log(postObj);
-		$http.post('http://localhost:3000/todo/new', postObj).then(function() {
-			$state.reload()
-		})
-	}
-
-	this.delete = function(task_id) {
-		$http.post('http://localhost:3000/todo/delete', {
-			task_id: task_id
-		}).then(function() {
-			$state.reload()
-		})
-	}
-
 }])
 
 .controller('funController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
-	$rootScope.header = 'views/header.html';
 	var foo = this
 	$http.get('http://localhost:3000/fun/getFun').then(function(obj) {
 		foo.qoute = obj.data.quoteText
@@ -267,79 +222,12 @@ angular.module('myApp.controllers', [])
 		})
 	})
 
-	this.toggle_visibility1 = function() {
-		var e = document.getElementById('toggle_div1');
+  this.toggleVisibility = function (id) {
+    console.log(id);
+    var e = document.getElementById(id);
 		if (e.style.display == 'block')
 			e.style.display = 'none';
 		else
 			e.style.display = 'block';
-	}
-	this.toggle_visibility2 = function() {
-		var e = document.getElementById('toggle_div2');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
-	this.toggle_visibility3 = function() {
-		var e = document.getElementById('toggle_div3');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
-	this.toggle_visibility4 = function() {
-		var e = document.getElementById('toggle_div4');
-		if (e.style.display == 'block')
-			e.style.display = 'none';
-		else
-			e.style.display = 'block';
-	}
+  }
 }])
-
-
-
-.controller('showTaskController', ['$http', '$rootScope', '$state', '$stateParams', function($http, $rootScope, $state, $stateParams) {
-	$rootScope.header = 'views/header.html';
-	var self = this
-	$http.get(`http://localhost:3000/todo/showTask/${$stateParams.user_id}/${$stateParams.task_id}`).then(function(task) {
-		console.log(task.data);
-		self.task = task.data.task
-		self.task_id = task.data.task_id
-		self.user_id = task.data.user_id
-		self.priority = task.data.priority
-		self.due_date = task.data.due_date
-		self.time = task.data.time
-		self.description = task.data.description
-	})
-
-	this.edit = function() {
-		var postObj = {
-			user_id: $stateParams.user_id,
-			task_id: $stateParams.task_id,
-			task: self.task,
-			priority: self.priority,
-			due_date: self.due_date,
-			time: self.time,
-			description: self.description
-		}
-		$http.post('http://localhost:3000/todo/edit', postObj).then(function() {
-			$state.go('todo')
-		})
-	}
-}])
-
-
-//   document.getElementById('button').onclick = function() {
-//       this.__toggle = !this.__toggle;
-//       var target = document.getElementById('hidden_content');
-//       if( this.__toggle) {
-//           target.style.height = target.scrollHeight+"px";
-//           this.firstChild.nodeValue = "Hide content";
-//       }
-//       else {
-//           target.style.height = 0;
-//           this.firstChild.nodeValue = "Show content";
-//       }
-//   }
-// }])
