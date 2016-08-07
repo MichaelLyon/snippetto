@@ -27,7 +27,7 @@ var Youtube = require('../lib/queries')
 
 
   router.post('/addToFavorites', function(req, res, next) {
-    Youtube.addVideo(req.body.user_id, req.body.videoId, req.body.videoTitle).then(function() {
+    Youtube.addVideo(req.body.user_id, req.body.videoId, req.body.videoTitle.replace(/\'/g, '')).then(function() {
       res.sendStatus(200)
     })
   });
