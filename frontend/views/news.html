@@ -7,18 +7,46 @@
     </div>
     <div class="set-preferences" ng-show="news.showPrefs">
       <h3>Select the New York Times sections you're interested in seeing</h3>
-      Opinion<input class="news-checkbox" type="checkbox" name="opinion" value="opinion">
-      World<input class="news-checkbox" type="checkbox" name="world" value="world">
-      National<input class="news-checkbox" type="checkbox" name="national" value="national">
-      Business<input class="news-checkbox" type="checkbox" name="business" value="business">
-      Technology<input class="news-checkbox" type="checkbox" name="technology" value="technology">
-      <br>
-      Science<input class="news-checkbox" type="checkbox" name="science" value="science">
-      Health<input class="news-checkbox" type="checkbox" name="health" value="health">
-      Sports<input class="news-checkbox" type="checkbox" name="sports" value="sports">
-      Fashion<input class="news-checkbox" type="checkbox" name="fashion" value="fashion">
-      Food<input class="news-checkbox" type="checkbox" name="food" value="food">
-      Real Estate<input class="news-checkbox" type="checkbox" name="realestate" value="realestate">
+      <div class='preferences-container'>
+        <div class='row'>
+          <div class="col-md-12">
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="opinion" value="opinion"> Opinion
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="world" value="world"> World
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="national" value="National"> National
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="business" value="business"> Business
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="technology" value="technology"> Tech
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="science" value="science"> Science
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="health" value="health"> Health
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="sports" value="sports"> Sports
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="fashion" value="fashion"> Fashion
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="food" value="food"> Food
+            </label>
+            <label class='checkbox-inline'>
+              <input class="custom-control-input" type="checkbox" name="realestate" value="realestate"> Real Estate
+            </label>
+            </div>
+          </div>
+        </div>
+      </div>
       <br>
       <br>
       <button class="btn btn-primary" type="button" name="button" ng-click="news.gatherPreferences()">Submit Sections</button>
