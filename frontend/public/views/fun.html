@@ -1,33 +1,40 @@
 <div class="fun_wrapper">
-  <div ng-include src="'views/header.html'"></div>
-<div class="fun_body">
-  <div class="fun_mid col-md-5 col-md-offset-3">
-    <br>
-    <br>
-  <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div1')"><h3 class="fun_font hvr-buzz-out">Quote of the Day!</h3></a>
-  <div id="toggle_div1" style="display:none;">
-    <p class="fun_p">{{fun.qoute}}</p>
-    <strong><p class="fun_author">Author: {{fun.author}} </p></strong>
+  <div ng-include src="'views/header.html'"></div> -->
+  <div class="funBG container-fluid">
+    <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div1')"><h3 class="fun_font hvr-buzz-out">Quote of the Day!</h3></a>
+          <div id="toggle_div1" style="display:none;">
+            <p class="fun_p">{{fun.qoute}}</p>
+            <strong><p class="fun_author">Author: {{fun.author}} </p></strong>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div2')"><h3 class="fun_font hvr-buzz-out">Word of the Day!</h3></a>
+          <div id="toggle_div2" style="display:none;">
+            <strong><u><p class="fun_p_word">{{fun.word}}</p></u></strong>
+            <p class="fun_p">Definition: {{fun.definition}}</p>
+            <p class="fun_p">Part of speech: {{fun.pof}}</p>
+            <p class="fun_p">{{fun.example}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div3')"><h3 class="fun_font hvr-buzz-out">Advice of the Day!</h3></a>
+          <div id="toggle_div3" style="display:none;">
+            <p class="fun_p">{{fun.advice}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div4')"><h3 class="fun_font hvr-buzz-out">What would Chuck Norris do?</h3></a>
+          <div id="toggle_div4" style="display:none;">
+            <p class="fun_p">{{fun.chuckNorris}}</p>
+          </div>
+        </div>
+      </div>
   </div>
-  <br>
-  <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div2')"><h3 class="fun_font hvr-buzz-out">Word of the Day!</h3></a>
-  <div id="toggle_div2" style="display:none;">
-    <strong><u><p class="fun_p_word">{{fun.word}}</p></u></strong>
-    <p class="fun_p">Definition: {{fun.definition}}</p>
-    <p class="fun_p">Part of speech: {{fun.pof}}</p>
-    <p class="fun_p">{{fun.example}}</p>
-  </div>
-<br>
-  <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div3')"><h3 class="fun_font hvr-buzz-out">Advice of the Day!</h3></a>
-  <div id="toggle_div3" style="display:none;">
-    <p class="fun_p">{{fun.advice}}</p>
-  </div>
-<br>
-  <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div4')"><h3 class="fun_font hvr-buzz-out">What would Chuck Norris do?</h3></a>
-  <div id="toggle_div4" style="display:none;">
-    <p class="fun_p">{{fun.chuckNorris}}</p>
-  </div>
-  </div>
-
-  </div>
-</div>

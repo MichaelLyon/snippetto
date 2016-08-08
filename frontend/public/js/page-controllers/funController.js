@@ -11,17 +11,19 @@ angular.module('myApp.funController', [])
 			foo.pof = obj2.data.definitions[0].partOfSpeech
 			foo.example = obj2.data.examples[0].text
       console.log('example: ',obj2.data);
-			$http.get('http://api.adviceslip.com/advice').then(function(obj3) {
-				foo.advice = obj3.data.slip.advice
-        console.log('advice: ', foo.advice);
-				$http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
-					foo.chuckNorris = obj4.data.value
-          console.log('chuck: ',foo.chuckNorris);
-				})
-			})
+
 		})
 	})
+	$http.get('http://api.adviceslip.com/advice').then(function(obj3) {
+		foo.advice = obj3.data.slip.advice
+		console.log('advice: ', foo.advice);
 
+	})
+	$http.get('https://api.chucknorris.io/jokes/random').then(function(obj4) {
+		foo.chuckNorris = obj4.data.value
+		console.log('chuck: ',foo.chuckNorris);
+	})
+	
   this.toggleVisibility = function (id) {
     console.log(id);
     var e = document.getElementById(id);
