@@ -7,14 +7,12 @@
         <input type="submit" class="trafficButtonSave" name="name" value="Enter a New Address" ng-click='traffic.showSaveNewAddress()'>
         <div ng-show='traffic.trafficAddNewAddress'>
             <form class="simple-form">
-                <h3>Enter your Destination Address...</h3>
-                <div class="list-group-item">
-                    <input type="text" name="street" value="" ng-model="workAddress.street" placeholder="Street">
-                    <input type="text" name="city" value="" ng-model="workAddress.city" placeholder="City">
-                    <input type="text" name="state" maxlength="2" value="" ng-model="workAddress.state" placeholder="State">
-                    <input type="number" name="zip" max="99999" value="" ng-model="workAddress.zip" placeholder="Zip Code">
-                    <input type="submit" name="sumbitAddress" value="Save" ng-click='traffic.workAddGet(workAddress)'>
-                </div>
+                <h3 class="enterDestinationH3">Enter your Destination Address...</h3>
+                <input type="text" name="street" value="" ng-model="workAddress.street" placeholder="Street">
+                <input type="text" name="city" value="" ng-model="workAddress.city" placeholder="City">
+                <input type="text" name="state" maxlength="2" value="" ng-model="workAddress.state" placeholder="State">
+                <input type="number" name="zip" max="99999" value="" ng-model="workAddress.zip" placeholder="Zip Code">
+                <input type="submit" name="sumbitAddress" value="Save" ng-click='traffic.workAddGet(workAddress)'>
             </form>
         </div>
         <div id="map" data-tap-disabled="true"></div>

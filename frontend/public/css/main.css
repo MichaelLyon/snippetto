@@ -228,6 +228,9 @@ hr:after {
   text-align: center;
   font-size: 20px;
 }
+.enterDestinationH3{
+  text-align: center;
+}
 /*START weather page CSS*/
 .weather_body{
   margin: 0px;
