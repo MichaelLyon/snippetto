@@ -208,11 +208,25 @@ hr:after {
     justify-content: flex-start;
     align-items: center;
 }
+.browseSectionsH3{
+  text-align: left;
+  margin-left: 10px;
+}
 .prefButton{
     margin-right:10%;
 }
 .pref-tabs-header {
     text-align: center;
+}
+.trafficButtonSave{
+  margin-left: 45%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 15px;
+}
+.durationToDestinationDiv{
+  text-align: center;
+  font-size: 20px;
 }
 /*START weather page CSS*/
 .weather_body{
@@ -353,6 +367,7 @@ width: 100%;
 .nytTop{
   margin-top: 0%;
   margin-left: 10px;
+  margin-top: 2%;
 }
 .submitSectionsNews{
   float:right;
