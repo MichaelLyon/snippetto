@@ -236,9 +236,10 @@ hr:after {
   margin-bottom: 2%;
 }
 .loading{
-  font-size: 20px;
-  height: 30%;
-  width: 30%;
+
+}
+.firstButtonTraffic{
+  margin-left: 15%;
 }
 /*START weather page CSS*/
 .weather_body{
