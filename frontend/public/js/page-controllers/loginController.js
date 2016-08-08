@@ -41,7 +41,7 @@ angular.module('myApp.loginController', [])
 		if (window.location.href.includes('code')) {
 			var startingIndex = window.location.search.indexOf('code=') + 5
 			$rootScope.code = window.location.search.substring(startingIndex, window.location.search.length)
-			$http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=http://localhost:8000&grant_type=authorization_code`).then(function(response) {
+			$http.post(`https://www.googleapis.com/oauth2/v4/token?code=${$rootScope.code}&client_id=709501805031-d87qamtke60go50st3tiv2lu235fpcfb.apps.googleusercontent.com&client_secret=Srv4Ep2JLkXSZnHdi_HGmYFY&redirect_uri=https://snippetto-34aee.firebaseapp.com&grant_type=authorization_code`).then(function(response) {
 				$rootScope.accessToken = response.data.access_token
 				var postObj = {
 					accessToken: $rootScope.accessToken

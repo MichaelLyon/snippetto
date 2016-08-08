@@ -28,7 +28,7 @@ angular.module('myApp.weatherController', [])
 		self.weatherImg = data.data.weather[0].icon
 			// console.log('root: ',$rootScope.currentPosition.lat);
 
-		$http.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=imperial&cnt=5&APPID=c98ec93f5a134adb4a37ca10c015d4e5`).then(function(obj) {
+		$http.post(`https://snippetto.herokuapp.com/weather/getWeekWeather`, {lat: lat, lng: lng}).then(function(obj) {
       console.log(obj.data.list[0].dt);
 			self.day1 = timeConverter(obj.data.list[0].dt)
 			self.day2 = timeConverter(obj.data.list[1].dt)
