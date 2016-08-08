@@ -115,7 +115,7 @@ hr:after {
 /*START Login page CSS*/
 .login_jumbo{
   width: 100%;
-  height: auto;
+  height: 400px;
   margin: 0;
 }
 #login-welcome-header{
