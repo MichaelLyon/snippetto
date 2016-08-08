@@ -13,7 +13,7 @@ module.exports = {
       order by favorites desc`)
   },
   getVideoFavoriteUsers: function(video_id) {
-    return knex.raw(`select distinct username
+    return knex.raw(`select distinct user_name
       from users u
       join youtube_videos y on u.user_id = y.user_id
       where y.video_id = '${video_id}'`)
