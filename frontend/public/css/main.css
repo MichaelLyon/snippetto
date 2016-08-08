@@ -231,6 +231,15 @@ hr:after {
 .enterDestinationH3{
   text-align: center;
 }
+.optionsContainer{
+  margin-left: 20%;
+  margin-bottom: 2%;
+}
+.loading{
+  font-size: 20px;
+  height: 30%;
+  width: 30%;
+}
 /*START weather page CSS*/
 .weather_body{
   margin: 0px;
