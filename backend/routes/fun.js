@@ -31,6 +31,12 @@ var request = require('request');
     })
   })
 
+  router.get('/getMeme', function(req,res,next){
+    request("https://api.chucknorris.io/jokes/random", function(error,response,body){
+      res.send(JSON.parse(body));
+    })
+  })
+
   // router.get('/')
 
   module.exports = router;
