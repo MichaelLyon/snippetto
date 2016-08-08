@@ -4,11 +4,11 @@ var async = require('async')
 module.exports = {
 	createNewUser: function(username) {
 		return knex.raw(`insert into users values (default, '${username}')`).then(function() {
-			return knex.raw(`select * from users where username = '${username}'`)
+			return knex.raw(`select * from users where user_name = '${username}'`)
 		})
 	},
 	checkForExistingUser: function(username) {
-		return knex.raw(`select * from users where username = '${username}'`)
+		return knex.raw(`select * from users where user_name = '${username}'`)
 	},
 	createArrayForAsync: function(user_id, arr) {
 		return arr.map(function(elem) {
