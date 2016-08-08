@@ -205,8 +205,11 @@ hr:after {
 .pref-tabs {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+}
+.prefButton{
+    margin-right:10%;
 }
 .pref-tabs-header {
     text-align: center;
@@ -348,8 +351,15 @@ width: 100%;
   margin-left: 13%;
 }
 .nytTop{
-  margin-top: 5%;
+  margin-top: 0%;
   margin-left: 10px;
+}
+.submitSectionsNews{
+  float:right;
+}
+.btn-primary{
+  margin-left: 3px;
+  margin-top: 3px;
 }
 .fun_mid{
   color: #F4BB51;
@@ -604,4 +614,7 @@ iframe {
 .article-date {
   margin-right: 10px !important;
   color: #337AB7;
+}
+.editButtonNews{
+  float: right;
 }
