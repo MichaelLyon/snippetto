@@ -236,7 +236,8 @@ hr:after {
   margin-bottom: 2%;
 }
 .trafficListGroup{
-  margin-left: 15%;
+  margin-left: 25%;
+  margin-bottom: 2%;
 }
 /*START weather page CSS*/
 .weather_body{
@@ -574,6 +575,7 @@ width: 100%;
     height: 75vh;
     width: 85vw;
     margin: 0px auto;
+    margin-top: 2%;
 }
 
 .ipe-container {
