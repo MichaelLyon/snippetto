@@ -201,11 +201,13 @@ hr:after {
 
 .capitalize {
     text-transform: capitalize;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 .pref-tabs {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
 }
 .pref-tabs-header {
