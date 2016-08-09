@@ -24,7 +24,6 @@ angular.module('myApp.loginController', [])
 				lng: position.coords.longitude
 			};
 			$rootScope.currentPosition = pos;
-      console.log(pos);
 			loadingDone = true;
 		})
 		if (loadingDone === true) {

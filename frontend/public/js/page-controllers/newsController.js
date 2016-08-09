@@ -70,8 +70,8 @@ angular.module('myApp.newsController', [])
 		self.showPrefs = true
 	}
 
-	this.saveArticle = function(img, section, title, url, abstract) {
-		console.log('SAVING ARTICLE');
+	this.saveArticle = function(img, section, title, url, abstract, event) {
+		document.getElementById(event.target.id).className += ' saved-article'
 		var postObj = {
 			user_id: $rootScope.user_id,
 			image: img,
