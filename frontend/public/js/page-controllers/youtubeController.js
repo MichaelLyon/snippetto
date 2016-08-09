@@ -57,6 +57,7 @@ angular.module('myApp.youtubeController', [])
       console.log(videoId);
       $http.get('https://snippetto.herokuapp.com/youtube/getVideoFavoriteUsers/' + videoId).then(function(data) {
         self.favoritedUsers = data.data
+        console.log(self.favoritedUsers);
       })
     }
 }])
