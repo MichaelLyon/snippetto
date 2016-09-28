@@ -6,7 +6,7 @@ module.exports = {
     return knex.raw(`insert into youtube_videos values (default, ${user_id}, '${videoId}', '${videoTitle}')`)
   },
   getFavoritedRank: function() {
-    return knex.raw(`select video_title, video_id, count(video_title) as favorites
+    return knex.raw(`select video_title, video_id, count(distinct user_name) as favorites
       from youtube_videos y
       join users u on y.user_id = u.user_id
       group by video_title, video_id

@@ -37,4 +37,41 @@
           </div>
         </div>
       </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div5')"><h3 class="fun_font hvr-buzz-out">Cat Facts</h3></a>
+          <div id="toggle_div5" style="display:none;">
+            <p class="fun_p">{{fun.catFact}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div6');fun.makewCall()"><h3 class="fun_font hvr-buzz-out">Math Fact</h3></a>
+          <div id="toggle_div6" style="display:none;">
+            <p class="fun_p">{{fun.mathFact}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div7')"><h3 class="fun_font hvr-buzz-out">Trivia</h3></a>
+          <div id="toggle_div7" style="display:none;">
+            <p class="fun_p"><u><b>Question:</b></u> {{fun.triviaQuestion}}</p>
+            <p class="fun_p"><u><strong>Answer:</strong></u>  {{fun.triviaAnswer}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center bg-grey">
+          <a class="hvr-buzz-out" type="button"  value="Show Div" ng-click="fun.toggleVisibility('toggle_div8')"><h3 class="fun_font hvr-buzz-out">New Start-Up</h3></a>
+          <div id="toggle_div8" style="display:none;">
+            <p class="fun_p">It's a Start-Up that </p>
+            <p class="fun_p">{{fun.startUpThat}}</p>
+            <p class="fun_p">for</p>
+            <p class="fun_p">{{fun.startUpThis}}</p>
+          </div>
+        </div>
+      </div>
   </div>
+</div>

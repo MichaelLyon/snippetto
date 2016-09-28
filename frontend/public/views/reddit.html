@@ -4,6 +4,7 @@
 <h1>Reddit Subreddits</h1>
 <form class="subReddit_Post">
   <div class="list-group-item">
+    <button type="btn-success" name="name" value="Sign Into Reddit" ng-click="">
     <a href="/#/reddit_sub" ng-model="subreddit" ng-click="reddit.getSub(all)"><h3 class="display-1">/r/all</h3></href>
   </div>
   <div class="list-group-item" ng-repeat="sub in reddit.redditSubList">
