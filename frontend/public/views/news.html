@@ -86,7 +86,7 @@
                         <div class="news_article">
                             <a href="{{story.url}}" target="blank"><h3 class="news_title">{{story.title}}</h3></a>
                             <p id='news_abstract'>{{story.abstract}}</p>
-                            <button ng-show="news.prefTabs" class="btn btn-success" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract)">Save Article</button>
+                            <button id="{{$index}}article" ng-show="news.prefTabs" class="btn btn-success" type="button" ng-click="news.saveArticle(story.multimedia[0].url, story.section, story.title, story.url, story.abstract, $event)">Save Article</button>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                         <p id='news_abstract'>{{article.snippet}}</p>
                         <div class="date-container">
                             <h4 class="article-date">Date: {{article.pub_date}}</h4>
-                            <button class="btn btn-success" type="button" ng-click="news.saveArticle(article.multimedia[0].url, article.section_name, article.headline.main, article.web_url, article.snippet)">Save Article</button>
+                            <button id="{{$index}}searchArticle" class="btn btn-success" type="button" ng-click="news.saveArticle(article.multimedia[0].url, article.section_name, article.headline.main, article.web_url, article.snippet, $event)">Save Article</button>
                         </div>
                     </div>
                 </div>

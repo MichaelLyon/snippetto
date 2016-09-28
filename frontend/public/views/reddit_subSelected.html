@@ -1,7 +1,7 @@
 <div ng-include src="'views/header.html'"></div>
 <br>
 <br>
-<h1>Reddit View</h1>
+<h1>{{redditSub.name}}</h1>
 <div class="scroll">
   <div class="news-row-container">
     <div class="list-group-item row" ng-repeat="sub in redditSub.redditResults">
@@ -12,8 +12,5 @@
         <div class="news_article">
           <a href="{{sub.data.url}}" target="blank"><h3 class="display-1 news_title">{{sub.data.title}}</h3></href>
         </div>
-      </div>
-      </div>
-</div>
-
+    </div>
 </div>

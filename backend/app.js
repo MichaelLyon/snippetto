@@ -16,7 +16,7 @@ var youtube = require('./routes/youtube');
 var todo = require('./routes/todo');
 
 var app = express();
-// Add headers
+//code below eliminates cors issues
 app.use(function (req, res, next) {
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
     res.setHeader('Access-Control-Allow-Origin', '*');
